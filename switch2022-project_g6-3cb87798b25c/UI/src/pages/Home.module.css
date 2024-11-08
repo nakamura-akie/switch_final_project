@@ -1,0 +1,26 @@
+.homepage {
+    height: 105%;
+    width: 89.5%;
+    position: absolute;
+    background: url("Background.svg");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-position-x: center;
+    background-position-y: center;
+    top: 0;
+    bottom: 0;
+    left: 200px;
+    right: 200px;
+}
+
+.pic {
+    background-image: url('Scrumy.svg') ;
+    background-repeat: no-repeat;
+    width: 1000px; /* image width */
+    height: 500px; /* image height */
+    position: relative;
+    left: 12%;
+    margin-top: 13%;
+}

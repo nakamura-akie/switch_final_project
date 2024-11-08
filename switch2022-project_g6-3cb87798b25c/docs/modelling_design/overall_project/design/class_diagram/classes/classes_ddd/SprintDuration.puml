@@ -1,0 +1,13 @@
+@startuml
+
+class SprintDuration <<Value Object>>{
+    - sprintDurationValue : Integer
+
+    + SprintDuration(sprintDurationValue : Integer)
+    - validateValue(sprintDurationValue : Integer) {static}
+    + getSprintDurationValue(): Integer
+    + equals(o : Object) : boolean
+    + hashCode(): int
+}
+
+@enduml

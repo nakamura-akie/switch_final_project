@@ -1,0 +1,19 @@
+@startuml
+'Attribute syntax: <visibility> <name> : <type> <multiplicity> = <default>
+'Method syntax: <visibility> <name (parameter-list)> : <return-type> - For simplicity the type of the parameter-list is not specified
+
+enum Effort {
+    One,
+    Two,
+    Three,
+    Five,
+    Eight,
+    Thirteen,
+    Twenty,
+    Forty
+
+    + Effort(value : int)
+    + getValue() : int
+}
+
+@enduml

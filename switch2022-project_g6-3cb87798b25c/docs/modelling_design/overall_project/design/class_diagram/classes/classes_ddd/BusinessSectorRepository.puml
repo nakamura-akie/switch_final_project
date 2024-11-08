@@ -1,0 +1,15 @@
+@startuml
+
+class BusinessSectorRepository <<Repository>> {
+    - businessSectorList : BusinessSector [1..*] {static} {readOnly}
+
+    + save(businessSector : BusinessSector) : boolean
+    + findAll(businessSectorName : BusinessSectorName) : Iterable
+    + findByID(businessSectorName : BusinessSectorName) : Optional
+    + existsByID(businessSectorName : BusinessSectorName) : boolean
+    + findByCriteria(criteria : Predicate) : Iterable
+    + deleteAll()
+    + findAllByID(listOfIDs : BusinessSectorName [0..*]) : BusinessSector [0..*]
+}
+
+@enduml

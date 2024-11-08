@@ -1,0 +1,12 @@
+@startuml
+
+class UserStoryDTO {
+    + projectCode : ProjectCode
+    + userStoryCode : UserStoryCode
+    + description : Description
+    + status : UserStoryStatus
+
+    + equals(o : Object) : boolean
+    + hashCode() : int
+}
+@enduml

@@ -1,0 +1,9 @@
+@startuml
+
+class SprintStatusDTO {
+    + sprintID : SprintID
+    + sprintStatus : SprintStatus
+    + equals(o : Object) : boolean
+    + hashCode() : int
+}
+@enduml

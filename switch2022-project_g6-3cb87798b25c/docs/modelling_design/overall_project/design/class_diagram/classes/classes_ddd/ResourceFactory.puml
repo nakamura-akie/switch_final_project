@@ -1,0 +1,9 @@
+@startuml
+
+interface ResourceFactory<<Factory>>{
+
+    + createResource(resourceID : ResourceID, roleInProject : ProjectRole,
+     percentageOfAllocation : PercentageOfAllocation, costPerHour : CostPerHour) : Resource
+}
+
+@enduml

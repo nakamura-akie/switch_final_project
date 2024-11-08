@@ -1,0 +1,54 @@
+@startuml
+
+skinparam sequenceMessageAlign center
+skinparam actorBackgroundColor white
+skinparam participantBackgroundColor white
+skinparam sequenceReferenceBackgroundColor white
+skinparam sequenceReferenceHeaderBackgroundColor white
+skinparam sequenceGroupBackgroundColor white
+
+autonumber
+
+title US015 - As a Manager, I want to get a list of all projects
+
+actor ":Manager" as Manager
+
+participant ":ListProjectsUI" as UI
+participant "<<Controller>>\n:CreateProjectListController" as Controller
+participant "<<Service>>\n:ProjectService" as PS
+participant "<<Repository>>\n:ProjectRepository" as PR
+participant ":CreateProjectListAssembler" as assembler
+participant "projectDTO\n:ProjectDTO" as projectDTO
+participant "projectDTOList\n:List<ProjectDTO>" as projectDTOList
+
+
+Manager -> UI++: requests list of all projects
+
+    UI -> Controller++ : createProjectList()
+    Controller -> PS++: createProjectList()
+    PS -> PR++: findAll()
+    return projectList
+
+    PS -> assembler++: createProjectList(projectList)
+    create projectDTOList
+    assembler -> projectDTOList: create()
+
+    loop for each project in projectList
+
+    assembler -> assembler: projectDTO = generateDTO(project)
+    activate assembler
+    create projectDTO
+    assembler --> projectDTO: create()
+    deactivate assembler
+
+    assembler -> projectDTOList: add(projectDTO)
+    activate projectDTOList
+    deactivate projectDTOList
+    end
+
+    return projectDTOList
+    return projectDTOList
+    return projectDTOList
+    return returns list of projects
+
+@enduml

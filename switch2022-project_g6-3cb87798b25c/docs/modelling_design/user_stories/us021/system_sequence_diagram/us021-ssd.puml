@@ -1,0 +1,12 @@
+@startuml
+
+skinparam sequenceMessageAlign center
+autonumber
+title US021 - As Team Member, I want to estimate the effort of a user story in a sprint, \nduring the sprint planning ceremony.
+actor ":Team Member" as TeamMember #white
+participant ":System" as System #white
+
+TeamMember -> System: requests to estimate the effort of a user story
+TeamMember <-- System: successful/unsuccessful
+
+@enduml

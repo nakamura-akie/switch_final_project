@@ -1,0 +1,19 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+skinparam sequenceMessageAlign center
+skinparam actorBackgroundColor white
+skinparam participantBackgroundColor white
+
+autonumber
+
+title US022 - As a Team Member, I want to view the Scrum Board of the current sprint
+
+actor ":Team Member" as TM
+participant ":System" as System
+
+TM -> System : ask to view Scrum Board
+System --> TM : list of user stories and status \nof the current sprint
+
+
+@enduml

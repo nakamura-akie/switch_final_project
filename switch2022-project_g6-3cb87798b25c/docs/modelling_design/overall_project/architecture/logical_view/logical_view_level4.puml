@@ -1,0 +1,72 @@
+@startuml
+
+'note as N1
+'In this diagram only the classes related to the aggregates
+'Project and Resource are shown. The classes for the
+'remaining aggregates follow the same pattern and are
+'not shown for legibility reasons.
+'end note
+'
+title Logical View - Level 4
+
+rectangle "<<component>>\nRepository" as RepositoryComponent {
+    interface Repository
+
+    interface ProjectRepository
+
+    class ProjectRepositoryPersistence
+
+    class ProjectRepositoryFake
+
+    interface ResourceRepository
+
+    class ResourceRepositoryFake
+    class ResourceRepositoryPersistence
+}
+
+rectangle "<<component>>\nData Model" as DataModelComponent {
+    class ProjectDomainModelAssembler
+
+    class ProjectJPA
+
+    class ResourceDomainModelAssembler
+
+    class ResourceJPA
+}
+
+rectangle "<<component>>\nPersistence" as PersistenceComponent{
+    interface CrudRepository
+
+    interface ProjectRepositoryJPA
+
+    interface ResourceRepositoryJPA
+}
+
+Repository <|-- ProjectRepository
+Repository <|-- ResourceRepository
+'Repository <|.. PlaceHolderRepository
+
+ProjectRepository <|.. ProjectRepositoryFake
+ProjectRepository <|.. ProjectRepositoryPersistence
+ResourceRepository <|.. ResourceRepositoryFake
+ResourceRepository <|.. ResourceRepositoryPersistence
+
+CrudRepository <|-- ProjectRepositoryJPA
+CrudRepository <|-- ResourceRepositoryJPA
+
+ProjectRepositoryPersistence -> ProjectRepositoryJPA
+ResourceRepositoryPersistence --> ResourceRepositoryJPA
+ProjectRepositoryPersistence --> ProjectDomainModelAssembler
+ResourceRepositoryPersistence --> ResourceDomainModelAssembler
+'ResourceRepositoryPersistence ..> ResourceJPA
+'ProjectRepositoryPersistence ..> ProjectJPA
+
+ProjectDomainModelAssembler ..> ProjectJPA
+ResourceDomainModelAssembler ..> ResourceJPA
+
+ProjectRepositoryJPA ..> ProjectJPA
+ResourceRepositoryJPA ..> ResourceJPA
+
+RepositoryComponent ---d[hidden]-> PersistenceComponent
+
+@enduml

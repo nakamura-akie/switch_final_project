@@ -1,0 +1,30 @@
+@startuml
+title US028 - As Manager, I want to associate a user as Team Member of a project in the web UI.\nUS029 - As Manager, I want to define the PO of a project in the web UI.\nUS030 - As Manager, I want to define the SM of a project in the web UI.
+
+autonumber
+skinparam sequenceMessageAlign center
+skinparam actorBackgroundColor white
+skinparam participantBackgroundColor white
+skinparam sequenceReferenceBackgroundColor white
+skinparam sequenceReferenceHeaderBackgroundColor white
+skinparam sequenceGroupBackgroundColor white
+
+
+participant "<<container(c4)>>\n:Front-end" as fe
+participant "<<container(c4)>>\n:Back-end" as be
+participant "<<container(c4)>>\nDatabase" as db
+
+[o-> fe++ : ask to add resource to a project
+[o<- fe: UI
+deactivate
+[o-> fe++: email, projectCode, startDate, endDate, \nprojectRole, percentageOfAllocation, costPerHour
+fe -> be++ : POST /resources (info)
+be -> db++: save(newResource)
+db --> be: newResource
+deactivate
+be --> fe: 201, \n newResourceDTO
+deactivate
+[o<--fe: success / unsuccessful
+deactivate
+
+@enduml

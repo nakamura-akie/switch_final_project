@@ -1,0 +1,69 @@
+@startuml
+skinparam sequenceMessageAlign center
+skinparam actorBackgroundColor white
+skinparam participantBackgroundColor white
+skinparam sequenceReferenceBackgroundColor white
+skinparam sequenceReferenceHeaderBackgroundColor white
+skinparam sequenceGroupBackgroundColor white
+
+autonumber
+
+title US022 - As a Team Member, I want to view the Scrum Board of the current sprint
+
+actor ":Team Member" as actor
+participant ":ViewScrumBoardUI" as ui
+participant ":SprintBacklog\nController" as controller
+participant "<<ValueObject>>\nprojectCodeValueObject\n:ProjectCode" as ProjectCode
+participant "<<ValueObject>>\nsprintCodeValueObject\n:SprintCode" as SprintCode
+participant "<<DTO>>\nviewSprintBacklogDTO\n:ViewSprintBacklogDTO" as DTO
+participant "CollectionModel\n<UserStoryDTO>\ncollectionModel" as colectionModel
+participant "sprintService\n:SprintService" as sprintService
+participant "<<ValueObject>>\nsprintIdentifier\n:SprintID" as sprintID
+participant "<<Repository>>\n:ProjectRepository" as projectRepository
+participant "<<Repository>>\n:SprintRepository" as sprintRepository
+participant "currentSprint\n:Sprint" as sprint
+participant "<<Repository>>\n:UserStoryRepository" as userStoryRepository
+participant ":OutputUserStoryAssembler" as Assembler
+participant "userStoryList\n:List<UserStoryDTO>" as ListDTO
+
+
+actor -> ui++ : ask to view Scrum Board
+ui -> controller++ : showScrumBoard\n(projectCodeValue, sprintCodeValue)
+    create ProjectCode
+    controller -> ProjectCode : create(projectCodeValue)
+    create SprintCode
+    controller -> SprintCode : create(sprintCodeValue)
+    create DTO
+    controller -> DTO : create()
+    controller -> DTO : viewSprintBacklogDTO.projectCode = projectCodeValueObject
+    controller -> DTO : viewSprintBacklogDTO.sprintCode = sprintCodeValueObject
+
+    controller -> sprintService++ : showScrumBoard\n(viewSprintBacklogDTO)
+        create sprintID
+        sprintService -> sprintID : create\n(viewSprintBacklogDTO.projectCode,\nviewSprintBacklogDTO.sprintCode)
+        sprintService -> projectRepository++ : existsByID(viewSprintBacklogDTO.projectCode)
+        return true/false
+        sprintService -> sprintRepository++ : findByID (sprintIdentifier)
+        return currentSprint
+
+        sprintService -> sprint++ : getIDsOfUserStoriesInSprintBacklog()
+        return sprintBacklog
+        sprintService -> userStoryRepository++ : findAllByID(sprintBacklog)
+        return userStoryList
+        sprintService -> Assembler++ : userStoryList(userStoryList.iterator())
+
+        create ListDTO
+        Assembler -> ListDTO : create()
+        loop #white userStoryIterator.hasNext()
+        Assembler -> Assembler : currentUserStory=\nuserStoryIterator.next()
+        Assembler -> Assembler : userStoryDTO=\ngenerateDTO(currentUserStory)
+        Assembler -> ListDTO : add(userStoryDTO)
+        end
+
+    return userStoryList
+return listOfUserStoryDTOsWithStatus
+create colectionModel
+controller -> colectionModel : create(lisOfUserStoryDTOsWithStatus)
+return ResponseEntity.ok(collectionModel)
+return list of user stories and status\nof the current sprint
+@enduml

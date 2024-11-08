@@ -1,0 +1,56 @@
+@startuml
+skinparam sequenceMessageAlign center
+skinparam actorBackgroundColor white
+skinparam participantBackgroundColor white
+skinparam sequenceReferenceBackgroundColor white
+skinparam sequenceReferenceHeaderBackgroundColor white
+skinparam sequenceGroupBackgroundColor white
+skinparam sequenceReferenceBackgroundColor white
+skinparam sequenceReferenceHeaderBackgroundColor white
+skinparam sequenceMessageAlign center
+autonumber
+
+title US021 -  As Team Member, I want to estimate the effort of a user story in a sprint, during the sprint planning ceremony
+
+actor "Team Member" as TeamMember #white
+participant ":EstimateEffort\nUI" as UI #white
+participant ":UserStory\nController" as Controller #white
+participant ":UserStory\nService" as Service #white
+participant "<<ValueObject>>\nuserStoryID\n:UserStoryID" as USID #white
+participant "<<Repository>>\n:UserStoryRepository" as Repository #white
+participant "userStory:\nUserStory" as UserStory #white
+
+
+TeamMember -> UI++: requests to estimate the effort of a user story
+
+UI -> Controller++: estimateEffort(projectCode,\n userStoryCode, effortValue)
+
+Controller -> Service++: estimateEffort(projectCode,\n userStoryCode, effortValue)
+
+create USID
+Service -> USID: create(projectCodeValue,\n userStoryCodeValue)
+
+Service -> Repository++: findByID(userStoryID)
+return userStory
+
+Service -> UserStory: defineEffort(effortValue)
+note right of UserStory
+user story fetches
+effort values from
+an enum class
+end note
+
+
+Service -> Repository++: save(userStoryToSet)
+return true/false
+
+
+return true/false
+return true/false
+return successful/unsuccessful
+
+
+
+
+
+@enduml

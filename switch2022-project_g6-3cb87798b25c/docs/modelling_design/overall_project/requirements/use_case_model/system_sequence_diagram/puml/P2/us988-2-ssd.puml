@@ -1,0 +1,13 @@
+@startuml
+
+
+autonumber
+
+actor User as User
+participant "__:System:__" as System
+
+User -> System: The administrator uses the search fild to find users with availability. The administrator provides users profile
+System --> User: The system displays user's information as such availibility
+
+
+@enduml

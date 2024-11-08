@@ -1,0 +1,73 @@
+.resourcesTable {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 900px;
+    color: #B8C1CA;
+    border-spacing: 0;
+    position: relative;
+    border-bottom: 1px solid rgba(168, 167, 167, 0.47);
+
+}
+
+.resourcesTable::before {
+    content: '';
+    position: absolute;
+    top: 0px;
+    left: -1px;
+    right: -1px;
+    bottom: -2px;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.resourcesTable thead th:first-child {
+    padding: 20px;
+
+}
+
+.resourcesTable {
+    border-top: 1px solid transparent;
+    border-right: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+    background-color: transparent;
+    border-bottom: 1px solid rgba(168, 167, 167, 0.47);
+}
+
+th {
+    color: black ;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 1px solid rgba(168, 167, 167, 0.47);
+}
+
+.resourcesTable .rows {
+    background-color: transparent;
+    height:85px;
+}
+
+.resourcesTable th,
+.resourcesTable td {
+    padding: 12px 15px;
+    text-align: center;
+    border-bottom: 1px solid rgba(168, 167, 167, 0.47);
+}
+
+/*.projectsTable td:first-child{*/
+/*    border-left: 2px solid cyan;*/
+/*}*/
+
+.resourcesTable .rows:hover {
+    background-color: rgba(74, 75, 79, 0.11);
+}
+
+/*.projectsTable .rows:first-child {*/
+/*    border-left: 2px solid deeppink;*/
+/*}*/
+
+.projectCodeRow {
+    text-align: center;
+}
+

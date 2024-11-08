@@ -1,0 +1,20 @@
+@startuml
+'Attribute syntax: <visibility> <name> : <type> <multiplicity> = <default>
+'Method syntax: <visibility> <name (parameter-list)> : <return-type> - For simplicity the type of the parameter-list is not specified
+
+class ProductBacklog<<Domain Entity>> {
+    - projectCode : ProjectCode {readOnly}
+    - userStoryCodeList : LinkedList<UserStoryID> {readOnly}
+
+    # ProductBacklog(projectCode : ProjectCode)
+    # ProductBacklog(projectCode : ProjectCode, userStoryCodeList : UserStoryID [0..*])
+    + addUserStory(userStoryID : UserStoryID) : boolean
+    + removeUserStory(userStoryID : UserStoryID) : boolean
+    + getUserStoryList() : UserStoryID [0..*]
+    + identity() : ProjectCode
+    + sameAs(object : Object) : boolean
+    + equals(o : Object) : boolean
+    + hashCode() : int
+}
+
+@enduml

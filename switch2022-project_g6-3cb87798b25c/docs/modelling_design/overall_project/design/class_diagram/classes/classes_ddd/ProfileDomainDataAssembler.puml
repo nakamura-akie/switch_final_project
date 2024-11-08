@@ -1,0 +1,13 @@
+@startuml
+'Attribute syntax: <visibility> <name> : <type> <multiplicity> = <default>
+'Method syntax: <visibility> <name (parameter-list)> : <return-type> - For simplicity the type of the parameter-list is not specified
+
+class ProfileDataDomainAssembler {
+    '- profileFactory : ProfileFactory {readOnly}
+
+    + ProfileDataDomainAssembler(profileFactory : ProfileFactory)
+    + toData(profile : Profile) : ProfileJPA
+    + toDomain(profileJPA : ProfileJPA) : Profile
+}
+
+@enduml

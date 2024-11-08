@@ -1,0 +1,15 @@
+@startuml
+skinparam SequenceMessageAlign center
+autonumber
+actor "User" as User
+participant ":System" as System
+participant ":LegacySystem" as LegacySystem
+
+User -> "LegacySystem": asks for legacy data
+"LegacySystem" --> User: returns legacy data
+User -> System: sends legacy data to import
+System --> System: validates business rules and transforms legacy data
+System --> System: stores data
+System --> User: returns ok
+
+@enduml

@@ -1,0 +1,13 @@
+@startuml
+'Lines in red are assumed relationships and are not clearly defined yet
+'therefore Actor may change.
+
+skinparam sequenceMessageAlign center
+autonumber
+
+actor "Team Member" #red
+participant ":System" as System
+
+"Team Member" -[#red]> System: defines effort for each activity
+System --> "Team Member": confirms definition of effort
+@enduml

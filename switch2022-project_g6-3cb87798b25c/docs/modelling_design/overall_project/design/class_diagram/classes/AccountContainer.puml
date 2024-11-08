@@ -1,0 +1,17 @@
+@startuml
+'Attribute syntax: <visibility> <name> : <type> <multiplicity> = <default>
+'Method syntax: <visibility> <name (parameter-list)> : <return-type> - For simplicity the type of the parameter-list is not specified
+
+class AccountContainer {
+    -accountList : Account [1..*] {readOnly}
+
+    +createNewAccount(name : String, email : String, photo : Image, phoneNumber : int, profile : Profile) : boolean
+    -addAccount(newAccount : Account) : boolean
+    +getAccount(email : String) : Account
+    +inactivateAccount(email : String) : boolean
+    +activateAccount(email : String) : boolean
+    +changeAccountProfile(email : String, profile : Profile) : boolean
+    +getIterator() : Iterator
+}
+
+@enduml

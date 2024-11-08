@@ -1,0 +1,8 @@
+@startuml
+
+enum SprintStatus<<ValueObject>> {
+PLANNED
+OPENED
+CLOSED
+}
+@enduml

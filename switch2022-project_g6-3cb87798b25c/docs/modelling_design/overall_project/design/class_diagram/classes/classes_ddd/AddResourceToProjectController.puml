@@ -1,0 +1,11 @@
+@startuml
+
+class AddResourceToProjectController {
+
+    -resourceService : ResourceService
+
+    +AddResourceToProjectController (resourceService : ResourceService)
+    +addResourceToProject(newResourceDTO : NewResourceDTO) : boolean
+}
+
+@enduml

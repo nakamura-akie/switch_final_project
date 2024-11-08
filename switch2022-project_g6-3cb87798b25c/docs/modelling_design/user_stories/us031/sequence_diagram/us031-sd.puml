@@ -1,0 +1,73 @@
+@startuml
+
+skinparam sequenceMessageAlign center
+skinparam actorBackgroundColor white
+skinparam participantBackgroundColor white
+skinparam sequenceReferenceBackgroundColor white
+skinparam sequenceReferenceHeaderBackgroundColor white
+skinparam sequenceGroupBackgroundColor white
+
+autonumber
+
+title US031 -  As Project Manager, I want to start the next sprint of a project in the web UI
+
+actor "Product Manager" as PM
+
+participant ":OpenSprint\nUI" as UI
+participant "<<Controller>>\n:SprintController" as Controller
+participant "<<Service>>\n:SprintService" as Service
+participant "<<ValueObject>>\n<<DomainID>>\nsprintID\n:SprintID" as SprintID
+participant "<<ValueObject>>\nsprintStatus\n:SprintStatus" as SprintStatus
+participant "<<Interface>>\n<<Repository>>\n:SprintRepository" as SprintRepository
+participant "<<Entity>>\n<<Aggregate Root>>\nsprint\n:Sprint" as Sprint
+participant ":SprintDomainDataAssembler" as Assembler
+participant "<<Interface>>\n<<Repository>>\n:SprintRepositoryJPA" as JPARepo
+participant ":CreatedSprintAssembler" as CreatedSprintAssembler
+
+
+
+PM -> UI++: asks to open a sprint
+UI -> Controller++: changeSprintStatusREST(sprintStatusDTO)
+Controller -> Service++: changeSprintStatus(sprintStatusDTO)
+
+create SprintID
+Service -> SprintID : sprintID = sprintStatusDTO.sprintID
+
+create SprintStatus
+Service -> SprintStatus : sprintStatus = sprintStatusDTO.sprintStatus
+
+Service -> SprintRepository++: findById(sprintID)
+return sprint
+
+Service -> Service++: setSprintInformation(sprint, sprintStatus)
+
+Service -> Sprint++: hasStatus(sprintStatus)
+return true/false
+
+Service -> SprintRepository++: existsBySprintIdJPAProjectCodeAndSprintStatusLike\n(sprint.projectCode, SprintStatus.OPENED)
+return true/false
+
+Service -> Sprint: defineSprintStatus(sprintStatus)
+
+Service -> SprintRepository++: save(sprint)
+SprintRepository -> Assembler++ : toData(sprint)
+return sprintJPA
+SprintRepository -> JPARepo++ : save(sprintJPA)
+return savedSprintJPA
+SprintRepository -> Assembler++ : toDomain(savedSprintJPA)
+return sprintWithChangedStatus
+return sprintWithChangedStatus
+deactivate Service
+
+Service -> CreatedSprintAssembler++ : generateDTO(sprintWithChangedStatus)
+return createdSprintDTO
+
+Service --> Controller : createdSprintDTO
+deactivate
+
+Controller --> UI : createdSprintDTO
+deactivate
+
+UI --> PM : successful/unsuccessful
+
+@enduml

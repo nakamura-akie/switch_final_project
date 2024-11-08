@@ -1,0 +1,85 @@
+@startuml
+skinparam linetype polyline
+top to bottom direction
+
+title US022 - As a Team Member, I want to view the Scrum Board of the current sprint
+
+
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/SprintBacklogController.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ViewSprintBacklogDTO.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/SprintService.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/SprintRepositoryPersistence.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/SprintRepositoryFake.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/SprintRepository.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/Repository.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/Sprint.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/SprintID.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/SprintCode.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/SprintBacklog.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStory.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectCode.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/Description.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStoryStatus.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStoryCode.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStoryRepositoryFake.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStoryRepositoryPersistence.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStoryRepository.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectRepositoryFake.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectRepositoryPersistence.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectRepository.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStoryAssembler.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStoryDTO.puml
+
+
+SprintBacklogController --> SprintService : sprintService
+SprintBacklogController --> ProjectCode
+SprintBacklogController --> SprintCode
+SprintBacklogController --> ViewSprintBacklogDTO
+SprintBacklogController ..> UserStoryDTO
+
+ViewSprintBacklogDTO --> SprintCode
+ViewSprintBacklogDTO --> ProjectCode
+SprintService ..> ViewSprintBacklogDTO
+
+
+SprintService --> SprintRepository : sprintRepository
+SprintService --> UserStoryRepository : UserStoryRepository
+SprintService --> Repository : ProjectRepository
+
+SprintService --> Sprint
+SprintService --> SprintID
+
+Repository <|-- SprintRepository
+Repository <|-- UserStoryRepository
+Repository <|-- ProjectRepository
+
+SprintRepositoryPersistence ..|> SprintRepository
+SprintRepositoryFake ..|> SprintRepository
+
+UserStoryRepositoryPersistence ..|> UserStoryRepository
+UserStoryRepositoryFake ..|> UserStoryRepository
+
+ProjectRepositoryPersistence ..|> ProjectRepository
+ProjectRepositoryFake ..|> ProjectRepository
+
+SprintRepositoryFake "1" *--> "*" Sprint : sprintList
+UserStoryRepositoryFake "1" *--> "*" UserStory : userStoryList
+
+SprintService ..> UserStoryAssembler
+UserStoryAssembler ..> UserStory
+UserStoryAssembler --> UserStoryDTO
+
+UserStory --> UserStoryCode : userStoryCode
+UserStory --> ProjectCode : projectCode
+UserStory --> Description : description
+UserStory --> UserStoryStatus : status
+
+Sprint --> SprintID : sprintID
+Sprint --> SprintBacklog : sprintBacklog
+
+SprintID --> ProjectCode : projectCode
+SprintID --> SprintCode : sprintCode
+
+
+
+@enduml

@@ -1,0 +1,11 @@
+@startuml
+
+interface AccountFactory{
+
+    +createAccount(accountName: AccountName, email : Email, photo : Image,\nphoneNumber : PhoneNumber, profileName : ProfileName) : Account
+    +createAccountJPA(accountName : String, accountEmail : String, photo : Image, accountPhoneNumber : Integer,
+    accountProfile : String, accountStatus : boolean) : Account
+
+}
+
+@enduml

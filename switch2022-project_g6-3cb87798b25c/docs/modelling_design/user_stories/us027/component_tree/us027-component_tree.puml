@@ -1,0 +1,20 @@
+@startmindmap
+
+title US027 - As a Project Manager, I want to create a sprint in the web UI.
+
+top to bottom direction
+
+* <&globe>Application
+** Navbar
+*** NavItem
+** MainRoute
+*** Projects
+**** ProjectPage
+***** SprintForm
+****** Button\n(Back)
+****** Button\n(Add Sprint)
+******* SuccessMessage
+******** Button\n(Ok)
+****** Button\n(Reset)
+
+@endmindmap

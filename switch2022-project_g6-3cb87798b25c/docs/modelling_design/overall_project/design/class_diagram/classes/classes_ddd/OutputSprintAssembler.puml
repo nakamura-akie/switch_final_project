@@ -1,0 +1,10 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class OutputSprintAssembler {
+
+    + generateDTO(sprint : Sprint) : OutputSprintAssembler {static}
+
+}
+
+@enduml

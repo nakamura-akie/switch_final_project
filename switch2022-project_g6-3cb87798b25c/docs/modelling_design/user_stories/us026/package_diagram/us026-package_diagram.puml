@@ -1,0 +1,35 @@
+@startuml
+'https://plantuml.com/component-diagram
+title US026 - As a PO/SM/Team Member, I want to consult the current Product Backlog in the web UI
+
+top to bottom direction
+
+package "src" {
+    package "routes" {
+    }
+    package "pages" {
+    }
+    package "components" {
+        package "projectsList" {
+        }
+        package "productBacklog" {
+        }
+        package "userStory" {
+        }
+    }
+    package "context" {
+    }
+}
+
+"routes" ..> "pages"
+"routes" ..> "components"
+"pages" ..> "projectsList"
+"pages" ..> "components"
+"projectsList" ..> "productBacklog"
+"projectsList" ..> "context"
+"productBacklog" ..> "context"
+"pages" ......> "context"
+"productBacklog" ..> "userStory"
+"userStory" ..> "context"
+
+@enduml

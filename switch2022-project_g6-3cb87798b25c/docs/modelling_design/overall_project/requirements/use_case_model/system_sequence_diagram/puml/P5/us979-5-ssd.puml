@@ -1,0 +1,11 @@
+@startuml
+skinparam SequenceMessageAlign center
+autonumber
+actor “User” as User
+participant ":System" as System
+
+User -> System: change view mode
+User <-- System: show information as requested
+
+@enduml
+

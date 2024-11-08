@@ -1,0 +1,17 @@
+@startuml
+
+left to right direction
+
+title Implementation View - Level 2
+
+package system {
+    package UI #white{
+    }
+
+    package src #white{
+    }
+}
+
+UI ..> src
+
+@enduml

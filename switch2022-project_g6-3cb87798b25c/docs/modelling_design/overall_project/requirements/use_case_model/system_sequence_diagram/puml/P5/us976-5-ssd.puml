@@ -1,0 +1,13 @@
+@startuml
+skinparam SequenceMessageAlign center
+autonumber
+actor “User” as User
+participant ":System" as System
+
+User <- User: fill details(type of meeting, minute, date)
+User -> System: sends meeting data
+System --> System: validates meeting date
+System --> System: stores meeting data
+System --> User: returns ok
+@enduml
+

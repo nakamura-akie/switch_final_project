@@ -1,0 +1,33 @@
+@startuml
+'https://plantuml.com/use-case-diagram
+
+skinparam UsecaseBackgroundColor white
+skinparam ActorBackgroundColor white
+
+left to right direction
+
+actor "Product Owner" as PO
+actor "Scrum Master" as SM
+actor "Project Manager" as PM
+actor "Team Member" as TM
+
+
+rectangle System {
+  usecase "US017: create a user story and add\n it to the product backlog" as UC17
+  usecase "US018: consult the product backlog" as UC18
+  usecase "US019: create a sprint" as UC19
+  usecase "US020: add a user story in the\n product backlog to the sprint backlog" as UC20
+  usecase "US021: estimate the effort of \na user story in a sprint" as UC21
+  usecase "US022: view the Scrum Board of the \ncurrent sprint" as UC22
+}
+
+PO --> UC17
+PO --> UC18
+SM --> UC18
+TM --> UC18
+PM --> UC19
+TM --> UC20
+TM --> UC21
+TM --> UC22
+
+@enduml

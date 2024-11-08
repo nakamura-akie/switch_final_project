@@ -1,0 +1,14 @@
+@startuml
+
+skinparam sequenceMessageAlign center
+autonumber
+
+actor "Product Owner"
+participant ":System" as System
+
+"Product Owner" -> System: creates User Story
+
+System -> System: adds User Story to Project Backlog
+System --> "Product Owner": confirms creation of User Story
+
+@enduml

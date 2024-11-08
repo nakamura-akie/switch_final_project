@@ -1,0 +1,18 @@
+@startuml
+title US024 - As an Administrator, I want to list all projects
+
+skinparam sequenceMessageAlign center
+skinparam actorBackgroundColor white
+skinparam participantBackgroundColor white
+skinparam sequenceReferenceBackgroundColor white
+skinparam sequenceReferenceHeaderBackgroundColor white
+skinparam sequenceGroupBackgroundColor white
+
+autonumber
+
+actor "Administrator" as AD
+participant "<<context(c4)>>\n:Scrumy" as system
+
+AD -> system++ : ask for a list of all projects
+return list of projects
+@enduml

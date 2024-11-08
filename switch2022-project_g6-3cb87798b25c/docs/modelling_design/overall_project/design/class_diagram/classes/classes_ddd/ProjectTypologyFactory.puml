@@ -1,0 +1,7 @@
+@startuml
+
+Interface ProjectTypologyFactory {
++createProjectTypology(projectTypologyName : ProjectTypologyName)
+}
+
+@enduml

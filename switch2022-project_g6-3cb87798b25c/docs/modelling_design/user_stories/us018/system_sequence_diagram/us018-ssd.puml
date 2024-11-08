@@ -1,0 +1,23 @@
+@startuml
+
+skinparam sequenceMessageAlign center
+skinparam actorBackgroundColor white
+skinparam participantBackgroundColor white
+
+autonumber
+
+title US018 - As PO/SM/Team Member, I want to consult the product backlog, i.e. to get the list of user stories sorted by priority
+
+actor ":User With Role" as UserWithRole
+participant ":System" as System
+
+note left of UserWithRole
+Product Owner,
+Scrum Master or
+Team Member
+end note
+
+UserWithRole -> System++ : requests list of User Stories
+return shows list of User Stories
+
+@enduml

@@ -1,0 +1,17 @@
+@startuml
+
+skinparam sequenceMessageAlign center
+skinparam classBackgroundColor transparent
+autonumber
+
+title US010 - As Manager, I want to register/create a new project
+
+actor ":Manager" as M #white
+participant ":System" as System #white
+
+M -> System: asks to register a new project
+M <-- System: asks for project details
+M -> System: inserts project details
+M <-- System: successful
+
+@enduml

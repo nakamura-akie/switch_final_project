@@ -1,0 +1,60 @@
+@startuml
+
+skinparam sequenceMessageAlign center
+skinparam actorBackgroundColor white
+skinparam participantBackgroundColor white
+skinparam sequenceReferenceBackgroundColor white
+skinparam sequenceReferenceHeaderBackgroundColor white
+skinparam sequenceGroupBackgroundColor white
+
+autonumber
+
+title US014 - As Manager, I want to get a list of all human resources in a project
+
+actor ":Manager" as Manager
+
+participant ":ListResourcesInProjectUI" as UI
+participant "<<Controller>> \n:ListHumanResourcesController" as controller
+participant "<<Service>>\n:ResourceService" as service
+participant "<<Value Object>> \nprojectCode \n:ProjectCode" as projectCode
+participant "<<Repository>> \n:ResourceRepository" as repository
+participant ":ResourcesInProjectAssembler" as assembler
+participant "resourceDTO\n:ResourceDTO" as resourceDTO
+participant "resourceDTOList\n:List<ProjectDTO>" as resourceDTOList
+
+Manager -> UI++ : request list of all human\nresources in a projectCode
+
+UI -> controller++ : listResourcesInProject(projectCodeValue, clock)
+controller -> service++: listResourcesInProject(projectCodeValue, clock)
+    create projectCode
+    service -> projectCode: create(projectCodeValue)
+
+    service -> repository++: findByCriteria()
+    return resourceList
+
+    service -> assembler++ : resourceInProjectList(resourceListIterator)
+
+    create resourceDTOList
+        assembler -> resourceDTOList: create()
+
+        loop for each resource in iterable
+
+        assembler -> assembler: resourceDTO = generateDTO(resource)
+        create resourceDTO
+        assembler --> resourceDTO: create()
+
+
+        assembler -> resourceDTOList: add(resourceDTO)
+        activate resourceDTOList
+        deactivate resourceDTOList
+        end
+
+return list of human resources in Project
+return list of human resources in Project
+return list of human resources in Project
+return list of human resources in Project
+
+
+
+
+@enduml

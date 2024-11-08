@@ -1,0 +1,12 @@
+@startuml
+
+skinparam sequenceMessageAlign center
+autonumber
+
+actor Manager
+participant ":System" as System
+
+Manager -> System: asks to register project
+System --> Manager: shows confirmation of registration
+
+@enduml

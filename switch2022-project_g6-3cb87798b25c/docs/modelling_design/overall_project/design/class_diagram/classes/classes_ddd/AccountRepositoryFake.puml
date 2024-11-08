@@ -1,0 +1,17 @@
+@startuml
+
+class AccountRepositoryFake<<AccountRepository>>{
+    - accountList : Account [0..*] {static}
+
+    + save(account : Account) : Account
+    + findAll() : Iterable<Account>
+    + findById(email : Email) : Optional<Account>
+    + existsById(email : Email) : boolean
+    + deleteAll()
+    + deleteById(id : Email)
+    + existsByEmailAndProfileName(email : Email, profileName : ProfileName) : boolean
+
+}
+
+
+@enduml

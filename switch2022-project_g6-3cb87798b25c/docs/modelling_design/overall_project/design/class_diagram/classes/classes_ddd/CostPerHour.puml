@@ -1,0 +1,12 @@
+@startuml
+
+class CostPerHour <<Value Object>> {
+-costPerHour : Double
+
++CostPerHour(costPerHour : Double)
++equals(object : Object) : boolean
++hashCode() : int
+
+}
+
+@enduml

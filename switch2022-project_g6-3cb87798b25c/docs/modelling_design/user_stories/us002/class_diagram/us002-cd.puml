@@ -1,0 +1,49 @@
+@startuml
+skinparam linetype polyline
+
+title US002 - As Administrator, I want to register a user
+
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/CreateAccountController.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/Repository.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/AccountRepository.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProfileRepository.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/AccountFactory.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/AccountFactoryImplementation.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/AccountService.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProfileName.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/Account.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/AccountName.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/Email.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/PhoneNumber.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/Profile.puml
+
+
+CreateAccountController --> AccountService : accountService
+
+AccountService --> AccountFactory : accountFactory
+AccountService --> Repository : accountRepository
+AccountService --> Repository : profileRepository
+
+AccountFactoryImplementation ..|> AccountFactory
+
+AccountFactoryImplementation --> Account
+
+AccountService ..> AccountName
+AccountService ..> Email
+AccountService ..> PhoneNumber
+AccountService ..> ProfileName
+
+AccountRepository ..|> Repository
+ProfileRepository ..|> Repository
+
+AccountRepository "1" *--> "*" Account : accountList
+ProfileRepository "1" *--> "*" Profile : profileList
+
+Account --> AccountName : accountName
+Account --> PhoneNumber : phoneNumber
+Account --> ProfileName : profileName
+Account --> Email : email
+
+Profile --> ProfileName : profileName
+
+@enduml

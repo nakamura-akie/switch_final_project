@@ -1,0 +1,12 @@
+@startuml
+
+skinparam sequenceMessageAlign center
+autonumber
+
+actor "Product Owner" as PO
+participant ":System" as System
+
+PO -> System: defines Sprint Backlog
+System --> PO: confirms creation of Sprint Backlog
+
+@enduml

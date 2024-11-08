@@ -1,0 +1,55 @@
+@startuml
+
+skinparam linetype polyline
+
+title US001 - As Administrator, I want to create user profiles
+
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProfileController.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/NewProfileDTO.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProfileService.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/Repository.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProfileRepository.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProfileRepositoryPersistence.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProfileRepositoryJPA.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProfileFactory.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProfileFactoryImplementation.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/Profile.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProfileName.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/OutputProfileDTO.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/OutputProfileAssembler.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProfileDomainDataAssembler.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProfileJPA.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/CrudRepository.puml
+
+
+'--
+ProfileController --> ProfileService : profileService
+ProfileController ..> NewProfileDTO
+ProfileController ..> OutputProfileDTO
+ProfileService ..> OutputProfileAssembler
+ProfileService ..> OutputProfileDTO
+
+ProfileService --> ProfileRepository : profileRepository
+ProfileService --> ProfileFactory : profileFactory
+ProfileService ..> Profile
+
+ProfileDataDomainAssembler --> ProfileJPA
+ProfileDataDomainAssembler ..> Profile
+ProfileDataDomainAssembler --> ProfileFactory : profileFactory
+OutputProfileAssembler --> OutputProfileDTO
+
+Repository <|-- ProfileRepository
+ProfileRepository <|.. ProfileRepositoryPersistence
+ProfileRepositoryJPA --|> CrudRepository
+ProfileRepositoryPersistence ..> Profile
+ProfileRepositoryPersistence ..> ProfileJPA
+
+ProfileRepositoryPersistence --> ProfileDataDomainAssembler : profileDomainDataAssembler
+ProfileRepositoryPersistence --> ProfileRepositoryJPA : profileRepositoryJPA
+
+ProfileFactory <|.. ProfileFactoryImplementation
+Profile --> ProfileName : profileName
+ProfileFactoryImplementation --> Profile
+ProfileRepositoryJPA ..> ProfileJPA
+
+@enduml

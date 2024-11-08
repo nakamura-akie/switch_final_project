@@ -1,0 +1,45 @@
+body.active-modal {
+    overflow-y: hidden;
+}
+
+.overlay {
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+    background: rgba(0,0,0,0.75);
+}
+
+.modalContent {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    line-height: 1.4;
+    background: #f1f1f1;
+    padding: 14px 28px;
+    border-radius: 20px;
+    max-height: 600px;
+    max-width: 600px;
+    min-width: 400px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    outline: 5px solid #18ACA4;
+    outline-offset: 10px;
+}
+
+.modal-open {
+    overflow: hidden;
+}
+
+.button_container {
+    padding-top: 20px;
+}
+
+

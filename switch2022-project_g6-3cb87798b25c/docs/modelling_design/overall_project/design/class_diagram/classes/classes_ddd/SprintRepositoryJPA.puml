@@ -1,0 +1,14 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+interface SprintRepositoryJPA<<Repository>> {
+
+        + findBySprintIdJPA_ProjectCode(projectCode : String) : Iterable<SprintJPA>
+        + findBySprintIdJPA_ProjectCodeAndStartDate(projectCode : String, startDate : String) : Optional<SprintJPA>
+        + findFirstBySprintIdJPA_ProjectCodeOrderByEndDateDesc(projectCode : String) : Optional<SprintJPA>
+        + findBySprintIdJPAAndSprintStatusLike(sprintIdJPA : SprintIdJPA, sprintStatus : String) : Optional<SprintJPA>
+        + findBySprintIdJPA_ProjectCodeAndSprintStatus(projectCode : String, sprintStatus : String) : Optional<SprintJPA>
+        + existsBySprintIdJPAProjectCodeAndSprintStatusLike(projectCode : String, sprintStatus : String) : boolean
+}
+
+@enduml

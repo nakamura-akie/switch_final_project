@@ -1,0 +1,40 @@
+@startuml
+
+skinparam sequenceMessageAlign center
+skinparam sequenceReferenceBackgroundColor white
+autonumber
+
+title US003 - As Administrator, I want to change the profile of a user account
+
+actor "Administrator" as admin #white
+participant ":ChangeProfileUI" as ui #white
+participant ":ChangeProfileController" as ChangeProfileController #white
+participant ":AccountService" as service #white
+participant ":ProfileName" as profileName #white
+participant ":Email" as email #white
+participant ":ProfileRepository" as profileRepo #white
+participant ":AccountRepository" as accountRepo #white
+participant ":Account" as account #white
+
+admin -> ui++ : Asks to change\nprofile of an account
+ui -> ChangeProfileController++ : changeProfileOfExistingAccount\n(userEmail, newProfile)
+ChangeProfileController -> service++ : changeProfileOfUserAccount(email, newProfile)
+create profileName
+service -> profileName : create()
+service -> profileRepo++ : existsByID(profileName)
+return true/false
+
+opt#white profileExists = true
+create email
+service -> email : create()
+service -> accountRepo++ : findByID(email)
+return account
+service -> account++ : changeProfileOfUserAccount(profile)
+return successfull/unsuccessful
+end
+
+return successfull/unsuccessful
+return successfull/unsuccessful
+return successfull/unsuccessful
+
+@enduml

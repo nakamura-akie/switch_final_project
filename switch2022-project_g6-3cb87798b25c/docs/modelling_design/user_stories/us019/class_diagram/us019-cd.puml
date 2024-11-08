@@ -1,0 +1,52 @@
+@startuml
+skinparam linetype polyline
+
+title US019 - As Project Manager, I want to create a sprint
+
+
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/NewSprintDTO.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/SprintController.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/SprintService.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/CreatedSprintAssembler.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/CreatedSprintDTO.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/SprintRepository.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/SprintFactory.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/Repository.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/SprintFactoryImplementation.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/SprintRepositoryPersistence.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectCode.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/CreatedSprintDTO.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/SprintID.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/Sprint.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/SprintCode.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/SprintDuration.puml
+
+NewSprintDTO ..> SprintController
+NewSprintDTO --> ProjectCode
+NewSprintDTO --> StartDate
+SprintController --> SprintService
+
+SprintService --> SprintFactory
+SprintService ..> ProjectCode
+SprintFactory <|.. SprintFactoryImplementation
+SprintFactoryImplementation --> Sprint
+Sprint --> SprintID
+Sprint --> StartDate
+SprintID  --> ProjectCode
+SprintID --> SprintCode
+Sprint --> SprintDuration
+
+SprintService --> SprintRepository
+
+SprintRepository <|.. SprintRepositoryPersistence
+Repository <|-- SprintRepository
+
+Sprint <--* SprintRepositoryPersistence
+
+SprintService --> CreatedSprintAssembler
+Sprint --> CreatedSprintAssembler
+CreatedSprintAssembler --> CreatedSprintDTO
+
+
+
+@enduml

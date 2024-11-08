@@ -1,0 +1,18 @@
+@startuml
+'Attribute syntax: <visibility> <name> : <type> <multiplicity> = <default>
+'Method syntax: <visibility> <name (parameter-list)> : <return-type> - For simplicity the type of the parameter-list is not specified
+
+class SprintID <<DomainID>><<Value Object>>{
+    - sprintCode: SprintCode {readOnly}
+    - projectCode: ProjectCode {readOnly}
+
+    + SprintID(sprintCode: SprintCode, projectCode: ProjectCode)
+    + equals(o: Object): boolean
+    + hashCode(): int
+    + hasProjectCode(projectCode: ProjectCode): boolean
+    + getProjectCode(): projectCode
+    + getSprintCode(): sprintCode
+
+}
+
+@enduml

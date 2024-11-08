@@ -1,0 +1,18 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+
+enum UserStoryStatus <<Value Object>>  {
+    OPEN
+    RUNNING
+    FINISHED
+    CANCELED
+
+    - newUserStoryStatus : String {readOnly}
+    + UserStoryStatus(status : String)
+    + fromString(status : String) : UserStoryStatus
+    + isFinished() : boolean
+    + isCancelled() : boolean
+}
+
+@enduml

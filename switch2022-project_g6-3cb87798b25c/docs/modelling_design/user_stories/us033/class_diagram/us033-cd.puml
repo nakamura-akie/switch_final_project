@@ -1,0 +1,81 @@
+@startuml
+'https://plantuml.com/class-diagram
+skinparam linetype polyline
+
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStoryController.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStoryService.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/InputUserStoryStatus.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStoryCode.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectCode.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStoryID.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStory.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStoryRepository.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStoryRepositoryPersistence.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/Repository.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStoryStatus.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/OutputUserStoryAssembler.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/OutputUserStoryDTO.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStoryDomainDataAssembler.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStoryFactory.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStoryFactoryImplementation.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/Description.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/Effort.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStoryRepositoryJPA.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStoryJPA.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/CrudRepository.puml
+
+
+UserStoryController --> UserStoryService
+UserStoryController ..> OutputUserStoryDTO
+
+UserStoryController ..> ProjectCode
+UserStoryController ..> UserStoryCode
+UserStoryController ..> InputUserStoryStatus
+UserStoryController --> UserStoryID
+
+UserStoryService --> UserStoryRepository : userStoryRepository
+
+UserStoryService ..> UserStoryStatus
+UserStoryService ..> UserStoryID
+
+UserStoryService ..> UserStory
+UserStoryService ..> OutputUserStoryAssembler
+UserStoryService ..> OutputUserStoryDTO
+
+UserStory --> UserStoryID
+UserStory --> UserStoryStatus
+
+UserStoryID --> UserStoryCode
+UserStoryID --> ProjectCode
+
+OutputUserStoryAssembler --> OutputUserStoryDTO
+OutputUserStoryAssembler ..> UserStory
+OutputUserStoryAssembler ..> Description
+OutputUserStoryAssembler ..> UserStoryStatus
+OutputUserStoryAssembler ..> ProjectCode
+OutputUserStoryAssembler ..> UserStoryCode
+OutputUserStoryAssembler ..> Effort
+
+Repository <|-- UserStoryRepository
+
+UserStoryRepositoryPersistence --> UserStoryRepositoryJPA : jpaRepository
+UserStoryRepositoryPersistence ..> UserStoryJPA
+UserStoryRepositoryPersistence --> UserStoryDomainDataAssembler : jpaAssembler
+
+UserStoryDomainDataAssembler --> UserStoryJPA
+UserStoryDomainDataAssembler ..> UserStory
+
+UserStoryFactoryImplementation ..|> UserStoryFactory
+UserStoryFactoryImplementation --> UserStory
+
+UserStoryDomainDataAssembler --> UserStoryFactory
+
+UserStoryRepository <|.. UserStoryRepositoryPersistence
+
+UserStoryRepositoryJPA --|> CrudRepository
+UserStoryRepositoryJPA ..> UserStoryJPA
+
+UserStoryRepositoryPersistence ..> UserStory
+
+
+@enduml

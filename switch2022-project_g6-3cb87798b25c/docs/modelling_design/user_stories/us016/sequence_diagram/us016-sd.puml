@@ -1,0 +1,68 @@
+@startuml
+
+skinparam sequenceMessageAlign center
+skinparam sequenceReferenceBackgroundColor white
+autonumber
+
+title US016 - As Authenticated User, I want to get a list of all projects I'm currently allocated to
+
+actor ":Authenticated User" as User #white
+participant ":ListUserProjectsUI" as UI #white
+participant ":ListUserProjectsController" as controller #white
+participant "resourceService \n:ResourceService" as service #white
+participant "<<ValueObject>>\naccountEmail\n:AccountEmail" as accountEmailVO #white
+participant "resourceRepository \n:ResourceRepository" as resourceRepository #white
+participant "projectList\n:List<Project>" as List #white
+participant "projectRepository \n:ProjectRepository" as projectRepository #white
+participant "<<ValueObject>>\nresourceIDl\n:ResourceID" as resourceIDVO #white
+participant "projectRepository \n:ProjectRepository" as projectRepository #white
+
+participant ":ProjectByResourceAssembler" as assembler #white
+participant "userProjectsList : \nArrayList<UserProjectDTO>" as userProjectList #white
+
+User -> UI++ : requests list of projects \ncurrently allocated to
+
+    UI -> controller++: userProjectsList(email, currentDate)
+
+        controller -> service++: userProjectsList(email, currentDate)
+
+            create accountEmailVO
+            service -> accountEmailVO: create(email)
+
+            service -> resourceRepository++: findByAccountEmailAndCurrentDate(accountEmail, currentDate)
+            return resources
+            create List
+            service -> List: create()
+
+
+            loop#white for each resource in resources
+                service -> resourceIDVO++ : getProjectCode()
+                return projectCode
+                service -> projectRepository++: findById(projecCode)
+                return project
+                service -> List: add (project)
+            end
+
+            service -> assembler++: userProjectsList(projects)
+
+                create assembler
+                    create userProjectList
+            assembler -> userProjectList: create()
+
+            loop#white resourceIterator.hasNext()
+                assembler -> assembler: currentResource = \nresourceIterateor.next()
+                assembler -> assembler: userProjectDTO = \ngenerateDTO(currentResource)
+                assembler -> userProjectList++: add(userProjectDTO)
+               return true
+               end
+
+    return userProjectsList
+return userProjectsList
+
+controller --> UI: userProjectsList
+deactivate controller
+UI --> User: userProjectList of projects
+deactivate UI
+
+
+@enduml

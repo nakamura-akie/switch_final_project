@@ -1,0 +1,23 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class SprintRepositoryPersistence<<Repository>> {
+    - jpaRepository: SprintRepositoryJPA {readOnly}
+    - jpaAssembler: SprintDomainDataAssembler {readOnly}
+
+    # SprintRepositoryPersistence (jpaRepository: SprintRepositoryJPA, \njpaAssembler: SprintDomainDataAssembler)
+    + save(domainSprint : Sprint) : Sprint
+    + findAll() : Iterable<Sprint>
+    + findById(id : SprintID) : Optional<Sprint>
+    + existsById(id : SprintID) : boolean
+    + findByProjectCode(projectCode : ProjectCode) : Iterable<Sprint>
+    + findBySprintIdJPA_ProjectCodeAndStartDate(projectCode :\n ProjectCode, startDate : LocalDate) : Optional<Sprint>
+    + findBySprintIdAndSprintStatusLike(sprintID : SprintID,\n sprintStatus : SprintStatus) : Optional<Sprint>
+    + findOpenSprint(projectCode : ProjectCode) : Optional<Sprint>
+    + findFirstBySprintIdJPA_ProjectCodeOrderByEndDateDesc\n(projectCode : ProjectCode) : Optional<Sprint>
+    + existsBySprintIdJPAProjectCodeAndSprintStatusLike(projectCode : ProjectCode, sprintStatus : SprintStatus) : boolean
+    + deleteAll()
+    + deleteById(id: SprintID)
+}
+
+@enduml

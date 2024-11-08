@@ -1,0 +1,35 @@
+@startuml
+
+title US033 - As Project Member, I want to update the status (i.e.: the Scrum Board category) of \na user story in the scope of the current/active sprint backlog in the web UI.
+
+package "src" {
+    package "routes" {
+    }
+
+    package "pages" {
+    }
+
+    package "components" {
+
+        package "sprintBacklog" {
+        }
+
+    }
+
+    package "context" {
+    }
+    package "services" {
+        }
+}
+
+src ..> components
+src ..> routes
+routes ..> pages
+pages ..> components
+pages ..> sprintBacklog
+sprintBacklog ..> context
+pages ..> context
+context ..> services
+
+
+@enduml

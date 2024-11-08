@@ -1,0 +1,9 @@
+@startuml
+
+class ProjectMapper {
+
+    - ProjectMapper()
+    + createDomainObject(projectFactory : ProjectFactory, newProjectDTO : NewProjectDTO) : Project {static}
+}
+
+@enduml

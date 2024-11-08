@@ -1,0 +1,53 @@
+.sprint-backlog-table{
+    display: flex;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+.item {
+    background: white;
+    padding: 0.5rem 2rem;
+    margin: 1rem 1rem;
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px rgba(75, 71, 71, 0.3);
+}
+
+.item:hover {
+    background: transparent;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    color: #202D46;
+    cursor: pointer;
+}
+
+.dragging {
+    background: transparent;
+    color: transparent;
+    box-shadow: none;
+}
+
+.columns {
+    background: rgba(154, 154, 154, 0.16);
+    border-radius: 10px;
+    padding: 10px;
+    margin: 7px 7px;
+    width: 300px;
+    height: 100%;
+    min-height: 400px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+
+}
+
+.column-title {
+    text-align: center;
+    font-size: 20px;
+    width: 100%;
+}
+
+.addUS {
+    padding-left: 67%;
+    padding-top: 20px;
+}
+
+.top {
+    display: flex;
+}

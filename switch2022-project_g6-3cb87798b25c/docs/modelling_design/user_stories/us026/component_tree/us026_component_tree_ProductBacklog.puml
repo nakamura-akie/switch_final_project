@@ -1,0 +1,20 @@
+@startmindmap
+'https://plantuml.com/mindmap-diagram
+
+title US026 - As a PO/SM/Team Member, I want to consult the current Product Backlog in the web UI
+top to bottom direction
+
+* <&globe>Application
+** Navbar
+*** NavItem
+** MainRoute
+*** Projects
+**** ProjectPage
+***** Header \n(Product Backlog)
+***** Button\n(Back)
+***** Button\n(Create User Story)
+***** ProductBacklogTable\n(List of User Stories)
+****** ProductBacklogBody
+****** ProductBacklogHeader
+
+@endmindmap

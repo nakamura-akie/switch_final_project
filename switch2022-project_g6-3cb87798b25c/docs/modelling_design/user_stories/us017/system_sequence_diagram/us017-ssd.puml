@@ -1,0 +1,17 @@
+@startuml
+
+skinparam sequenceMessageAlign center
+skinparam actorBackgroundColor white
+skinparam participantBackgroundColor white
+
+autonumber
+
+title US017 - As Product Owner, I want to create a user story and add it to the Product Backlog
+
+actor ":Product Owner" as PO
+participant ":System" as System
+
+PO -> System : asks to create a user story and \n add it to the Product Backlog
+return successful
+
+@enduml

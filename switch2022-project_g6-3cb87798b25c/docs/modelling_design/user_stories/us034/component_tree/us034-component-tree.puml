@@ -1,0 +1,27 @@
+@startmindmap
+
+title US034 -   As Project Manager, I want to close the current/active sprint of a project in the web UI.
+top to bottom direction
+
+* <&globe>Application
+** Navbar
+*** NavItem
+** MainRoute
+*** Projects
+**** ProjectPage
+***** ProjectPageTable\n(Project Info)
+***** Button\n(Back)
+***** Button\n(Product Backlog)
+***** Button\n(Resources)
+***** Button \n(Sprints)
+****** Sprint Page
+******* Button\n(Create Sprint)
+******* Button\n(All Sprints)
+******* Button\n(Open next Sprint)
+******* CurrentlyOpenSprint
+******* Button\n(Close Sprint)
+******* Button\n(Add User Story)
+******* Button\n(Back)
+******* ScrumBoard
+
+@endmindmap

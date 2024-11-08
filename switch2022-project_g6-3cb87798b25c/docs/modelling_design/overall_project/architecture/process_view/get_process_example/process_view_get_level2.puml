@@ -1,0 +1,27 @@
+@startuml
+title US024 - As an Admin, I want to list all projects
+
+autonumber
+skinparam sequenceMessageAlign center
+skinparam actorBackgroundColor white
+skinparam participantBackgroundColor white
+skinparam sequenceReferenceBackgroundColor white
+skinparam sequenceReferenceHeaderBackgroundColor white
+skinparam sequenceGroupBackgroundColor white
+
+
+participant "<<container(c4)>>\n:Front-end" as fe
+participant "<<container(c4)>>\n:Back-end" as be
+participant "<<container(c4)>>\n:Database" as db
+
+[o-> fe++ : ask for list of all projects
+fe --> be++ : GET /projects
+be --> db++: findAll()
+db --> be: listOfProjects
+deactivate
+be --> fe: 200, \n listOfProjects
+deactivate
+[o<--fe: list of projects
+deactivate
+
+@enduml

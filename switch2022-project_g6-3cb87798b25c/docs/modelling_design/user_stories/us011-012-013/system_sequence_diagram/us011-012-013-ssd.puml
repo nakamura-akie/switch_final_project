@@ -1,0 +1,14 @@
+@startuml
+
+skinparam sequenceMessageAlign center
+autonumber
+
+actor ":Manager" as Manager #white
+participant ":System" as System #white
+
+title US011/012/013 - As a manager, I want to associate a user as a resource of a project
+
+Manager -> System: asks to associate a resource to project
+System --> Manager: success
+
+@enduml

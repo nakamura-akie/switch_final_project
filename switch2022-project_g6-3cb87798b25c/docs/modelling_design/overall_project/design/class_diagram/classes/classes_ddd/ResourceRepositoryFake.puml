@@ -1,0 +1,16 @@
+@startuml
+class ResourceRepositoryFake <<ResourceRepository>>{
+    - resourceList : Resource [0..*] {static}
+    + save(entity : Resource) : Resource
+    + findAll() : Iterable<Resource>
+    + findById(id : ResourceID) : Optional<Resource>
+    + existsById(id : ResourceID) : boolean
+    + findByAccountEmailAndCurrentDate(accountEmail : Email, currentDate : LocalDate) : Iterable<Resource>
+    + findByProjectCodeAndIsAllocatedNow(projectCode : ProjectCode, searchDate : LocalDate) : Iterable<Resource>
+    + deleteAll()
+    + deleteById(id : ResourceID)
+    + findByEmail(email : Email) : Iterable<Resource>
+    + findByProjectCodeAndProjectRole(projectCode : ProjectCode, projectRole : ProjectRole) : Iterable<Resource>
+    + findByProjectCode(projectCode : ProjectCode) : Iterable<Resource>
+}
+@enduml

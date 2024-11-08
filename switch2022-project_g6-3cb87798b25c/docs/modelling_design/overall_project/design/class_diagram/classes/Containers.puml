@@ -1,0 +1,28 @@
+@startuml
+'Attribute syntax: <visibility> <name> : <type> <multiplicity> = <default>
+'Method syntax: <visibility> <name (parameter-list)> : <return-type> - For simplicity the type of the parameter-list is not specified
+
+class Containers {
+    - accountContainer : AccountContainer {readOnly}
+    - businessSectorContainer : BusinessSectorContainer {readOnly}
+    - customerContainer : CustomerContainer {readOnly}
+    - profileContainer : ProfileContainer {readOnly}
+    - projectContainer : ProjectContainer {readOnly}
+    - resourceContainer : ResourceContainer {readOnly}
+    - projectTypologyContainer : ProjectTypologyContainer {readOnly}
+    - projectRoleContainer : ProjectRoleContainer {readOnly}
+    - projectStatusContainer : ProjectStatusContainer {readOnly}
+
+    + getAccountContainer() : AccountContainer
+    + getBusinessSectorContainer() : BusinessSectorContainer
+    + getCustomerContainer() : CustomerContainer
+    + getProfileContainer() : ProfileContainer
+    + getProjectContainer() : ProjectContainer
+    + getResourceContainer() : ResourceContainer
+    + getProjectTypologyContainer() : ProjectTypologyContainer
+    + getRoleContainer() : ProjectRoleContainer
+    + getProjectStatusContainer() : ProjectStatusContainer
+
+}
+
+@enduml

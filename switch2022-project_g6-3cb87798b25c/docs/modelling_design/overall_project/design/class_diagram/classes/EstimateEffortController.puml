@@ -1,0 +1,12 @@
+@startuml
+'Attribute syntax: <visibility> <name> : <type> <multiplicity> = <default>
+'Method syntax: <visibility> <name (parameter-list)> : <return-type> - For simplicity the type of the parameter-list is not specified
+
+class EstimateEffortController {
+    - containers : Containers {readOnly}
+
+     + EstimateEffortController(containers : Containers)
+     + estimateEffort(projectCode : String ,USER_STORY_CODE :  String, effortValue :  Effort) : boolean
+}
+
+@enduml

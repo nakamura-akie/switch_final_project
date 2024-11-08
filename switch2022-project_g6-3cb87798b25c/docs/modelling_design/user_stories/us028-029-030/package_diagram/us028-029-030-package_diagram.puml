@@ -1,0 +1,35 @@
+@startuml
+
+title US028 - As Manager, I want to associate a user as Team Member of a project in the web UI.\nUS029 - As Manager, I want to define the PO of a project in the web UI.\nUS030 - As Manager, I want to define the SM of a project in the web UI.
+
+package "src" {
+    package "routes" {
+    }
+
+    package "pages" {
+    }
+
+    package "components" {
+
+        package "resource" {
+        }
+
+    }
+
+    package "context" {
+    }
+    package "services" {
+        }
+}
+
+src ..> components
+src ..> routes
+routes ..> pages
+pages ..> components
+pages ..> resource
+resource ..> context
+pages ..> context
+context ..> services
+
+
+@enduml

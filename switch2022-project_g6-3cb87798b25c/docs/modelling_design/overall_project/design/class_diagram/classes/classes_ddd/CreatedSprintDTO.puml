@@ -1,0 +1,15 @@
+@startuml
+
+class CreatedSprintDTO {
+    + sprintID : SprintID
+    + sprintDuration : SprintDuration
+    + startDate : LocalDate
+    + endDate : LocalDate
+    + sprintStatus : SprintStatus
+
+    + equals(o : Object) : boolean
+    + hashCode() : int
+
+}
+
+@enduml

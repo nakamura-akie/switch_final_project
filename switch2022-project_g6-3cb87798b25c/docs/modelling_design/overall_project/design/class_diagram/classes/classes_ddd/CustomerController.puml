@@ -1,0 +1,11 @@
+@startuml
+
+class CustomerController {
+    - customerService : CustomerService
+
+    +CustomerController(customerService : CustomerService)
+    +createCustomer(newCustomerDTO : NewCustomerDTO) : ResponseEntity<Object>
+    +getCustomer(taxIdentificationNumber : String, country : String) : ResponseEntity<Object>
+}
+
+@enduml

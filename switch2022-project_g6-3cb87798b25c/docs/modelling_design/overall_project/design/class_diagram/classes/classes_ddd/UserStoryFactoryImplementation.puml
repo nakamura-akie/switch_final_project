@@ -1,0 +1,8 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class UserStoryFactoryImplementation<<Factory>>{
++ createUserStory(userStoryID : UserStoryID, userStoryDescription : Description) : UserStory
+}
+
+@enduml

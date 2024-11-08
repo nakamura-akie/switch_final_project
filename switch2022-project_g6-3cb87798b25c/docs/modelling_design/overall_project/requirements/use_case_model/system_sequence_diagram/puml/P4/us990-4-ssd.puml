@@ -1,0 +1,12 @@
+@startuml
+
+skinparam sequenceMessageAlign center
+autonumber
+
+actor "Team Member"
+participant ":System" as System
+
+"Team Member" -> System: creates task
+System --> "Team Member": confirms creation of task
+
+@enduml

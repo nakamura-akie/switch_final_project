@@ -1,0 +1,50 @@
+@startuml
+
+'skinparam packageStyle rectangle
+skinparam linetype polyline
+'left to right direction
+
+'Value Objects --------------------------------------------------------------------------------------
+
+package ValueObject as ValueObject <<Rectangle>> {
+
+
+
+object "<<ValueObject>>\nProjectCode" as ProjectCode
+'object "<<ValueObject>>\nProjectName" as ProjectName
+object "<<ValueObject>>\nDescription" as Description
+
+'object "<<ValueObject>>\nProjectStatusName" as ProjectStatusName
+'object "<<ValueObject>>\nProjectTypologyName" as ProjectTypologyName
+'object "<<ValueObject>>\nName" as BusinessSectorName
+
+object "<<ValueObject>>\nUserStoryCode" as UserStoryCode
+object "<<ValueObject>>\nAcceptanceCriteria" as AcceptanceCriteria
+object "<<ValueObject>>\nUserStoryStatus" as UserStoryStatus
+object "<<ValueObject>>\nEffort" as Effort
+}
+
+
+' Aggregates -------------------------------------------------------------
+
+package ProjectAggregate {
+    object "<<Aggregate Root>>\nProject" as Project
+    object "<<Entity>>\nProductBacklog" as ProductBacklog
+}
+
+Project ---> ProjectCode
+Project ---> ProductBacklog
+ProductBacklog "1" ---> "*" UserStoryCode
+
+package UserStoryAggregate {
+object "<<Aggregate Root>>\nUserStory" as UserStory
+}
+
+UserStory --> UserStoryCode
+UserStory --> ProjectCode
+UserStory --> AcceptanceCriteria
+UserStory --> UserStoryStatus
+UserStory --> Description
+UserStory --> Effort
+
+@enduml

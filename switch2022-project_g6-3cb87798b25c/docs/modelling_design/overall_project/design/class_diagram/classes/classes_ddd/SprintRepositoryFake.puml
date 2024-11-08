@@ -1,0 +1,23 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class SprintRepositoryFake<<Repository>> {
+    - sprintList : Sprint [0..*] {static}
+
+    + save(sprint : Sprint) : Sprint
+    + findAll() : Iterable<Sprint>
+    + findById(id : SprintID) : Optional<Sprint>
+    + existsById(id : SprintID) : boolean
+    + deleteAll()
+    + deleteById(id: SprintID)
+    + findByProjectCode(projectCode : ProjectCode) :\n Iterable<Sprint>
+    + findBySprintIdJPA_ProjectCodeAndStartDate(projectCode :\n ProjectCode, startDate : LocalDate) : Optional<Sprint>
+    + findBySprintIdAndSprintStatusLike(sprintID : SprintID,\n sprintStatus : SprintStatus) : Optional<Sprint>
+    + findFirstBySprintIdJPA_ProjectCodeOrderByEndDateDesc\n(projectCode : ProjectCode) : Optional<Sprint>
+    + findOpenSprint(projectCode : ProjectCode) : Optional<Sprint>
+    + existsBySprintIdJPAProjectCodeAndSprintStatusLike\n(projectCode : ProjectCode, sprintStatus : SprintStatus) : boolean
+
+
+}
+
+@enduml

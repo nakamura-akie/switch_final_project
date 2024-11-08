@@ -1,0 +1,32 @@
+@startuml
+'Attribute syntax: <visibility> <name> : <type> <multiplicity> = <default>
+'Method syntax: <visibility> <name (parameter-list)> : <return-type> - For simplicity the type of the parameter-list is not specified
+
+'skinparam classAttributeIconSize 0
+'skinparam classBackgroundColor transparent
+skinparam linetype polyline
+
+title US004 - As Administrator, I want to get a list of all user accounts and their status
+
+!include ../../../overall_project/design/class_diagram/classes/ListAccountController.puml
+!include ../../../overall_project/design/class_diagram/classes/Containers.puml
+!include ../../../overall_project/design/class_diagram/classes/AccountContainer.puml
+!include ../../../overall_project/design/class_diagram/classes/Account.puml
+!include ../../../overall_project/design/class_diagram/classes/AccountAndStatusListAssembler.puml
+!include ../../../overall_project/design/class_diagram/classes/AccountAndStatusDTO.puml
+
+' Controller Layer
+ListAccountController ..> Containers
+ListAccountController ..> AccountContainer
+
+' Collections Layer
+Containers --> AccountContainer : accountContainer
+AccountContainer "1" *--> "*" Account : accountList
+
+' DTO Layer
+ListAccountController ..> AccountAndStatusListAssembler
+AccountAndStatusListAssembler ..> AccountAndStatusDTO
+AccountAndStatusListAssembler ..> Account
+
+
+@enduml

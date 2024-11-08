@@ -1,0 +1,45 @@
+@startuml
+
+'skinparam classBackgroundColor transparent
+'skinparam classAttributeIconSize 0
+skinparam linetype polyline
+
+title US016 - As Authenticated User, I want to get a list of all projects I'm currently allocated to
+
+' Controller -----------------------------------------------------------------------------------------------------------
+!include ../../../overall_project/design/class_diagram/classes/ListUserProjectsController.puml
+' Service  -----------------------------------------------------------------------------------------------------------
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ResourceService.puml
+' Entities -------------------------------------------------------------------------------------------------------------
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/Project.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/Resource.puml
+
+' VO -------------------------------------------------------------------------------------------------------------
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/Email.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ResourceID.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectCode.puml
+' Repository -------------------------------------------------------------------------------------------------------------
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectRepository.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ResourceRepository.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/Repository.puml
+' DTO and Assembler ------------------------------------------------------------------------------------------------------------------
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectByResourceAssembler.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectByResourceDTO.puml
+
+ListUserProjectsController --> ResourceService : resourceService
+ResourceService --> Repository : repository
+Repository <|.. ResourceRepository : resourceRepository
+Repository <|.. ProjectRepository : projectRepository
+ResourceRepository --> Resource
+ProjectRepository --> Project
+Resource --> ResourceID : resourceID
+
+ResourceID --> ProjectCode
+ResourceID --> Email
+
+Project --> ProjectCode
+
+ResourceService ..> ProjectByResourceAssembler
+ProjectByResourceAssembler ..> ProjectByResourceDTO
+
+@enduml

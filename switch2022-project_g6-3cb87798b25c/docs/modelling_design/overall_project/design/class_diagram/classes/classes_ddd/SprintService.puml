@@ -1,0 +1,37 @@
+@startuml
+'Attribute syntax: <visibility> <name> : <type> <multiplicity> = <default>
+'Method syntax: <visibility> <name (parameter-list)> : <return-type> - For simplicity the type of the parameter-list is not specified
+
+class SprintService<<Service>> {
+    - projectErrorString : String {static} {readOnly}
+    - projectRepository : Repository<Project, ProjectCode>
+    - sprintRepository : SprintRepository
+    - userStoryRepository : UserStoryRepository
+    - sprintFactory : SprintFactory
+
+    # SprintService(sprintRepository : SprintRepository, projectRepository : Repository<Project, \nProjectCode>, userStoryRepository : UserStoryRepository, sprintFactory : SprintFactory)
+    + createSprintList(projectCode : ProjectCode) : OpenSprintoutputDTO [0..*]
+    - getSprintCountByProjectCode(projectCode : ProjectCode) : int
+    - createSprintCode(projectCode : ProjectCode) : String
+    - findSprintDurationOfASpecificProject(projectCode : ProjectCode) : SprintDuration
+    - findTimePeriodOfASpecificProject(projectCode : ProjectCode) : TimePeriod
+    - findFirstBySprintIdJPA_ProjectCodeOrderByEndDateDesc(projectCode : ProjectCode) : Optional<Sprint>
+    - calculateSprintEndDate(startDate : LocalDate, sprintDuration : SprintDuration) : LocalDate
+    - validateIfStartDateIsAfterPreviousSprintEndDate(projectCode : ProjectCode, startDate : LocalDate)
+    - validateSprintDatesWithinProjectRange(projectCode : ProjectCode, startDate : LocalDate, endDate : LocalDate)
+    - validateProjectStatus(projectCode : ProjectCode)
+    + createSprint(newSprintDTO : NewSprintDTO) : CreatedSprintDTO
+    + addUserStoryToSprintBacklog(projectCode : ProjectCode, sprintCode : SprintCode, \nnewSprintBacklogUserStoryDTO : NewSprintBacklogUserStoryDTO): OutputSprintDTO
+    - checkIfProjectExists(projectCode : ProjectCode)
+    - checkIfUserStoryExistsOnProductBacklog(userStoryID : UserStoryID)
+    - checkIfSprintExistsAndIsOpened(sprintID : SprintID)
+    - projectExists (projectCode: ProjectCode): boolean
+    - sprintExists (sprintID: SprintID): boolean
+    + showScrumBoard (viewSprintBacklogDTO : ViewSprintBacklogDTO): UserStoryDTO [0..*]
+    + changeSprintStatus(sprintStatusDTO : SprintStatusDTO) : CreatedSprintDTO
+    - setSprintInformation(sprint : Sprint, sprintStatus : SprintStatus) : Sprint
+    + getOpenSprint(projectCode : ProjectCode) : OpenSprintOutputDTO
+
+}
+
+@enduml

@@ -1,0 +1,16 @@
+@startuml
+
+skinparam sequenceMessageAlign center
+autonumber
+
+actor ":Administrator" as Admin #white
+participant ":System" as System #white
+
+title US002 - As Administrator, I want to register a user
+
+Admin -> System: requests to register account
+System --> Admin: asks for details
+Admin -> System: fills details (name, email, photo, phoneNumber)
+System --> Admin: successful/unsuccessful
+
+@enduml

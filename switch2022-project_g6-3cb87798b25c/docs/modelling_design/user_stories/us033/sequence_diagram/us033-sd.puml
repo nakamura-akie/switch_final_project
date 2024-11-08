@@ -1,0 +1,40 @@
+@startuml
+skinparam sequenceMessageAlign center
+skinparam actorBackgroundColor white
+skinparam participantBackgroundColor white
+skinparam sequenceReferenceBackgroundColor white
+skinparam sequenceReferenceHeaderBackgroundColor white
+skinparam sequenceGroupBackgroundColor white
+
+autonumber
+
+title US033 - As Project Member, I want to update the status (i.e.: the Scrum Board category) of \na user story in the scope of the current/active sprint backlog in the web UI.
+
+actor ":Project Manager" as actor
+participant ":ChangeUserStoryStatusUI" as ui
+participant ":UserStory\nController" as controller
+participant "<<DomainID>>\n:UserStoryID" as userStoryID
+participant ":UserStoryService" as userStoryService
+participant "<<Repository>>\n:UserStoryRepository" as userStoryRepository
+participant "<<AggregateRoot>>\n:UserStory" as userStory
+participant ":OutputUserStoryAssembler" as assembler
+participant ":OutputUserStoryDTO" as DTO
+
+actor -> ui++ : Ask to change status\nof User Story
+ui -> controller++ : updateUserStoryStatus\n(projectCode, userStoryCode, InputUserStoryStatus)
+create userStoryID
+controller -> userStoryID : create()
+controller -> userStoryService++ : changeUserStoryStatus(userStoryStatus, userStoryID
+userStoryService -> userStoryRepository++ : findById(userStoryID)
+return userStory
+userStoryService -> userStory : changeStatus(userStoryStatus)
+userStoryService -> userStoryRepository++ : patch(userStory)
+return userStory
+userStoryService -> assembler++ : createOutputUserStoryDTO (userStory)
+create DTO
+assembler -> DTO : create()
+return outputUserStoryDTO
+return outputUserStoryDTO
+return responseEntity.OK
+return success
+@enduml

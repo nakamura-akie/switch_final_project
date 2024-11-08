@@ -1,0 +1,24 @@
+@startuml
+
+title Physical View - Level 2
+
+left to right direction
+
+<style>
+component {
+    BackgroundColor #white
+}
+</style>
+
+package Scrumy {
+    node "localhost:??" as client {
+        component Browser {
+            component "Front-end" as Frontend
+        }
+        component "Back-end" as Backend
+    }
+}
+
+Frontend -- Backend : http
+
+@enduml

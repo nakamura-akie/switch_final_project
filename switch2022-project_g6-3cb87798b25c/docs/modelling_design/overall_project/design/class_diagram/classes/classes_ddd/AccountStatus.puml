@@ -1,0 +1,13 @@
+@startuml
+
+class AccountStatus <<ValueObject>> {
+    -value : boolean {readOnly}
+
+    +AccountStatus(value : boolean)
+    +getValue() : String
+    +equals(o : Object) : boolean
+    +hashCode() : int
+    +isStatusActive() : boolean
+}
+
+@enduml

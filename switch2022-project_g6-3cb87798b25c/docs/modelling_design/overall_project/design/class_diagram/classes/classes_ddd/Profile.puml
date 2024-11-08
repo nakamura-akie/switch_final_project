@@ -1,0 +1,15 @@
+@startuml
+'Attribute syntax: <visibility> <name> : <type> <multiplicity> = <default>
+'Method syntax: <visibility> <name (parameter-list)> : <return-type> - For simplicity the type of the parameter-list is not specified
+
+class Profile<<Entity>><<AggregateRoot>> {
+    '- profileName : ProfileName {readOnly}
+
+    # Profile(profileName : ProfileName)
+    + identity() : ProfileName
+    + sameAs(object : Object) : boolean
+    + equals(object : Object) : boolean
+    + hashCode() : int
+}
+
+@enduml

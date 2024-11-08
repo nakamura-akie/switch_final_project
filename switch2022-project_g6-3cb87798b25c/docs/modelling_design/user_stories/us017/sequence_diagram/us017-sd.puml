@@ -1,0 +1,53 @@
+@startuml
+
+skinparam sequenceMessageAlign center
+skinparam actorBackgroundColor white
+skinparam participantBackgroundColor white
+skinparam sequenceReferenceBackgroundColor white
+skinparam sequenceReferenceHeaderBackgroundColor white
+skinparam sequenceGroupBackgroundColor white
+
+autonumber
+
+title US017 - As Product Owner, I want to create a user story and add it to the Product Backlog
+
+actor "Product Owner" as PO
+
+participant ":CreateUserStory\nUI" as UI
+participant "<<Controller>>\n:UserStoryController" as Controller
+participant "<<Service>>\n:UserStoryService" as USService
+participant "<<Interface>>\n:UserStoryFactory" as Factory
+participant "<<Interface>>\n:UserStoryRepository" as UserStoryRepository
+participant ":OutputUserStoryAssembler" as outputUserStoryAssembler
+participant "newUserStory\n:UserStory" as US
+
+PO -> UI++: asks to create a user story and\nadd it to Product Backlog
+
+    UI -> Controller++: createUserStory(newUserStoryDTO)
+
+        Controller -> USService++: createUserStory(newUserStoryDTO)
+
+            USService -> UserStoryRepository++: existsByID(newUserStoryDTO.userStoryID)
+            return true
+
+            USService -> Factory++: createUserStory(userStoryID, description)
+            create US
+            Factory -> US : create (userStoryID, description)
+            return newUserStory
+
+            USService -> UserStoryRepository++: save(newUserStory)
+            return savedUserStory
+
+            USService -> outputUserStoryAssembler++: createUserStoryDTO(savedUserStory)
+            return userStoryDTO
+
+            USService ->o]: publishAddUserStoryEvent(userStoryID)
+            note right: see "Add User Story Event" ref.
+
+        return userStoryDTO
+
+    return userStoryDTO
+
+return successful
+
+@enduml

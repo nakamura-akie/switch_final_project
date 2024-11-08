@@ -1,0 +1,15 @@
+.sprintTableForm {
+    margin-top: 10px;
+    border: 1px solid rgba(128, 128, 128, 0.27);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+
+.addSprintButton {
+    padding-top: 10px;
+}
+
+.date {
+    margin-left: 20px;
+}

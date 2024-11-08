@@ -1,0 +1,12 @@
+@startuml
+class ResourceController{
+    - resourceService : ResourceService
+
+    + ResourceController(resourceService : ResourceService)
+    + addResourceToProject(info : NewResourceDTO) : ResponseEntity<Object>
+    + getCurrentResourcesInProjectList (projectCode : ProjectCode,
+    dateOfToday : LocalDate) : CollectionModel<EntityModel<ResourceDTO>>
+    + findResourceByID(resourceEmail : Email, projectCode : ProjectCode, startDate : LocalDate,\n endDate : LocalDate) : ResponseEntity<Object>
+
+}
+@enduml

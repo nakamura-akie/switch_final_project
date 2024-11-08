@@ -1,0 +1,26 @@
+@startuml
+
+skinparam UsecaseBackgroundColor white
+skinparam ActorBackgroundColor white
+
+left to right direction
+
+actor "Administrator" as A
+
+rectangle System {
+    usecase "US001: create user profiles" as UC1
+    usecase "US002: register a user" as UC2
+    usecase "US003: change the profile of a user account" as UC3
+    usecase "US004: list of user account and their status" as UC4
+    usecase "US005: inactivate a user account" as UC5
+    usecase "US006: activate a user account" as UC6
+}
+
+A --> UC1
+A --> UC2
+A --> UC3
+A --> UC4
+A --> UC5
+A --> UC6
+
+@enduml

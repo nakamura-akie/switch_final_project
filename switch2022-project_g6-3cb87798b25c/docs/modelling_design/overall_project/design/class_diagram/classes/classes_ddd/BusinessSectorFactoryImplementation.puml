@@ -1,0 +1,7 @@
+@startuml
+
+class BusinessSectorFactoryImplementation {
+    + createBusinessSector(businessSectorName : BusinessSectorName) : BusinessSector
+}
+
+@enduml

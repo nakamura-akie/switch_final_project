@@ -1,0 +1,16 @@
+@startuml
+
+class UserStoryJPA {
+    - userStoryIdJPA : userStoryIdJPA
+    - description : String
+    - userStoryStatus : String
+
+    + UserStoryJPA(userStoryIdJPA : UserStoryIdJPA, description : String, userStoryStatus : String)
+    + getUserStoryIdJPA() : UserStoryIdJPA
+    + getDescription() : String
+    + getUserStoryStatus() : String
+    + equals(o : Object) : boolean
+    + hashCode() : int
+}
+
+@enduml

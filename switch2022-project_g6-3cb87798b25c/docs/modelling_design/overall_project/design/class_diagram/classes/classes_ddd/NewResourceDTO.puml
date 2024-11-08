@@ -1,0 +1,13 @@
+@startuml
+
+class NewResourceDTO {
+    + email : Email
+    + projectCode : ProjectCode
+    + startDate : LocalDate
+    + endDate : LocalDate
+    + projectRole : ProjectRole
+    + percentageOfAllocation : PercentageOfAllocation
+    + costPerHour : CostPerHour
+}
+
+@enduml

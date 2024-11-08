@@ -1,0 +1,18 @@
+@startuml
+class AccountRepositoryPersistence <<AccountRepository>>{
+    - accountAssembler : AccountDomainDataAssembler {readOnly}
+    - accountRepository : AccountRepositoryJPA
+
+    + AccountRepositoryPersistence(accountAssembler : AccountDomainDataAssembler,
+    accountJpaRepository : AccountRepositoryJPA)
+    + save(entity : Account) : Account
+    + findAll() : Iterable<Account>
+    + findById(id : Email) : Optional<Account>
+    + existsById(id : Email) : boolean
+    + deleteAll()
+    + deleteById(id : Email)
+    + existsByEmailAndProfileName(email : Email, profileName : ProfileName) : boolean
+
+}
+
+@enduml

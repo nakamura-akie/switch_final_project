@@ -1,0 +1,38 @@
+.sprintButtons {
+    padding-top: 10px;
+}
+.dropDown {
+    padding-top: 10px;
+}
+
+.addSprintButton {
+    padding-top: 10px;
+}
+
+.openSprintTable {
+    border-collapse: collapse;
+    margin: 0px 0px 20px 0px;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 700px;
+    border-spacing: 0;
+    position: relative;
+    padding: 5px 5px;
+}
+
+.openSprintTable::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -1px;
+    right: -1px;
+    bottom: -2px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.openSprintTable td {
+    padding: 20px 15px;
+}

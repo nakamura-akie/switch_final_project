@@ -1,0 +1,33 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class OutputResourceDTO {
+    - email : String
+    - projectCode : String
+    - startDate : String
+    - endDate : String
+    - projectRole: String
+    - percentageOfAllocation: Integer
+    - costPerHour: Double
+
+    + OutputResourceDTO(email : String, projectCode : String, startDate : String
+    endDate : String, projectRole : String, percentageOfAllocation : Integer
+    costPerHour : Double)
+    +getEmail() : String
+    +setEmail(email : String)
+    +getProjectCode() : String
+    +setProjectCode(projectCode : String)
+    +getStartDate() : String
+    +setStartDate(startDate : String)
+    +getEndDate() : String
+    +setEndDate(endDate : String)
+    +getProjectRole() : String
+    +setProjectRole(projectRole : String)
+    +getPercentageOfAllocation() : Integer
+    +setPercentageOfAllocation(percentageOfAllocation : Integer)
+    +getCostPerHour() : Double
+    +setCostPerHour(costPerHour : Double)
+    +equals(o : Object) : boolean
+    - hashCode() : int
+}
+@enduml

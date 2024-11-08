@@ -1,0 +1,33 @@
+@startuml
+'https://plantuml.com/component-diagram
+title US025 - As a Product Owner, I want to create a user story and add it to the Product Backlog using the web UI
+
+top to bottom direction
+
+package "src" {
+    package "routes" {
+    }
+    package "pages" {
+    }
+    package "components" {
+        package "user-story" {
+        }
+        package "projectsList" {
+        }
+        package "productBacklog" {
+        }
+    }
+    package "context" {
+    }
+}
+
+"routes" ..> "pages"
+"productBacklog" ..> "user-story"
+"pages" ..> "projectsList"
+"projectsList" ..> "productBacklog"
+"user-story" ..> "context"
+"projectsList" ..> "context"
+"productBacklog" ..> "context"
+"pages" ..> "context"
+
+@enduml

@@ -1,0 +1,17 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class ProjectRepositoryPersistence<<Repository>> {
+    - projectRepositoryJPA : ProjectRepositoryJPA {readOnly}
+    - projectDomainDataAssembler : ProjectDomainDataAssembler {readOnly}
+
+    + ProjectRepositoryPersistence(projectRepositoryJPA : ProjectRepositoryJPA, \n projectDomainDataAssembler : ProjectDomainDataAssembler)
+    + save(project : Project) : Project
+    + findAll() : Iterable<Project>
+    + findById(projectCode : ProjectCode) : Optional<Project>
+    + existsById(projectCode : ProjectCode) : boolean
+    + deleteAll()
+    + deleteById (id : ProjectCode)
+}
+
+@enduml

@@ -1,0 +1,95 @@
+.modal {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.75);
+}
+
+.modal {
+    position: fixed;
+    top: 30vh;
+    z-index: 100;
+    overflow: hidden;
+    outline: 5px solid #18ACA4;
+    outline-offset: 10px;
+}
+
+.content .modalTitle {
+    padding-left: 30%;
+    margin: 0;
+    color: #0c1c42;
+}
+.icon {
+    content: attr(data-letters);
+    display: inline-block;
+    width: 2em;
+    height: 2em;
+    line-height: 2em;
+    text-align: center;
+    border-radius: 50%;
+    vertical-align: middle;
+    margin-right: 0.5em;
+    color: #18ACA4;
+}
+
+.content {
+    padding-left: 3rem;
+    background: white;
+}
+
+.body {
+    background-color: white;
+    border-radius: 10px;
+    padding-bottom: 10px;
+    padding-left: 20%;
+    padding-top: 10px;
+    font-size: 30px;
+    height: 200px;
+}
+
+.actions {
+    padding: 1rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+@media (min-width: 768px) {
+    .modal {
+        left: calc(50% - 20rem);
+        width: 40rem;
+    }
+}
+
+.close {
+    margin-top: 15px;
+    padding-left: 92%;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: orange;
+}
+
+
+.body table {
+    height: 30px;
+}
+
+.resourceTitle {
+    padding-left: 25%;
+    color: #0c1c42;
+}
+
+.resourceContent {
+    padding-left: 3rem;
+    padding-bottom: 3rem;
+    background: white;
+}
+

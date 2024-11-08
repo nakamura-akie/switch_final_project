@@ -1,0 +1,18 @@
+@startuml
+skinparam SequenceMessageAlign center
+autonumber
+actor “User” as User
+participant ":System" as System
+
+User <- User: selects filters(startDate, endDate, cost per hour of user,list of users,\n list of projects, percentage allocation of user)
+User -> System: ask for allocation report
+alt User profile
+System --> System: validates only self data was requested
+else Project Manager, PO, SM profile
+System --> System: validates user has permissions to access requested data
+end
+System --> System: generates report
+User <-- System: returns allocations report
+
+@endum
+

@@ -1,0 +1,16 @@
+@startuml
+
+skinparam sequenceMessageAlign center
+skinparam sequenceReferenceBackgroundColor white
+autonumber
+
+title US016 - As Authenticated User, I want to get a list of all projects I'm currently allocated to
+
+actor ":Authenticated User" as User #white
+participant ":System" as System #white
+
+User -> System++ : requests list of projects \ncurrently allocated to
+System --> User : list of projects
+deactivate System
+
+@enduml

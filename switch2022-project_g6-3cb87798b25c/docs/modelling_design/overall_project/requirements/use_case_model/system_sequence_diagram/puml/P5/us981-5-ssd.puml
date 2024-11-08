@@ -1,0 +1,18 @@
+@startuml
+skinparam SequenceMessageAlign center
+autonumber
+actor “Manager” as Manager
+participant ":System" as System
+
+Manager -> System: requests for a list of tasks
+System --> System: validates profile
+System --> Manager: returns list of tasks
+Manager <- Manager: selects a task to change assignee
+Manager -> System: asks for a list of users
+System --> System: validates profile
+System --> Manager: returns list of users
+Manager <- Manager: selects a user
+Manager -> System: request task to be assigned
+System --> System: validates Manager profile
+Manager <-- System: returns ok
+@enduml

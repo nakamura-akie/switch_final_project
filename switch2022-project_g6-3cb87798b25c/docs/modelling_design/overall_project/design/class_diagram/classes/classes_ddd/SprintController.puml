@@ -1,0 +1,15 @@
+@startuml
+'Attribute syntax: <visibility> <name> : <type> <multiplicity> = <default>
+'Method syntax: <visibility> <name (parameter-list)> : <return-type> - For simplicity the type of the parameter-list is not specified
+
+class SprintController {
+    - sprintService : SprintService
+
+    + SprintController (sprintService: SprintService)
+    + createSprintREST (newSprintDTO: NewSprintDTO): ResponseEntity <Object>
+    + changeSprintStatusREST(sprintStatusDTO : SprintStatusDTO) : ResponseEntity <Object>
+    + getOpenSprint(projectCodeValue : String) : ResponseEntity <Object>
+    + createSprintList(projectCodeValue : String) : ResponseEntity <Object>
+}
+
+@enduml

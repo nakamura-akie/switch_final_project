@@ -1,0 +1,24 @@
+@startuml
+
+class ProjectService<<Service>> {
+    - projectRepository : Repository {readOnly}
+    - userStoryRepository : UserStoryRepository {readOnly}
+    - customerRepository : Repository {readOnly}
+    - businessSectorRepository : Repository {readOnly}
+    - projectTypologyRepository : Repository {readOnly}
+    - projectFactory : ProjectFactory {readOnly}
+
+    + ProjectService(projectRepository : Repository, userStoryRepository : UserStoryRepository, \n customerRepository : Repository, businessSectorRepository : Repository, \n projectTypologyRepository : Repository, projectFactory : ProjectFactory)
+    + createUserStoryList(projectCode : ProjectCode) : UserStoryDTO [0..*]
+    - sortUserStoryByPriority(userStoryList : UserStory [0..*], userStoryPriorityList : UserStoryID [0..*]) {static}
+    + createProject(newProjectDTO : newProjectDTO) : OutputProjectDTO
+    - validateProjectData(newProjectDTO : NewProjectDTO)
+    + createProjectList() : ProjectDTO [0..*]
+    + findProjectById(projectCode : ProjectCode) : OutputProjectDTO
+    + changeProjectStatus(projectCode : ProjectCode, status : ProjectStatus)
+    + importProjectStatusHistory(projectCode : ProjectCode, statusHistory : Map<ProjectStatus, LocalDate>)
+    + addUserStoryToProductBacklog(userStoryID : UserStoryID)
+    + removeUserStoryFromProductBacklog(userStoryID : UserStoryID)
+}
+
+@enduml

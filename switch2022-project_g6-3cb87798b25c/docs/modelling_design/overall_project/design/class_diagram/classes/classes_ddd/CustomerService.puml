@@ -1,0 +1,12 @@
+@startuml
+
+class CustomerService {
+    - customerRepository : Repository
+    - customerFactory : CustomerFactory
+
+    +CustomerService(customerRepository : Repository,\n customerFactory : CustomerFactory)
+    +createCustomer(customerValueObjectDTO : CustomerValueObjectDTO) : OutputCustomerDTO
+    +findCustomer(taxIdentificationNumber : String , country : String) : OutputCustomerDTO
+}
+
+@enduml

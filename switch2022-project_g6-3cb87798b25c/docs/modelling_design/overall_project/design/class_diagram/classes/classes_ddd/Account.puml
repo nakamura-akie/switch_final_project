@@ -1,0 +1,29 @@
+@startuml
+
+class Account<<AggregateRoot>> {
+    -name : AccountName {readOnly}
+    -email : Email {readOnly}
+    -photo : Image {readOnly}
+    -phoneNumber : PhoneNumber {readOnly}
+    -profileName : ProfileNAme
+    -accountStatus : AccountStatus
+
+    #Account(name : AccountName, email : Email, photo : Image,\n phoneNumber : PhoneNumber, profileName :
+    ProfileName, accountStatus : AccountStatus)
+    +hasProfile(profileName : ProfileName) : boolean
+    +setAccountStatus(accountStatus : AccountStatus) : boolean
+    +hasAccountStatus(accountStatus : AccountStatus) : boolean
+    +getAccountStatus() : AccountStatus
+    +changeProfileOfUserAccount(profileName : ProfileName)
+    +getAccountName() : AccountName
+    +getProfile() : ProfileName
+    +getEmail() : Email
+    +getPhoneNumber() : PhoneNumber
+    +identity() : Email
+    +sameAs(object : Object) : boolean
+    +equals(o : Object) : boolean
+    +hashCode() : int
+
+}
+
+@enduml

@@ -1,0 +1,14 @@
+@startuml
+
+class CustomerRepositoryFake<<Repository>> {
+    - customerList : Customer [0..*] {static}
+
+    + save(customer : Customer) : Customer
+    + findAll() : Iterable
+    + findById(taxIdentificationNumber : TaxIdentificationNumber) : Optional<Customer>
+    + existsById(taxIdentificationNumber : TaxIdentificationNumber) : boolean
+    + deleteAll()
+    + deleteById (id : TaxIdentificationNumber)
+}
+
+@enduml

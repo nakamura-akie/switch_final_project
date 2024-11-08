@@ -1,0 +1,31 @@
+@startuml
+
+skinparam UsecaseBackgroundColor white
+skinparam ActorBackgroundColor white
+
+left to right direction
+
+actor "Product Owner" as PO
+actor "Scrum Master" as SM
+actor "Project Manager" as PM
+actor "Team Member" as TM
+actor "Administrator" as Admin
+
+
+rectangle System {
+  usecase "US023: create a Project in the web UI" as UC23
+  usecase "US024: list all Projects in the web UI" as UC24
+  usecase "US025: create a user story and add it to the \nProduct Backlog using the web UI" as UC25
+  usecase "US026: consult the current Product Backlog in the web UI" as UC26
+  usecase "US027: create a sprint in the web UI" as UC27
+}
+
+Admin --> UC23
+Admin --> UC24
+PO --> UC25
+PO --> UC26
+SM --> UC26
+TM --> UC26
+PM --> UC27
+
+@enduml

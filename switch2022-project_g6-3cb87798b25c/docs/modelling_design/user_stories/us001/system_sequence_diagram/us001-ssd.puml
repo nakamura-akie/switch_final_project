@@ -1,0 +1,17 @@
+@startuml
+
+skinparam sequenceMessageAlign center
+skinparam actorBackgroundColor white
+skinparam participantBackgroundColor white
+
+autonumber
+
+title US001 - As Administrator, I want to create user profiles
+
+actor ":Administrator" as Administrator
+participant ":System" as System
+
+Administrator -> System: requests to create profile
+Administrator <-- System: returns successful/unsuccessful
+
+@enduml

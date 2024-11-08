@@ -1,0 +1,14 @@
+@startuml
+
+skinparam sequenceMessageAlign center
+autonumber
+
+title US015 - As Manager, I want to get a list of all projects
+
+actor ":Manager" as Manager #white
+participant ":System" as System #white
+
+Manager -> System : requests list of all projects
+System --> Manager: returns list of all projects
+
+@enduml

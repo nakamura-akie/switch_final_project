@@ -1,0 +1,10 @@
+
+.details {
+    margin-left: 13rem;
+    color: orange;
+}
+
+.details:hover {
+    color: white;
+    cursor: pointer;
+}

@@ -1,0 +1,15 @@
+@startuml
+interface ResourceRepositoryJPA <<CrudRepository>>{
+
+    + findByResourceIDJpaProjectCodeAndProjectRole(projectCode : String, projectRole : String) : Iterable<ResourceJPA>
+    + findByResourceIDJpaEmail(email : String) : Iterable<ResourceJPA>
+    + findByResourceIDJpaProjectCode(projectCode : String) : Iterable<ResourceJPA>
+    + findByResourceIDJpa(resourceIdJpa : ResourceIdJPA) : Optional<ResourceJPA>
+    + findByResourceIDJpaEmailAndResourceIDJpaStartDateAfterAndResourceIDJpaEndDateIsBefore(
+    accountEmail : String, startDate : String, endDate : String) : Iterable<Resource>
+    + existsByResourceIDJpa(resourceIdJpa : ResourceIdJPA) : boolean
+    + findAllocatedResourcesByProjectIdAndSearchTime(projectId : String, searchTime : String) : ResourceJPA [0..*]
+
+}
+
+@enduml

@@ -1,0 +1,15 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class PercentageOfAllocation <<Value Object>>{
+
+-percentageOfAllocation : Integer
+
++PercentageOfAllocation(percentageOfAllocation : Integer)
++getPercentageValue() : Integer
++equals(object : Object) : boolean
++hashCode() : int
+}
+
+
+@enduml

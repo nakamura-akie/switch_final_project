@@ -1,0 +1,151 @@
+@startuml
+'left to right direction
+skinparam linetype ortho
+
+'Conceptual classes ----------------------------------------------------------------------------------------------------
+object Account {
+    name
+    e-mail
+    password
+    phoneNumber
+    photo : [0..1]
+    '[0..1] indicates optionality (Larman Figure 9.20)
+    status
+}
+object Profile {
+}
+object User {
+}
+object Manager {
+}
+object Admin {
+}
+object ScrumMaster {
+}
+    object ProjectManager {
+}
+object ProductOwner {
+}
+object TeamMember {
+}
+object Project {
+    code
+    name
+    description
+    sprintDuration
+    numberOfPlannedSprints
+    budget
+    period
+}
+object ProjectStatus{
+    name
+}
+object Customer{
+    name
+    taxIdentificationNumber
+}
+object BusinessSector{
+    name
+}
+object ProjectTypology{
+    name
+}
+object Sprint {
+    period
+    sprintNumber
+}
+object SprintBacklog {
+}
+object Task {
+    name
+    description
+    period
+    hoursSpent
+    effortEstimate
+    percentageOfExecution
+    status
+}
+object ProductBacklog {
+}
+object ScrumCeremony {
+}
+object SprintPlanning {
+}
+object SprintReview {
+}
+object SprintRetrospective {
+}
+object RoleAssignment {
+    period
+}
+object RoleType {
+    name
+}
+object UserStory {
+    number
+    actor
+    userStoryText
+    acceptanceCriteria
+    status
+    effort
+}
+object Resource {
+    period
+    costPerHour
+    percentageOfAllocation
+}
+note right: User allocated \nin project
+
+'Associations ----------------------------------------------------------------------------------------------------------
+Account "*" -- "1"Profile : has >
+
+Profile "1" -- "1" Manager : is a <
+Profile "1" -- "1" Admin : is a <
+Profile "1" -- "1" User : is a <
+
+Manager "1" -- "*" Project : creates >
+Manager "1" -- "*" Resource : manages >
+
+User "1" -- "1" Resource : is a <
+Resource "*" -- "1" Project : works as\nrole in >
+(Resource, Project) .. RoleAssignment
+
+RoleType "*" -- "1" ProductOwner
+RoleType "*" -- "1" ProjectManager
+RoleType "*" -- "1" ScrumMaster
+RoleType "*" -- "1" TeamMember
+
+RoleAssignment "*" -- "1" RoleType : is type of >
+
+Project "1" -- "*" Sprint : divided in >
+Project "1" -- "1" ProductBacklog : has a >
+Project "*" -- "*" ProjectTypology : has >
+Project "*" -- "1" Customer : has >
+Project "*" -- "1" BusinessSector : has >
+Project "*" -- "*" ProjectStatus : has >
+
+ProductBacklog "1" -- "*" UserStory : contains >
+
+Sprint "1" -- "*" ScrumCeremony : has >
+Sprint "1" -- "1" SprintBacklog : has >
+
+SprintBacklog "1" -- "*" UserStory : contains >
+
+ScrumCeremony "1" -- "1" SprintPlanning : is type of <
+ScrumCeremony "1" -- "1" SprintReview : is type of <
+ScrumCeremony "1" -- "1" SprintRetrospective : is type of <
+
+
+SprintPlanning "1" -- "1" SprintBacklog : defines >
+
+UserStory "0..1" -- "*" Task : has >
+
+Task "*" -- "1" User : is assigned <
+
+ProductOwner "1" -- "1" ProductBacklog : manages >
+
+ProductOwner "1" -- "*" UserStory: creates >
+
+
+
+@enduml

@@ -1,0 +1,8 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class CustomerValueObjectAssembler {
+    + createCustomerValueObjectDTO(newCustomerDTO : NewCustomerDTO)\n : CustomerValueObjectDTO {static}
+}
+
+@enduml

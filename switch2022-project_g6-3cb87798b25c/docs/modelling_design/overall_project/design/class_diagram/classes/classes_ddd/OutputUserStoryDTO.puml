@@ -1,0 +1,15 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class OutputUserStoryDTO {
+
+    + userStoryCode : String
+    + description : String
+    + status : Status
+    + userStoryEffort : Integer
+    + equals(object : Object) : boolean
+    + hashCode() : int
+
+}
+
+@enduml

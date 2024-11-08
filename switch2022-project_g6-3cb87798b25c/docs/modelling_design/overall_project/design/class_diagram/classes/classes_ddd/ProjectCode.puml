@@ -1,0 +1,16 @@
+@startuml
+'Attribute syntax: <visibility> <name> : <type> <multiplicity> = <default>
+'Method syntax: <visibility> <name (parameter-list)> : <return-type> - For simplicity the type of the parameter-list is not specified
+
+class ProjectCode<<DomainID>><<Value Object>> {
+    - projectCodeValue : String {readOnly}
+
+    + ProjectCode(projectCodeValue : String)
+    - validateValue(projectCodeValue : String) {static}
+    + getProjectCodeValue() : String
+    + toString() : String
+    + equals(o : Object) : boolean
+    + hashCode() : int
+}
+
+@enduml

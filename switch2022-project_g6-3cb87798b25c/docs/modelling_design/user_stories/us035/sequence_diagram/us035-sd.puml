@@ -1,0 +1,32 @@
+@startuml
+
+skinparam sequenceMessageAlign center
+skinparam actorBackgroundColor white
+skinparam participantBackgroundColor white
+skinparam sequenceReferenceBackgroundColor white
+skinparam sequenceReferenceHeaderBackgroundColor white
+skinparam sequenceGroupBackgroundColor white
+
+autonumber
+
+title US035 - As Project Manager, I want the Product Backlog to be updated when a sprint is closed.
+
+participant "<<Service>>\n:ProjectService" as Service
+participant "<<Interface>>\n<<Repository>>\n:Repository<Project, ProjectCode>" as ProjectRepository
+participant "<<Entity>>\nproject : Project" as Project
+
+[o-> Service++: removeUserStoryFromProductBacklog(userStoryId)
+
+
+Service -> ProjectRepository++: findById(userStoryId.getProjectCode())
+return project
+
+Service -> Project++: removeUserStoryFromProductBacklog(userStoryId)
+deactivate
+
+Service -> ProjectRepository++: save(project)
+deactivate
+
+deactivate
+
+@enduml

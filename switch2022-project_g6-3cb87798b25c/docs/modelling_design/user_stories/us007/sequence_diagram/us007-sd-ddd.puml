@@ -1,0 +1,45 @@
+@startuml
+
+skinparam sequenceMessageAlign center
+autonumber
+
+title US007 - As Administrator, I want to create a new project typology
+
+actor ":Administrator" as Administrator #white
+participant ":CreateProjectTypologyUI" as UI #white
+participant ":CreateProjectTypology\nController" as Controller #white
+participant ":ProjectTypologyService" as Service #white
+participant "<<ValueObject>> \n name\n:ProjectTypologyName" as ProjectTypologyName #white
+participant "<<Interface>>\n ProjectTypologyFactory" as ProjectTypologyFactory #white
+participant ":ProjectTypologyRepository" as Repository #white
+participant "<<ValueObject>> \nnewProjectTypology : \nProjectTypology" as newProjectTypology #white
+
+
+Administrator -> UI++: requests to create project typology
+
+    UI -> Administrator : requests project typology name
+
+    Administrator -> UI : enters project typology name
+
+    UI -> Controller++: createProjectTypology(projectTypologyValue)
+    Controller -> Service++: createProjectTypology(projectTypologyValue)
+
+        create ProjectTypologyName
+        Service -> ProjectTypologyName: create(projectTypologyValue)
+
+    Service -> ProjectTypologyFactory++ : create(projectTypologyName)
+
+        create newProjectTypology
+        ProjectTypologyFactory -> newProjectTypology
+        return newProjectTypology
+
+        Service -> Repository++: save(newProjectTypology)
+        return true/false
+
+        return true/false
+        return true/false
+        return successful/insuccessful
+
+
+
+@enduml

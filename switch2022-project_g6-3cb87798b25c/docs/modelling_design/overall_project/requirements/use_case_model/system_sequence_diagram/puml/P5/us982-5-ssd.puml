@@ -1,0 +1,21 @@
+@startuml
+skinparam SequenceMessageAlign center
+autonumber
+actor “Manager” as Manager
+participant ":System" as System
+
+Manager -> System: asks for a list of users
+System --> System: validates profile
+System --> Manager: returns list of users
+Manager <- Manager: selects a user to allocate
+Manager -> System: asks for a list of projects
+System --> System: validates profile
+System --> Manager: returns list of projects
+Manager <- Manager: edit allocation details
+Manager -> System: enters user with list of details (startDate, endDate, costPerHour \n and percentageAllocation) per project
+System --> System: validates it's Manager profile
+System --> System: validates acceptance criteria
+Manager <-- System: returns OK
+@enduml
+
+

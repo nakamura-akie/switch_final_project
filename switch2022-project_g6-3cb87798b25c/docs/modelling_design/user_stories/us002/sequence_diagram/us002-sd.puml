@@ -1,0 +1,72 @@
+@startuml
+skinparam sequenceMessageAlign center
+skinparam actorBackgroundColor white
+skinparam participantBackgroundColor white
+skinparam sequenceReferenceBackgroundColor white
+skinparam sequenceReferenceHeaderBackgroundColor white
+skinparam sequenceGroupBackgroundColor white
+
+autonumber
+title US002 - As Administrator, I want to register a user
+
+actor ":Administrator" as Administrator
+participant ":CreateAccountUI" as UI
+participant ":CreateAccountController" as Controller
+participant "accountService\n:AccountService" as Service
+participant "<<ValueObject>>\naccountName \n: AccountName" as AccountName
+participant "<<ValueObject>>\nprofileName \n: ProfileName" as ProfileName
+participant "<<DomainID>>\nemail : Email" as Email
+participant "<<ValueObject>>\nphoneNumber\n:PhoneNumber" as PhoneNumber
+participant "<<Repository>>\n:ProfileRepository" as ProfileRepository
+participant "<<Repository>>\n:AccountRepository" as AccountRepository
+participant "accountFactory\n:AccountFactory" as Factory
+participant "newAccount : \nAccount" as newAccount
+
+Administrator -> UI++: requests to register account
+UI -> Administrator: asks for details
+Administrator -> UI: fills details (name, email, photo, phoneNumber)
+
+    UI -> Controller++: createAccount(accountNameValue, emailValue, \nphoto, phoneNumberValue)
+
+        Controller -> Service++: createAccount(accountNameValue, \nemailValue, photo, phoneNumberValue)
+
+            create AccountName
+            Service -> AccountName : create(accountNameValue)
+
+            create ProfileName
+            Service -> ProfileName : create("user")
+
+            create Email
+            Service -> Email : create(emailValue)
+
+            create PhoneNumber
+            Service -> PhoneNumber : create(phoneNumberValue)
+
+            Service -> ProfileRepository++ : existsByID(profileName)
+            return true/false
+
+            Service -> AccountRepository++ : existsByID(email)
+            return true/false
+
+            Service -> Factory++ : createAccount(email, name, profileName, phoneNumber, photo)
+
+            create newAccount
+            Factory -> newAccount: create(email, name,\n profileName, phoneNumber, photo)
+
+            return newAccount
+
+            Service -> AccountRepository++ : save(newAccount)
+            return true/false
+
+
+
+
+
+
+
+
+        return true/false
+
+    return successful/unsuccessful
+
+@enduml

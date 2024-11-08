@@ -1,0 +1,17 @@
+@startuml
+
+enum ProjectRole <<Value Object>> {
+    PRODUCT_OWNER
+    SCRUM_MASTER
+    TEAM_MEMBER
+    PROJECT_MANAGER
+
+    - role : String {readOnly}
+    +ProjectRole(role : String)
+    +fromString(role : String) {static}
+    +isProductOwner() : boolean
+    +isScrumMaster() : boolean
+    +isTeamMember() : boolean
+}
+
+@enduml

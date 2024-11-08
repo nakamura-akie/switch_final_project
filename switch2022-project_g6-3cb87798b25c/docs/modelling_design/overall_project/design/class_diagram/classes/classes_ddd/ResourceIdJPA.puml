@@ -1,0 +1,27 @@
+@startuml
+'Attribute syntax: <visibility> <name> : <type> <multiplicity> = <default>
+'Method syntax: <visibility> <name (parameter-list)> : <return-type> - For simplicity the type of the parameter-list is not specified
+
+class ResourceIdJPA {
+    - email: String
+    - projectCode: String
+    - startDate: String
+    - endDate: String
+
+    +ResourceIdJPA(email: String, projectCode: String, startDate: String, endDate:
+    String)
+    +ResourceIdJPA()
+    +getEmail(): String
+    +setEmail()
+    +getProjectCode(): String
+    +setProjectCode()
+    +getStartDate(): String
+    +setStartDate()
+    +getEndDate(): String
+    +setEndDate()
+    +equals(o: Object): boolean
+    +hashCode(): int
+    +toString() : String
+}
+
+@enduml

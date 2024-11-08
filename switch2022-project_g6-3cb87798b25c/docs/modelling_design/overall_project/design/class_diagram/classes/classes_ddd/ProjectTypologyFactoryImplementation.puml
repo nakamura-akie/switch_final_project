@@ -1,0 +1,7 @@
+@startuml
+
+class ProjectTypologyFactoryImplementation {
++createProjectTypology(projectTypologyName : ProjectTypologyName) : ProjectTypology
+}
+
+@enduml

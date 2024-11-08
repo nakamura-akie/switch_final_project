@@ -1,0 +1,26 @@
+@startuml
+title US033 - As Team Member, I want to update the status (i.e.: the Scrum Board category) of \na user story in the scope of the current/active sprint backlog in the web UI.
+autonumber
+skinparam sequenceMessageAlign center
+skinparam actorBackgroundColor white
+skinparam participantBackgroundColor white
+skinparam sequenceReferenceBackgroundColor white
+skinparam sequenceReferenceHeaderBackgroundColor white
+skinparam sequenceGroupBackgroundColor white
+
+
+participant "<<container(c4)>>\n:Front-end" as fe
+participant "<<container(c4)>>\n:Back-end" as be
+participant "<<container(c4)>>\nDatabase" as db
+
+[o-> fe++ : ask to update user story status
+fe -> be++ : PATCH /projects/{projectCode}/user-stories/{userStoryCode} \n(userStoryStatus)
+be -> db++: patch(userStory)
+db --> be: userStory
+deactivate
+be --> fe: 200, \nuserStory
+deactivate
+[o<--fe: success
+deactivate
+
+@enduml

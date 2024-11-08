@@ -1,0 +1,25 @@
+@startuml
+
+class UserStory<<AggregateRoot>> {
+    - userStoryID : UserStoryID
+    - description : Description
+    - userStoryStatus : UserStoryStatus
+    - effort : Effort
+
+    # UserStory(userStoryID : UserStoryID, Description description)
+    + getDescription() : Description
+    + getUserStoryCode() : UserStoryCode
+    + getProjectCode() : ProjectCode
+    + setFinished()
+    + hasStatus(status : UserStoryStatus) : boolean
+    + defineEffort(effortValue : Effort)
+    + getUserStoryStatus() : UserStoryStatus
+    + changeStatus(status : UserStoryStatus)
+    + getEffort : Effort
+    + identity() : UserStoryID
+    + sameAs(object : Object) : boolean
+    + equals(o : Object) : boolean
+    + hashcode() : int
+}
+
+@enduml

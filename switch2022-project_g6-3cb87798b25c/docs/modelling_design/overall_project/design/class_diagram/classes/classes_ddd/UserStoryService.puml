@@ -1,0 +1,20 @@
+@startuml
+
+class UserStoryService<<Service>> {
+    - projectRepository : Repository {readOnly}
+    - userStoryFactory : UserStoryFactory {readOnly}
+    - userStoryRepository : UserStoryRepository {readOnly}
+    - userStoryEventPublisher : UserStoryEventPublisher {readOnly}
+
+    + UserStoryService(userStoryRepository : UserStoryRepository, projectRepository : Repository, userStoryFactory : UserStoryFactory, userStoryEventPublisher : UserStoryEventPublisher)
+    + createUserStory(newUserStoryDTO : NewUserStoryDTO) : UserStoryDTO
+    - projectExists(projectCode : ProjectCode) : boolean
+    - userStoryExists(userStoryID : userStoryID) : boolean
+    + estimateEffort(userStoryID : UserStoryID, effortValue : Effort) : boolean
+    - setUserStoryInformation(userStoryToSet : UserStory, effortValue : Effort, repository : UserStoryRepository) : Boolean
+    + changeUserStoryStatus(status : UserStoryStatus, userStoryCode : UserStoryCode, projectCode : ProjectCode) : OutputUserStoryDTO
+    - handleUserStoryStatusFinished(status : UserStoryStatus, userStoryID : UserStoryID)
+    + findUserStoryByID(userStoryID : UserStoryID) : OutputUserStoryDTO
+}
+
+@enduml

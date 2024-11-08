@@ -1,0 +1,84 @@
+@startuml
+
+skinparam UsecaseBackgroundColor white
+skinparam ActorBackgroundColor white
+
+left to right direction
+
+title Use Case Diagram
+
+actor "Manager" as M
+actor "Project Manager" as PM
+actor "User" as U
+actor "Admin" as A
+actor "Product Owner" as PO
+actor "Team Member" as TM
+
+rectangle System {
+    usecase "change profile of a user" as UC999
+    usecase "create a new project" as UC998
+    usecase "log in" as UC997
+    usecase "log out" as UC996
+    usecase "register user" as UC995
+    usecase "reset password" as UC994
+    usecase "list all system users" as UC993
+    usecase "search for users" as UC992
+    usecase "associate user accounts with existing profiles" as UC991
+    usecase "activate user accounts" as UC990
+    usecase "disable user accounts" as UC989
+    usecase "edit user account information" as UC988
+    usecase "register project" as UC987
+    usecase "create activity in project" as UC986
+    usecase "edit project information" as UC985
+    usecase "search for projects" as UC984
+    usecase "create User Story" as UC983
+    usecase "define Sprint Backlog" as UC982
+    usecase "define effort for each activity" as UC981
+    usecase "create task" as UC980
+    usecase "register work on a task" as UC979
+    usecase "update a task" as UC978
+    usecase "log a time record on a task" as UC977
+    usecase "associate resource to project" as UC976
+    usecase "assign task to user" as UC975
+    usecase "view the projects' ongoing activities" as UC974
+    usecase "change between two viewing modes" as UC973
+    usecase "generate an allocations report" as UC972
+    usecase "generate a KPI report" as UC971
+    usecase "create a scrum ceremony minute in system" as UC970
+    usecase "import projects created in a legacy platform" as UC969
+}
+
+A -- UC999
+M -- UC998
+U -- UC997
+U -- UC996
+A -- UC995
+U -- UC994
+A -- UC993
+A -- UC992
+A -- UC991
+A -- UC990
+A -- UC989
+A -- UC988
+M -- UC987
+PM -- UC986
+PM -- UC985
+U -- UC984
+PO -- UC983
+TM -- UC982
+PO -- UC982
+TM -- UC981
+TM -- UC980
+TM -- UC979
+U -- UC978
+U -- UC977
+M -- UC976
+M -- UC975
+U -- UC974
+U -- UC973
+U -- UC972
+U -- UC971
+U -- UC970
+M -- UC969
+
+@enduml

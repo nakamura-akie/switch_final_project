@@ -1,0 +1,10 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class OutputProfileAssembler {
+
+    + createOutputProfileDTO(profile : Profile) : OutputProfileDTO {static}
+
+}
+
+@enduml

@@ -1,0 +1,20 @@
+@startuml
+
+autonumber
+skinparam sequenceMessageAlign center
+
+actor ":User" as User
+
+participant ":System" as System
+
+
+
+User -> System: Inserts credentials
+
+System --> System: Creates new session
+
+User <-- System: Returns session
+
+
+
+@enduml

@@ -1,0 +1,5 @@
+@startuml
+interface AccountRepository <<Repository>>{
+}
+
+@enduml

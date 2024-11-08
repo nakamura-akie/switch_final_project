@@ -1,0 +1,10 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+interface UserStoryRepositoryJPA<<Repository>> {
+
+    + findByProjectCodeAndUserStoryStatusNotAndUserStoryStatusNot(projectCode : String,\n firstStatus : String, secondStatus : String) : Iterable<UserStory>
+    + existsByUserStoryIdAndUserStoryStatusNotAndUserStoryStatusNot\n(userStoryIdJPA : UserStoryIdJPA, firstStatus : String, secondStatus \n: String) : boolean
+}
+
+@enduml

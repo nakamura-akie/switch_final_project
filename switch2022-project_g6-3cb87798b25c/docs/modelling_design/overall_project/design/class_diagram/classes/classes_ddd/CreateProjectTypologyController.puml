@@ -1,0 +1,11 @@
+@startuml
+
+class CreateProjectTypologyController {
+- projectTypologyService : ProjectTypologyService
+
++ CreateProjectTypologyController(projectTypologyService : ProjectTypologyService)
++ createProjectTypology(name : String) : boolean
+
+}
+
+@enduml

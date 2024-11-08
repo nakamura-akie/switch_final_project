@@ -1,0 +1,10 @@
+@startuml
+
+class ChangeProfileController{
+    -accountService : AccountService {readOnly}
+
+    +ChangeProfileController(accountService : AccountService)
+    +changeProfileOfAccount(userEmail : String, desiredProfile : String)
+}
+
+@enduml

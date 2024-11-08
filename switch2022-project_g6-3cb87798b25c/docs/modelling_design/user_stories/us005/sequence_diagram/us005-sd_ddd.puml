@@ -1,0 +1,50 @@
+@startuml
+
+skinparam sequenceMessageAlign center
+skinparam actorBackgroundColor white
+skinparam participantBackgroundColor white
+skinparam sequenceReferenceBackgroundColor white
+skinparam sequenceReferenceHeaderBackgroundColor white
+skinparam sequenceGroupBackgroundColor white
+
+autonumber
+title US005 - As Administrator, I want to inactivate a user account
+
+actor ":Administrator" as Administrator #white
+participant ":InactivateAccountUI" as UI #white
+participant ":InactivateAccount\nController" as Controller #white
+participant "accountService\n:AccountService" as Service
+participant "<<DomainID>>\nemail : Email" as Email
+participant "<<Repository>>\n:AccountRepository" as AccountRepository
+participant "<<ValueObject>>\naccountStatus\n:AccountStatus" as Status
+participant "account\n:Account" as account #white
+
+
+Administrator -> UI++: asks to inactivate account
+
+    UI -> Controller++: inactivateAccount(emailValue)
+            Controller -> Service++: changeAccountStatus(emailValue, accountStatusValue)
+
+                create Email
+                        Service -> Email : create(emailValue)
+
+                Service -> AccountRepository++: findByID(email)
+                return accountOptional
+
+                    create Status
+                           Service -> Status : create(accountStatusValue)
+
+
+                Service -> account++: setAccountStatus(accountStatus)
+                   return true/false
+
+
+
+
+
+
+            return true/false
+    return true/false
+return successful/unsuccessful
+
+@enduml

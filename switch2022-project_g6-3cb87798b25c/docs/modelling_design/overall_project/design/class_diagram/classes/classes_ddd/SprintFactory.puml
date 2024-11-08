@@ -1,0 +1,11 @@
+@startuml
+'Attribute syntax: <visibility> <name> : <type> <multiplicity> = <default>
+'Method syntax: <visibility> <name (parameter-list)> : <return-type> - For simplicity the type of the parameter-list is not specified
+interface SprintFactory {
+
+    + createSprint (sprintID : SprintID, startDate : LocalDate,
+                                                  sprintDuration : SprintDuration, endDate : LocalDate) : Sprint
+    + createSprint (sprintID : SprintID, startDate : LocalDate, \nsprintDuration : SprintDuration, endDate : LocalDate,
+    userStoryCodeList : UserStoryID [0..*], sprintStatus : SprintStatus ) : Sprint
+}
+@enduml

@@ -1,0 +1,15 @@
+@startuml
+'Attribute syntax: <visibility> <name> : <type> <multiplicity> = <default>
+'Method syntax: <visibility> <name (parameter-list)> : <return-type> - For simplicity the type of the parameter-list is not specified
+
+class ProfileService<<Service>> {
+    '- profileRepository : ProfileRepository {readOnly}
+    '- profileFactory : ProfileFactory {readOnly}
+
+    + ProfileService(profileRepository : ProfileRepository,\n profileFactory : ProfileFactory)
+    + createDefaultProfiles(profileNameValue : String)
+    + createProfile(newProfileDTO : NewProfileDTO) : OutputProfileDTO
+    + findProfile(profileName : String) : OutputProfileDTO
+}
+
+@enduml

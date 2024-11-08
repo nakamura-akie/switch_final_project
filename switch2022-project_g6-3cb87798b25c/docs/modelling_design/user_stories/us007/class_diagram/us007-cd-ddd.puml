@@ -1,0 +1,25 @@
+@startuml
+
+skinparam linetype polyline
+
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/CreateProjectTypologyController.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectTypologyService.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectTypology.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectTypologyName.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectTypologyRepository.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectTypologyFactory.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/Repository.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectTypologyFactoryImplementation.puml
+
+CreateProjectTypologyController --> ProjectTypologyService : projectTypologyService
+ProjectTypologyService --> Repository : projectTypologyRepository
+ProjectTypologyService --> ProjectTypologyFactory : projectTypologyFactory
+ProjectTypologyService ..> ProjectTypologyName
+
+ProjectTypologyRepository "1" *--> "*" ProjectTypology : projectTypologyList
+
+ProjectTypology --> ProjectTypologyName : projectTypologyName
+
+ProjectTypologyFactoryImplementation ..> ProjectTypologyFactory
+ProjectTypologyFactoryImplementation --> ProjectTypology
+@enduml

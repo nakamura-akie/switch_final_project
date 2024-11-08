@@ -1,0 +1,9 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class OutputCustomerAssembler {
+
+    + createOutputCustomerDTO(domainCustomer : Customer) : OutputCustomerDTO {static}
+}
+
+@enduml

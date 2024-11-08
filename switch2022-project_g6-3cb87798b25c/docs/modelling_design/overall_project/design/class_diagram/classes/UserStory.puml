@@ -1,0 +1,26 @@
+@startuml
+'Attribute syntax: <visibility> <name> : <type> <multiplicity> = <default>
+'Method syntax: <visibility> <name (parameter-list)> : <return-type> - For simplicity the type of the parameter-list is not specified
+
+class UserStory {
+    - userStoryCode : String {readOnly}
+    - description : String {readOnly}
+    - acceptanceCriteria : String
+    - status : Status
+    - effort : Effort
+    - isAssignedToSprintBacklog : boolean
+
+    # UserStory(userStoryCode : String, description : String)
+    + getCode() : String
+    + getDescription() : String
+    + getStatus() : String
+    + hasStatus(status : Status) : boolean
+    + hasUserStoryCode(userStoryCode : String) : boolean
+    + equals(object : Object) : boolean
+    + hashCode() : int
+    + isAssignedToSprintBacklog() : boolean
+    + setAssignedToSprintBacklog()
+
+    }
+
+@enduml

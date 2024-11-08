@@ -1,0 +1,64 @@
+@startuml
+
+skinparam sequenceMessageAlign center
+skinparam actorBackgroundColor white
+skinparam participantBackgroundColor white
+skinparam sequenceReferenceBackgroundColor white
+skinparam sequenceReferenceHeaderBackgroundColor white
+skinparam sequenceGroupBackgroundColor white
+
+autonumber
+
+title US019 -  As Project Manager, I want to create a sprint
+
+actor "Product Manager" as PM
+
+participant ":CreateSprint\nUI" as UI
+participant ":CreateSprint\nController" as Controller
+participant "sprintService\n:SprintService" as Service
+participant "<<ValueObject>>\nsprintCode\n:SprintCode" as SprintCodeVO
+participant "<<ValueObject>>\nprojectCode\n:ProjectCode" as ProjectCodeVO
+participant "<<ValueObject>>\nstartDate\n:LocalDate" as LocalDateVO
+participant "<<ValueObject>>\nsprintDuration\n:SprintDuration" as SprintDurationVO
+participant "<<ValueObject>>\nsprintID\n:SpriintID" as SprintID
+participant "<<Interface>>\n:SprintFactory" as Factory
+participant "<<Interface>>\n:ProjectRepository" as ProjectRepository
+participant "<<Interface>>\n:SprintRepository" as SprintRepository
+participant "project\n:Project" as Project
+participant ":CreatedSprintAssembler" as CreatedSprintAssembler
+participant "newSprint\n:Sprint" as Sprint
+
+
+PM -> UI++: asks to create a sprint
+UI -> Controller++: createSprint(newSprintDTO)
+Controller -> Service++: createSprintREST(newSprintDTO)
+
+create ProjectCodeVO
+Service -> ProjectCodeVO: projectCode = newSprintDTO.projectCode
+create SprintCodeVO
+Service -> SprintCodeVO: sprintCode = createSprintCode(projectCode)
+create SprintDurationVO
+Service -> SprintDurationVO: sprintDuration = findSprintDurationOfASpecificProject(projectCode)
+create LocalDateVO
+Service -> LocalDateVO: startDate = newSprintDTO.startDate;
+create SprintID
+Service -> SprintID: create(projectCode, sprintCode)
+Service -> ProjectRepository++: existsByID(projectCode)
+return true/false
+Service -> SprintRepository++: existsById(sprintID)
+return true/false
+Service -> Factory++: createSprint(sprintID, startDate, sprintDuration)
+create Sprint
+Factory -> Sprint : createSprint(sprintID, startDate, sprintDuration)
+return newSprint
+Service -> SprintRepository++: save(newSprint)
+return savedSprint
+Service -> CreatedSprintAssembler++: generateDTO(savedSprint)
+return createdSprintDTO
+
+
+return createdSprintDTO
+return ResponseEntity.created
+return returns success/unsuccess
+
+@enduml

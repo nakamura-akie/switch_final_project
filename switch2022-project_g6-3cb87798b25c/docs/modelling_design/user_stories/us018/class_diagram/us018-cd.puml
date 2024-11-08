@@ -1,0 +1,83 @@
+@startuml
+skinparam linetype polyline
+
+title US018 - As PO/SM/Team Member, I want to consult the product backlog, i.e. to get the list of user stories sorted by priority
+
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStory.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectService.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectRepositoryFake.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectRepository.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectRepositoryPersistence.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProductBacklogController.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStoryRepositoryFake.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStoryRepository.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStoryRepositoryPersistence.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectService.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStory.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/Description.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStoryID.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStoryStatus.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/Repository.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectCode.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/Project.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStoryAssembler.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStoryDTO.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStoryDomainDataAssembler.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStoryRepositoryJPA.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStoryJPA.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStoryFactory.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStoryFactoryImplementation.puml
+
+ProductBacklogController --> ProjectService : projectService
+ProductBacklogController ..> ProjectCode
+ProductBacklogController ..> UserStoryDTO
+
+ProjectService --> Repository : customerRepository\n businessSectorRepository\n projectTypologyRepository
+ProjectService --> UserStoryRepository : userStoryRepository
+ProjectService ..> ProjectCode
+ProjectService ..> UserStoryStatus
+ProjectService ..> Project
+ProjectService ..> UserStory
+ProjectService ..> UserStoryID
+ProjectService ..> UserStoryAssembler
+ProjectService ..> UserStoryDTO
+
+UserStoryAssembler ..> UserStory
+UserStoryAssembler ..> UserStoryDTO
+
+Repository <|-- UserStoryRepository
+Repository <|-- ProjectRepository
+
+UserStoryRepository <|.. UserStoryRepositoryFake
+UserStoryRepository <|.. UserStoryRepositoryPersistence
+
+
+UserStoryRepositoryPersistence --> UserStoryRepositoryJPA : jpaRepository
+UserStoryRepositoryPersistence --> UserStoryDomainDataAssembler : jpaAssembler
+UserStoryRepositoryPersistence ..> UserStoryJPA
+UserStoryRepositoryPersistence ..> UserStory
+
+UserStoryRepositoryFake "1" *--> "*" UserStory : userStoryList
+
+UserStoryRepositoryJPA ..> UserStoryJPA
+
+ProjectRepository <|.. ProjectRepositoryFake
+ProjectRepository <|.. ProjectRepositoryPersistence
+
+ProjectRepositoryFake "1" --> "*" Project
+ProjectRepositoryPersistence ..> Project
+
+UserStoryFactory <|.. UserStoryFactoryImplementation
+UserStoryFactoryImplementation ..> UserStory
+UserStoryFactoryImplementation ..> UserStoryID
+UserStoryFactoryImplementation ..> Description
+
+UserStoryDomainDataAssembler ..> UserStoryJPA
+UserStoryDomainDataAssembler --> UserStoryFactory : userStoryFactory
+UserStoryDomainDataAssembler ..> UserStory
+
+UserStory --> UserStoryID : userStoryID
+UserStory --> Description : description
+UserStory --> UserStoryStatus : userStoryStatus
+
+@enduml

@@ -1,0 +1,9 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class ProfileFactoryImplementation<<Factory>> {
+
+    + createProfile(profileName : ProfileName) : Profile
+}
+
+@enduml

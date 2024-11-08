@@ -1,0 +1,44 @@
+@startmindmap
+'https://plantuml.com/mindmap-diagram
+
+title US028 - As Manager, I want to associate a user as Team Member of a project in the web UI.\nUS029 - As Manager, I want to define the PO of a project in the web UI.\nUS030 - As Manager, I want to define the SM of a project in the web UI.
+top to bottom direction
+
+* <&globe>Application
+** Navbar
+*** NavItem
+** MainRoute
+*** Projects
+**** ProjectPage
+***** ProjectPageTable\n(Project Info)
+***** Button\n(Back)
+***** Button\n(Product Backlog)
+***** Button \n(Sprints)
+***** Button \n(Resources)
+****** Resources
+******* ResourceSuccessMessageModal
+******** Backdrop
+******** ModalOverlay
+********* Card
+********** Button \n(Okay)
+******* Header
+******* Button\n(Back)
+******* Button\n(Add Resource)
+******** ResourceForm
+********* Button\n(Back)
+********* Button\n(Reset)
+********* Button\n(Add Resource)
+********* ConfirmResourceModal
+********** Backdrop
+********** ModalOverlay
+*********** Card
+************ Button\n(Save)
+************ Button\n(Cancel)
+********* ErrorResourceModal
+********** Backdrop
+********** ModalOverlay
+*********** Card
+************ Button \n(Okay)
+
+
+@endmindmap

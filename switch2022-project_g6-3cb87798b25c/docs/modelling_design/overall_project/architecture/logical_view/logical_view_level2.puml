@@ -1,0 +1,39 @@
+@startuml
+
+title Logical View - Level 2
+
+<style>
+    interface {
+        BackgroundColor #white
+        LineThickness 1
+    }
+    port {
+        BackgroundColor #white
+    }
+</style>
+
+component <<system>>\nScrumy {
+    port " " as applicationUiPort
+    component " <<container>>\nFrontend" as Frontend {
+        portin " " as frontEndPort
+        portout " " as frontEndRestPort
+    }
+    component " <<container>>\nBackend" as Backend {
+        port " " as backEndPort
+    }
+    interface "REST API" as API
+}
+
+
+UI -- applicationUiPort
+
+frontEndPort -d- applicationUiPort
+
+frontEndRestPort --( API
+backEndPort -u- API
+
+
+
+@enduml
+
+

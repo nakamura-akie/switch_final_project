@@ -1,0 +1,21 @@
+@startuml
+
+title Logical View - Level 1
+
+<style>
+    interface {
+        BackgroundColor #white
+        LineThickness 1
+    }
+    port {
+        BackgroundColor #white
+    }
+</style>
+
+component <<System>>\nScrumy {
+  port " " as p1
+}
+
+UI -- p1
+
+@enduml

@@ -1,0 +1,52 @@
+@startuml
+
+skinparam sequenceMessageAlign center
+skinparam actorBackgroundColor white
+skinparam participantBackgroundColor white
+skinparam sequenceReferenceBackgroundColor white
+skinparam sequenceReferenceHeaderBackgroundColor white
+skinparam sequenceGroupBackgroundColor white
+
+autonumber
+
+title US001 - As Administrator, I want to create user profiles
+
+actor ":Administrator" as Administrator
+
+participant ":CreateProfileUI" as UI
+participant "<<Controller>>\n:ProfileController" as Controller
+participant "<<Service>>\n:ProfileService" as Service
+participant "<<Value Object>>\n<<DomainID>>\nprofileName\n:ProfileName" as ProfileVO
+participant "<<Interface>>\n<<Repository>>\n:ProfileRepository" as Repository
+participant "<<Interface>>\n<<Factory>>\n:ProfileFactory" as Factory
+participant "<<Entity>>\n<<Aggregate Root>>\nnewProfile\n:Profile" as Profile
+participant ":ProfileDomainDataAssembler" as DDAssembler
+participant "<<Interface>>\n<<Repository>>\n:ProfileRepositoryJPA" as RepoJPA
+
+participant ":OutputProfileAssembler" as Assembler
+
+Administrator -> UI++: requests to create profile
+UI -> Controller++: createProfile(newProfileDTO)
+Controller -> Service++: createProfile(newProfileDTO)
+create ProfileVO
+Service -> ProfileVO: profileName = newProfileDTO.profileName
+Service --> Repository++: existsById(profileName)
+return true/false
+Service --> Factory++: createProfile(profileName)
+create Profile
+Factory --> Profile: create(profileName)
+return newProfile
+Service --> Repository++: save(newProfile)
+Repository --> DDAssembler++ : toData(newProfile)
+return profileJPA
+Repository --> RepoJPA++ : save(profileJPA)
+return savedProfileJPA
+Repository --> DDAssembler++ : toDomain(savedProfileJPA)
+return createdProfile
+return createdProfile
+Service --> Assembler++: createOutputProfileDTO(createdProfile)
+return outputProfileDTO
+return outputProfileDTO
+return outputProfileDTO
+return returns successful/unsuccessful
+@enduml

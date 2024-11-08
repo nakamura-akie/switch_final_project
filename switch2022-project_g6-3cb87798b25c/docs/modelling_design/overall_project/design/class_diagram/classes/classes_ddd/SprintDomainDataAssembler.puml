@@ -1,0 +1,13 @@
+@startuml
+'Attribute syntax: <visibility> <name> : <type> <multiplicity> = <default>
+'Method syntax: <visibility> <name (parameter-list)> : <return-type> - For simplicity the type of the parameter-list is not specified
+
+class SprintDomainDataAssembler {
+    - sprintFactory : SprintFactory {readOnly}
+
+    + SprintDomainDataAssembler(sprintFactory : SprintFactory)
+    + toData(sprint : Sprint) : SprintJPA
+    + toDomain(sprintJPA : SprintJPA) : Sprint
+}
+
+@enduml

@@ -1,0 +1,20 @@
+@startuml
+
+class Customer <<AggregateRoot>> {
+
+    -customerID : TaxIdentificationNumber
+    -customerName : CustomerName
+    -country : Country
+
+    # Customer(customerID : TaxIdentificationNumber, \ncustomerName : Name, country : Country)
+    + getTaxIdentificationNumber() : TaxIdentificationNumber
+    + getCustomerName() : CustomerName
+    + getCountry() : Country
+    + identity() : TaxIdentificationNumber
+    + sameAs(object : Object) : boolean
+    + equals(o : Object) : boolean
+    + hashcode() : int
+
+}
+
+@enduml

@@ -1,0 +1,15 @@
+@startuml
+
+class ProjectTypologyRepository<<Repository>> {
+    - projectTypologyList : ProjectTypology [0..*]
+
+    + save(projectTypology : ProjectTypology) : boolean
+    + findAll() : Iterable
+    + findByID(id : ProjectTypologyName) : ProjectTypology
+    + existsByID(id : ProjectTypologyName) : boolean
+    + findByCriteria(criteria : Predicate) {exception UnsupportedOperationException}
+    + deleteAll()
+    + findAllByID(idList : ProjectTypologyName [0..*]) : ProjectTypology [0..*]
+}
+
+@enduml

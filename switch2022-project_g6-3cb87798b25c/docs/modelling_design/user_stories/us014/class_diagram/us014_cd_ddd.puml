@@ -1,0 +1,34 @@
+@startuml
+
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ListHumanResourcesController.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ResourceService.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ResourceRepository.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ResourcesInProjectAssembler.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ResourceDTO.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/Resource.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ResourceID.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/Repository.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectRole.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/PercentageOfAllocation.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/CostPerHour.puml
+
+ListHumanResourcesController --> ResourceService : resourceService
+ResourceService --> Repository : resourceRepository
+Repository <|.. ResourceRepository
+ResourceService ..> ResourceID
+
+ResourceService ..> ResourcesInProjectAssembler
+ResourcesInProjectAssembler ..> ResourceDTO
+ResourcesInProjectAssembler ..> Resource
+
+ResourceRepository "1" *--> "*" Resource : resourceList
+
+Resource --> ResourceID : resourceID
+Resource --> ProjectRole
+Resource --> PercentageOfAllocation
+Resource --> CostPerHour
+
+
+
+
+@enduml

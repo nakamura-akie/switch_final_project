@@ -1,0 +1,12 @@
+@startuml
+
+skinparam sequenceMessageAlign center
+autonumber
+
+actor "Team Member"
+participant ":System" as System
+
+"Team Member" -> System: defines Sprint Backlog
+System --> "Team Member": confirms creation of Sprint Backlog
+
+@enduml

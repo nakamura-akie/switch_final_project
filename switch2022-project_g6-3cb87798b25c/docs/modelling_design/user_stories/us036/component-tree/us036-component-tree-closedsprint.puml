@@ -1,0 +1,32 @@
+@startmindmap
+'https://plantuml.com/mindmap-diagram
+
+title US036 - As a PO/SM/Team Member, I want to consult the Sprint Backlog of a chosen sprint in the web UI.
+top to bottom direction
+
+* <&globe>Application
+** Navbar
+*** NavItem
+** MainRoute
+*** Projects
+**** ProjectPage
+***** ProjectPageTable\n(Project Info)
+***** Button\n(Back)
+***** Button\n(Product Backlog)
+***** Button\n(Resources)
+***** Button \n(Sprints)
+****** Sprint Page
+******* Button\n(Create Sprint)
+******* Button\n(Open next Sprint)
+******* Button\n(Back)
+******* Button\n(All Sprints)
+******** SprintTableHeader
+******** SprintTableBody
+******** Drop down \n(Filter)
+******** Button \n(View Backlog)
+********* SprintBacklogTable
+********** SprintBacklogHeader
+********** SprintBacklogBody
+
+
+@endmindmap

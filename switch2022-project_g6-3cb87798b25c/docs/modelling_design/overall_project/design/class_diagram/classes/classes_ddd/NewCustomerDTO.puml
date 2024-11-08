@@ -1,0 +1,13 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class NewCustomerDTO {
+    + taxIdentificationNumber : String
+    + customerName : String
+    + country : String
+
+    + equals(o : Object) : boolean
+    + hashCode() : int
+}
+
+@enduml

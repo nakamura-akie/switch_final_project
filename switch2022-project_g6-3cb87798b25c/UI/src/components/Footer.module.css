@@ -1,0 +1,21 @@
+.footer {
+    background-color: transparent;
+    padding: 20px;
+    text-align: center;
+
+    /* Flexbox styles */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 7px; /* Adjust the height as needed */
+    color: rgba(255, 255, 255, 0);
+}
+
+.footer p {
+    color: black;
+    font-size: small;
+}

@@ -1,0 +1,59 @@
+@startuml
+
+skinparam linetype polyline
+
+title US020 - As a Team Member, I want to add a user story in the product backlog to the sprint backlog, during the sprint planning ceremony
+
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/NewSprintBacklogUserStoryDTO.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/SprintBacklogController.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/SprintService.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/SprintRepository.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/Repository.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/SprintRepositoryPersistence.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/SprintFactory.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/SprintFactoryImplementation.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/Sprint.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/SprintBacklog.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStoryID.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/SprintID.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectCode.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/SprintCode.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStoryCode.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/OutputSprintDTO.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/OutputSprintAssembler.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/SprintRepositoryJPA.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/SprintDomainDataAssembler.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/SprintJPA.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/CrudRepository.puml
+
+NewSprintBacklogUserStoryDTO ..> SprintBacklogController
+SprintBacklogController --> SprintService : sprintService
+SprintService --> SprintRepository : sprintRepository
+SprintRepository --|> Repository
+SprintRepositoryPersistence ..|> SprintRepository
+SprintService --> SprintFactory : sprintFactory
+SprintFactory <|.. SprintFactoryImplementation
+SprintFactoryImplementation --> Sprint
+Sprint --> SprintBacklog : sprintBacklog
+SprintService ..> Sprint
+SprintBacklog "1" *--> "*" UserStoryID : userStoryCodeList
+SprintBacklog --> SprintID : sprintID
+SprintID --> ProjectCode : projectCode
+SprintID --> SprintCode : sprintCode
+Sprint --> SprintID : sprintID
+UserStoryID --> ProjectCode : projectCode
+UserStoryID --> UserStoryCode : userStoryCode
+SprintService ..> OutputSprintAssembler
+OutputSprintAssembler --> OutputSprintDTO
+SprintService ..> OutputSprintDTO
+SprintBacklogController ..> OutputSprintDTO
+SprintRepositoryPersistence ..> Sprint
+SprintRepositoryPersistence ..> SprintJPA
+SprintRepositoryJPA ..> SprintJPA
+SprintRepositoryPersistence --> SprintDomainDataAssembler : jpaAssembler
+SprintRepositoryPersistence --> SprintRepositoryJPA : jpaRepository
+SprintDomainDataAssembler --> SprintJPA
+SprintRepositoryJPA --|> CrudRepository
+SprintDomainDataAssembler ..> Sprint
+SprintDomainDataAssembler --> SprintFactory : sprintFactory
+@enduml

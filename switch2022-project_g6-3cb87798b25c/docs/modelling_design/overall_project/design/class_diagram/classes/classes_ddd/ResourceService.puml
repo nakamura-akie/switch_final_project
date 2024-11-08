@@ -1,0 +1,24 @@
+@startuml
+
+class ResourceService {
+    -resourceRepository : ResourceRepository
+    -projectRepository : Repository
+    -accountRepository : AccountRepository
+    -resourceFactory : ResourceFactory
+    - MAXIMUM_ALLOCATION : int {readOnly}
+
+    + ResourceService(resourceRepository : ResourceRepository, projectRepository : Repository,
+accountRepository : AccountRepository, resourceFactory : ResourceFactory) : ResourceService
+    + addResourceToProject(newResourceDTO : NewResourceDTO) : OutputResourceDTO
+    - validateResource(newResource : Resource)
+    - isProfileUser(resource : Resource) : boolean
+    - validateResourceTimePeriod(resource : Resource)
+    - isResourceOverlapping(newResource : Resource) : boolean
+    - roleAlreadyExistsInTimePeriod(newResource : Resource) : boolean
+    - isAllocationPercentageUnderOneHundred (newResource : Resource) : boolean
+    + createProjectListByResource(email : String, currentDate : LocalDate) : List<ProjectByResourceDTO>
+    + createHumanResourcesInProjectList(projectCode : String, date : LocalDate) : List<ResourceDTO>
+    + findResourceById(resourceID : ResourceID) : OutputResourceDTO
+    }
+
+@enduml

@@ -1,0 +1,89 @@
+@startuml
+
+skinparam sequenceMessageAlign center
+skinparam actorBackgroundColor white
+skinparam participantBackgroundColor white
+skinparam sequenceReferenceBackgroundColor white
+skinparam sequenceReferenceHeaderBackgroundColor white
+skinparam sequenceGroupBackgroundColor white
+
+autonumber
+
+title US010 - As Manager, I want to register/create a new project
+
+actor ":Manager" as Manager
+participant ":CreateProjectUI" as UI
+participant "<<Controller>>\n:ProjectController" as Controller
+participant "<<Service>>\n:ProjectService" as Service
+participant "<<Interface>>\n<<Repository>>\n:Repository<Agg.Root, Id>" as Repository
+participant "<<DTO>>\n:ProjectMapper" as Mapper
+participant "projectFactory\n:ProjectFactory" as Factory
+participant "productBacklog\n:ProductBacklog" as ProductBacklog
+participant "<<Entity>>\nproject\n:Project" as Project
+participant "<<DataModel>>\n:ProjectDomainDataAssembler" as Assembler
+participant "<<Interface>>\n<<Repository>>\n:ProjectRepositoryJPA" as RepositoryJPA
+participant "<<DTO>>\n:OutputProjectAssembler" as AssemblerDTO
+
+Manager -> UI++: asks to create new project
+Manager <- UI: asks for project details
+Manager -> UI: inserts project details
+
+    UI -> Controller++: createProject(newProjectDTO)
+
+        Controller -> Service++: createProject(newProjectDTO)
+
+            Service -> Repository++: existsById(newProjectDTO.getProjectCode())
+            return false
+
+            Service -> Repository++: existsById(newProjectDTO.getCustomerID())
+            return true
+
+            Service -> Repository++: existsById(newProjectDTO.getBusinessSectorName())
+            return true
+
+            Service -> Repository++: existsById(newProjectDTO.getProjectTypologyName())
+            return true
+
+            Service -> Mapper++: createDomainObject(projectFactory, newProjectDTO)
+                Mapper -> Factory++: createProject(projectCode, projectName, projectDescription,\n customerID, businessSectorName, projectTypologyName,\n sprintDuration, numberOfPlannedSprints, budget, period)
+                    create ProductBacklog
+                    Factory -> ProductBacklog: create()
+
+                    create Project
+                    Factory -> Project: create(projectCode, projectName, projectDescription, customerID,\n businessSectorID, projectTypologyName, productBacklog,\n projectStatus, projectStatusHistory)
+
+                    Factory -> Project++: setSprintDuration(sprintDuration)
+                    deactivate Project
+
+                    Factory -> Project++: setNumberPlannedSprints(numberOfPlannedSprints)
+                    deactivate Project
+
+                    Factory -> Project++: setBudget(budget)
+                    deactivate Project
+
+                    Factory -> Project++: setPeriod(period)
+                    deactivate Project
+
+                return project
+
+            return project
+
+            Service -> Repository++: save(project)
+                Repository -> Assembler++: toData(project)
+                return projectJPA
+                Repository -> RepositoryJPA++: save(projectJPA)
+                return projectJPA
+                Repository -> Assembler++: toDomain(projectJPA)
+                return project
+            return project
+
+            Service -> AssemblerDTO++: generateDTO(project)
+            return projectDTO
+
+        return projectDTO
+
+    return projectDTO
+
+return successful
+
+@enduml

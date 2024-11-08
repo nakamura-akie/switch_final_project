@@ -1,0 +1,15 @@
+@startuml
+
+class UserStoryID <<DomainID>><<ValueObject>> {
+    + projectCode : ProjectCode {readOnly}
+    + userStoryCode : UserStoryCode {readOnly}
+
+    +UserStoryID(projectCode : ProjectCode, userStoryCode : UserStoryCode)
+    +getProjectCode() : ProjectCode
+    +getUserStoryCode() : UserStoryCode
+    +equals(o : Object) : boolean
+    +hashCode() : int
+
+}
+
+@enduml

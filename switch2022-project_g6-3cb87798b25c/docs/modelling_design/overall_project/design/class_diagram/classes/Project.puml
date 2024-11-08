@@ -1,0 +1,34 @@
+@startuml
+'Attribute syntax: <visibility> <name> : <type> <multiplicity> = <default>
+'Method syntax: <visibility> <name (parameter-list)> : <return-type> - For simplicity the type of the parameter-list is not specified
+
+class Project {
+    - projectCode : String {readOnly}
+    - projectName : String {readOnly}
+    - projectDescription : String {readOnly}
+    - customer : Customer {readOnly}
+    - projectTypology : ProjectTypology {readOnly}
+    - businessSector : BusinessSector {readOnly}
+    - startDate : LocalDate
+    - endDate : LocalDate
+    - projectStatus : ProjectStatus {readOnly}
+    - productBacklog : ProductBacklog
+    - sprintList : SprintList
+    - sprintDuration : TemporalAmount
+
+    + Project(businessSector : BusinessSector, projectTypology : ProjectTypology, \ncustomer : Customer, projectStatus : ProjectStatus, projectCode : String, \nprojectName : String, projectDescription : String, productBacklog : ProductBacklog)
+    + hasProjectCode(projectCode : String) : boolean
+    + getProjectCode() : String
+    + getName() : String
+    + getDescription() : String
+    + getCustomer() : Customer
+    + getProjectStatus() : ProjectStatus
+    + getProductBacklog() : ProductBacklog
+    + getSprintList() : SprintList
+    + getSprintDuration() : TemporalAmount
+    + createUserStory(userStoryCode : String, description : String) : boolean
+    + equals(object : Object) : boolean
+    + hashCode() : int
+}
+
+@enduml

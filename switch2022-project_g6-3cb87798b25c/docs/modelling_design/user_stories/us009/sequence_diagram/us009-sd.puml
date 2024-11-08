@@ -1,0 +1,75 @@
+@startuml
+
+skinparam sequenceMessageAlign center
+skinparam actorBackgroundColor white
+skinparam participantBackgroundColor white
+skinparam sequenceReferenceBackgroundColor white
+skinparam sequenceReferenceHeaderBackgroundColor white
+skinparam sequenceGroupBackgroundColor white
+
+autonumber
+
+
+title US009 - As Admin, I want to add a customer
+
+actor ":Administrator" as Administrator
+participant ":CreateCustomerUI" as UI
+participant ":CustomerController" as Controller
+participant ":CustomerValueObjectAssembler" as CustomerValueObjectAssembler
+participant "customerService\n:CustomerService" as Service
+participant "customerValueObjectDTO : \n CustomerValueObjectDTO" as customerVODTO
+participant "<<ValueObject>>\ntaxIdentificationNumber : \n TaxIdentificationNumber" as TIN
+participant "<<ValueObject>>\ncustomerName : \n CustomerName" as name
+participant "<<ValueObject>>\ncountry : \n Country" as country
+participant "<<Interface>>\n:CustomerRepository" as CustomerRepository
+participant "<<Interface>>\n:CustomerFactory" as Factory
+participant ":OutputCustomerAssembler" as OutputCustomerAssembler
+participant "newCustomer : \nCustomer" as newCustomer
+
+Administrator -> UI: requests to add customer
+UI --> Administrator: asks for details
+Administrator -> UI++: fills details \n(taxIdentificationNumberValue,\n customerNameValue, countryValue)
+
+    UI -> Controller++: createCustomer(newCustomerDTO)
+
+        Controller -> CustomerValueObjectAssembler++ : createCustomerValueObjectDTO\n(newCustomerDTO)
+                create customerVODTO
+                CustomerValueObjectAssembler -> customerVODTO: create()
+
+                create TIN
+                CustomerValueObjectAssembler -> TIN: create(newCustomerDTO.taxIdentificationNumber)
+
+                create name
+                CustomerValueObjectAssembler -> name: create(newCustomerDTO.customerName)
+
+                create country
+                CustomerValueObjectAssembler -> country : create(newCustomerDTO.country)
+
+        return customerValueObjectDTO
+
+        Controller -> Service++: createCustomer(customerValueObjectDTO)
+
+        Service -> CustomerRepository++: existsByID(customerValueObjectDTO.taxIdentificationNumber)
+        return true/false
+
+        Service -> Factory++: createCustomer(customerValueObjectDTO.taxIdentificationNumber,\n customerValueObjectDTO.customerName,\n customerValueObjectDTO.country)
+        create newCustomer
+        Factory -> newCustomer: create(taxIdentificationNumber,\ncustomerName, country)
+        return newCustomer
+
+        Service -> CustomerRepository++: save(newCustomer)
+        return savedCustomer
+
+        Service -> OutputCustomerAssembler++ : createOutputCustomerDTO(savedCustomer)
+
+        return outputCustomerDTO
+
+        return outputCustomerDTO
+
+    return ResponseEntity.created
+
+return success/failure
+
+
+
+@enduml

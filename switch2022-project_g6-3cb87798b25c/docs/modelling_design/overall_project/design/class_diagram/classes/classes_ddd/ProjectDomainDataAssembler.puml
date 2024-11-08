@@ -1,0 +1,11 @@
+@startuml
+
+class ProjectDomainDataAssembler {
+    - projectFactory : ProjectFactory {readOnly}
+
+    + ProjectDomainDataAssembler(projectFactory : ProjectFactory)
+    + toData(project : Project) : ProjectJPA
+    + toDomain(projectJPA : ProjectJPA) : Project
+}
+
+@enduml

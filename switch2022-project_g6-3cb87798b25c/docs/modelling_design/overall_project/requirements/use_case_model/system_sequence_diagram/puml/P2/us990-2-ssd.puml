@@ -1,0 +1,25 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+actor User as User
+participant "__:System:__" as System
+
+User -> System: The user uses the “forgot password link” on login and asks the system to reset password
+System --> User: The system asks for a valid email
+
+User -> System: The user provides email
+System --> System: The system validates the email
+
+User <-- System: The system sends to the email a link allowing the user to securely change the password
+System --> System: The system displays a message telling the user to check his email
+
+User -> System: The user clicks on the link and is taken to a secure page
+User <-- System: The system asks for a new password
+
+User -> System: The user provides new password
+System --> System: System validates the new password
+
+User <-- System: Display a message of “password successfully changed”
+@enduml

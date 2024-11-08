@@ -1,0 +1,8 @@
+@startuml
+
+class ResourceMapper {
+
+    + createDomainObject(newResourceDTO : NewResourceDTO, resourceFactory : ResourceFactory) : Resource {static}
+}
+
+@enduml

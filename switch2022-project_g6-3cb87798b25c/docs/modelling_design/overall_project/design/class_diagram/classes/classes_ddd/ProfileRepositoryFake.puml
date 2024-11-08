@@ -1,0 +1,15 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class ProfileRepositoryFake<<Repository>> {
+    '- profileList : Profile [1..*] {static} {readOnly}
+
+    + save(profile : Profile) : UserStory
+    + findAll(profileName : ProfileName) : Iterable
+    + findById(profileName : ProfileName) : Optional
+    + existsById(profileName : ProfileName) : boolean
+    + deleteAll()
+    + deleteById(profileName : profileName)
+}
+
+@enduml

@@ -1,0 +1,12 @@
+@startuml
+
+skinparam sequenceMessageAlign center
+autonumber
+
+actor "Project Manager" as PM
+participant ":System" as System
+
+PM -> System: associates resources
+System --> PM: confirms association of resources
+
+@enduml

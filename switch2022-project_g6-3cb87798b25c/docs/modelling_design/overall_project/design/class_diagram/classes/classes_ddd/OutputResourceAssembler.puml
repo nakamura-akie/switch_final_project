@@ -1,0 +1,9 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class OutputResourceAssembler {
+
+    + generateOutputResourceDTO(resource : Resource) : OutputResourceDTO {static}
+}
+
+@enduml

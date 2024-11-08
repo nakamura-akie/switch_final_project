@@ -1,0 +1,16 @@
+@startuml
+
+skinparam sequenceMessageAlign center
+autonumber
+
+title US007 - As Administrator, I want to create a new project typology
+
+actor ":Administrator" as Administrator #white
+participant ":System" as System #white
+
+Administrator -> System : requests to create a project typology
+System --> Administrator: requests project typology name
+Administrator -> System : enters project typology name
+System --> Administrator: successful/unsuccessful
+
+@enduml

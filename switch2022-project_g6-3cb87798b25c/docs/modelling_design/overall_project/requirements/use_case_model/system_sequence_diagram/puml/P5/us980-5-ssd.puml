@@ -1,0 +1,10 @@
+@startuml
+skinparam SequenceMessageAlign center
+autonumber
+actor “User” as User
+participant ":System" as System
+
+User -> System: asks to view projects’ ongoing activities.
+System --> System: validates session
+User <-- System: returns the projects’ ongoing activities.
+@enduml

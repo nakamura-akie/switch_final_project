@@ -1,0 +1,35 @@
+@startuml
+
+skinparam sequenceMessageAlign center
+skinparam participantBackgroundColor white
+skinparam actorBackgroundColor white
+autonumber
+
+title US024 - As an Administrator, I want to list all projects in the web UI
+
+actor ":Administrator" as Admin
+participant ":Projects" as Projects
+participant ":Table" as Table
+participant ":ProjectsListTableHeader" as ProjectsListTableHeader
+participant ":ProjectsListTableBody" as ProjectsListTableBody
+participant ":AppProvider" as AppProvider
+
+Admin --> Projects++: requests list of projects
+Projects -> Table++: Table
+Table -> ProjectsListTableHeader++: Table Head
+ProjectsListTableHeader -> AppProvider++: useContext(AppContext)
+return ProjectsListTableHeader
+return ProjectsListTableHeader
+
+
+Table -> ProjectsListTableBody++: Table Body
+ProjectsListTableBody -> AppProvider++: useContext(AppContext)
+return ProjectList
+return ProjectsListTableBody
+
+return Table
+return list of projects
+
+
+
+@enduml

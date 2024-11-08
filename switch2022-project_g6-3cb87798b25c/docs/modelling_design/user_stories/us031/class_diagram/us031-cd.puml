@@ -1,0 +1,55 @@
+@startuml
+skinparam linetype polyline
+
+title US031 -  As Project Manager, I want to start the next sprint of a project in the web UI
+
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/SprintStatusDTO.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/SprintController.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/SprintService.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/SprintRepository.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/SprintRepositoryPersistence.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/Repository.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/CreatedSprintAssembler.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/CreatedSprintDTO.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/SprintRepositoryJPA.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/SprintDomainDataAssembler.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/SprintJPA.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/Sprint.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/SprintFactory.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/SprintFactoryImplementation.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/CrudRepository.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/SprintID.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectCode.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/SprintCode.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/SprintStatus.puml
+
+
+SprintStatusDTO ..> SprintController
+SprintController --> SprintService : sprintService
+SprintService --> SprintRepository : sprintRepository
+SprintRepository --|> Repository
+SprintRepositoryPersistence ..|> SprintRepository
+SprintService ..> CreatedSprintAssembler
+CreatedSprintAssembler --> CreatedSprintDTO
+SprintService ..> CreatedSprintDTO
+SprintController ..> CreatedSprintDTO
+SprintRepositoryPersistence --> SprintDomainDataAssembler : jpaAssembler
+SprintRepositoryPersistence --> SprintRepositoryJPA : jpaRepository
+SprintDomainDataAssembler --> SprintJPA
+SprintDomainDataAssembler --> SprintFactory : sprintFactory
+SprintFactory <|.. SprintFactoryImplementation
+SprintFactoryImplementation --> Sprint
+SprintDomainDataAssembler ..> Sprint
+SprintRepositoryPersistence ..> Sprint
+SprintRepositoryJPA ..> SprintJPA
+CrudRepository <|-- SprintRepositoryJPA
+SprintRepositoryPersistence ..> SprintJPA
+Sprint --> SprintID : sprintID
+SprintID --> ProjectCode : projectCode
+SprintID --> SprintCode : sprintCode
+Sprint --> SprintStatus : sprintStatus
+
+
+
+
+@enduml

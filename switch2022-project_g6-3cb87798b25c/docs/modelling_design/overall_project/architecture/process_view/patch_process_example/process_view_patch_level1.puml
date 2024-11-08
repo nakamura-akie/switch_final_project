@@ -1,0 +1,16 @@
+@startuml
+title US033 - As Team Member, I want to update the status (i.e.: the Scrum Board category) of \na user story in the scope of the current/active sprint backlog in the web UI.
+autonumber
+skinparam sequenceMessageAlign center
+skinparam actorBackgroundColor white
+skinparam participantBackgroundColor white
+skinparam sequenceReferenceBackgroundColor white
+skinparam sequenceReferenceHeaderBackgroundColor white
+skinparam sequenceGroupBackgroundColor white
+
+actor "Team Member" as tm
+participant "<<context(c4)>>\n:Scrumy" as system
+
+tm -> system++ : ask to update user story status
+return success
+@enduml

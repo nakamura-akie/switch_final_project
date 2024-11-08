@@ -1,0 +1,10 @@
+@startuml
+
+interface ProjectFactory<<Factory>>{
+
+    + createProject(projectCode : ProjectCode, projectName : ProjectName, \n description : Description, customerID : TaxIdentificationNumber, \n businessSectorName : BusinessSectorName, projectTypologyName : ProjectTypologyName) : Project
+    + createProject(projectCode : ProjectCode, projectName : ProjectName, \n description : Description, customerID : TaxIdentificationNumber, \n businessSectorName : BusinessSectorName, projectTypologyName : ProjectTypologyName, \n sprintDuration : SprintDuration, numberOfPlannedSprints : NumberPlannedSprints, \n budget : Budget, period : TimePeriod) : Project
+    + createProject(projectCode : ProjectCode, projectName : ProjectName, \n description : Description, customerID : TaxIdentificationNumber, \n businessSectorName : BusinessSectorName, projectTypologyName : ProjectTypologyName, \n productBacklog : UserStoryID [0..*], projectStatus : ProjectStatus, \n projectStatusHistory : Map<ProjectStatus, LocalDate>, sprintDuration : SprintDuration, \n numberOfPlannedSprints : NumberPlannedSprints, budget : Budget, \n period : TimePeriod) : Project
+}
+
+@enduml

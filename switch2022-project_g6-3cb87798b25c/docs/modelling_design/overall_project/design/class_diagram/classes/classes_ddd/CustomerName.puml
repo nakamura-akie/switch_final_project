@@ -1,0 +1,13 @@
+@startuml
+
+class CustomerName<<ValueObject>> {
+    - customerNameValue : String {readOnly}
+
+    +CustomerName(nameValue : String)
+    -isValid(nameValue : String) : boolean {static}
+    +getCustomerNameValue() : String
+    +equals(o : Object) : boolean
+    +hashCode() : int
+}
+
+@enduml

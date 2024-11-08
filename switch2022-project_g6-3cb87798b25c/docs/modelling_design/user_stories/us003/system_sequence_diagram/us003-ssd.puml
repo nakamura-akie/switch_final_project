@@ -1,0 +1,19 @@
+@startuml
+
+skinparam sequenceMessageAlign center
+
+autonumber
+
+title US003 - As Administrator, I want to change the profile of a user account
+
+actor ":Administrator" as A #white
+participant ":System" as S #white
+
+A -> S : requests list of accounts
+S --> A : list of accounts
+A -> S : requests list of profiles
+S --> A : list of profiles
+A -> S : selects account and profile
+S --> A : confirmation of change
+
+@enduml

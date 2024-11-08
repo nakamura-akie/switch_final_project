@@ -1,0 +1,13 @@
+@startuml
+
+autonumber
+actor Manager
+participant "__:System__" as System
+
+Manager -> System: Asks to view all projects
+Manager <-- System: Shows Projects
+Manager -> System: Chooses a Project
+Manager <-- System: Shows resource allocation of that Project
+Manager -> System: Asks to modify the resources of that Project
+
+@enduml

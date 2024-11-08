@@ -1,0 +1,23 @@
+@startuml
+
+title US008 - As Administrator, I want to add a business sector
+skinparam linetype polyline
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/CreateBusinessSectorController.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/BusinessSectorService.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/Repository.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/BusinessSectorRepository.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/BusinessSector.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/BusinessSectorName.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/BusinessSectorFactory.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/BusinessSectorFactoryImplementation.puml
+
+CreateBusinessSectorController --> BusinessSectorService : BusinessSectorService
+BusinessSectorService --> Repository : businessSectorRepository
+Repository <|.. BusinessSectorRepository
+BusinessSectorService --> BusinessSectorFactory : businessSectorFactory
+BusinessSectorFactory <|.. BusinessSectorFactoryImplementation
+BusinessSectorRepository "1" *-- "*" BusinessSector
+BusinessSector --> BusinessSectorName : businessSectorName
+BusinessSectorFactoryImplementation --> BusinessSector
+
+@enduml

@@ -1,0 +1,9 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class ViewSprintBacklogDTO {
+    + projectCode : ProjectCode
+    + sprintCode : SprintCode
+}
+
+@enduml

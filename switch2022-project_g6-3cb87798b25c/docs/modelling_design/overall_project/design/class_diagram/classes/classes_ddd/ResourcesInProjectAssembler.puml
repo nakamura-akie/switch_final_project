@@ -1,0 +1,8 @@
+@startuml
+
+class ResourcesInProjectAssembler {
++resourcesInProjectList(resourceIterator : Iterator) : ResourceDTO [0..*] {static}
+-generateDTO(resource : Resource) : ResourceDTO {static}
+}
+
+@enduml

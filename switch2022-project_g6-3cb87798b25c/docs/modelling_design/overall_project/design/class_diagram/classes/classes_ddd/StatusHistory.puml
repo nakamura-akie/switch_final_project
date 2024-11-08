@@ -1,0 +1,13 @@
+@startuml
+
+class StatusHistory <<Domain Entity>> {
+    - projectCode : ProjectCode {readOnly}
+    - statusHistoryMap : Map<ProjectStatus, LocalDate> {readOnly}
+
+    + StatusHistory(projectCode : ProjectCode)
+    + StatusHistory(projectCode : ProjectCode, statusHistoryMap : Map<ProjectStatus, LocalDate>)
+    + record(status : ProjectStatus)
+    + getStatusHistoryMap() : Map<ProjectStatus, LocalDate>
+}
+
+@enduml

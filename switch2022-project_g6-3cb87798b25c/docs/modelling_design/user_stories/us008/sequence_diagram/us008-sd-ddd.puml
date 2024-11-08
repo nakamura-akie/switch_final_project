@@ -1,0 +1,51 @@
+@startuml
+
+skinparam sequenceMessageAlign center
+skinparam actorBackgroundColor white
+skinparam participantBackgroundColor white
+skinparam sequenceReferenceBackgroundColor white
+skinparam sequenceReferenceHeaderBackgroundColor white
+skinparam sequenceGroupBackgroundColor white
+autonumber
+
+title US008 - As Administrator, I want to add a business sector
+
+actor ":Administrator" as Admin #white
+participant ":CreateBusinessSectorUI" as UI #white
+participant ":CreateBusinessSectorController" as Controller #white
+participant ":BusinessSectorService" as Service
+participant "<<ValueObject>>\nbusinessSectorName : \n Name" as name
+participant "<<Repository>>\n:BusinessSectorRepository" as BusinessSectorRepository
+participant "<<Interface>>\n:BusinessSectorFactory" as Factory
+participant "newBusinessSector : \nBusinessSector" as newBusinessSector #white
+
+Admin -> UI++: requests to add business sector
+    UI --> Admin : requests business sector name
+    Admin -> UI : enters business sector name
+
+        UI -> Controller++: createBusinessSector(businessSectorNameValue)
+
+            Controller -> Service++: createBusinessSector(businessSectorNameValue)
+
+                create name
+                Service -> name: create(businessSectorNameValue)
+
+                Service -> BusinessSectorRepository++: existsByID(businessSectorName)
+                return true/false
+
+                    Service -> Factory++: createBusinessSector(businessSectorName)
+                    create newBusinessSector
+
+                        Factory -> newBusinessSector: create(businessSectorName)
+                        return newBusinessSector
+
+                            Service -> BusinessSectorRepository++: save(newBusinessSector)
+                            return true/false
+
+            return true/false
+
+        return true/false
+
+return successful/unsuccessful
+
+@enduml

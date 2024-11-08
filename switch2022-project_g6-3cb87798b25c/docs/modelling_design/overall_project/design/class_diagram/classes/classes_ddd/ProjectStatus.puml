@@ -1,0 +1,13 @@
+@startuml
+
+enum ProjectStatus <<Value Object>>  {
+    PLANNED
+    INCEPTION
+    ELABORATION
+    CONSTRUCTION
+    TRANSITION
+    WARRANTY
+    CLOSED
+}
+
+@enduml

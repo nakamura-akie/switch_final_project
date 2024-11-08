@@ -1,0 +1,92 @@
+@startuml
+
+skinparam linetype polyline
+
+title US010 - As Manager, I want to register/create a new project
+
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectController.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/Repository.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectRepositoryFake.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectRepositoryPersistence.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectRepository.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStoryRepository.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectService.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectMapper.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectFactory.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectFactoryImplementation.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectCode.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectName.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/Description.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/Budget.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/NumberPlannedSprints.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/SprintDuration.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/TaxIdentificationNumber.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/BusinessSectorName.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectTypologyName.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProductBacklog.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/TimePeriod.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/Project.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/NewProjectDTO.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/OutputProjectAssembler.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/OutputProjectDTO.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/StatusHistory.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectStatus.puml
+
+ProjectController --> ProjectService : projectService
+ProjectController ..> NewProjectDTO
+
+ProjectService --> Repository : projectRepository \n customerRepository \n businessSectorRepository \n projectTypologyRepository
+ProjectService --> UserStoryRepository : userStoryRepository
+ProjectService --> ProjectFactory : projectFactory
+ProjectService ..> ProjectMapper
+ProjectService ..> NewProjectDTO
+ProjectService ..> Project
+ProjectService ..> OutputProjectAssembler
+ProjectService ..> OutputProjectDTO
+
+OutputProjectAssembler ..> OutputProjectDTO
+
+Repository <|-- ProjectRepository
+Repository <|-- UserStoryRepository
+
+ProjectRepository <|.. ProjectRepositoryFake
+ProjectRepository <|.. ProjectRepositoryPersistence
+ProjectRepositoryFake ..> Project
+ProjectRepositoryPersistence ..> Project
+
+ProjectFactory <|.. ProjectFactoryImplementation
+
+ProjectMapper ..> ProjectFactory
+ProjectMapper ..> NewProjectDTO
+ProjectMapper ..> Project
+
+ProjectFactoryImplementation ..> ProjectCode
+ProjectFactoryImplementation ..> ProjectName
+ProjectFactoryImplementation ..> Description
+ProjectFactoryImplementation ..> TaxIdentificationNumber
+ProjectFactoryImplementation ..> BusinessSectorName
+ProjectFactoryImplementation ..> ProjectTypologyName
+ProjectFactoryImplementation ..> ProductBacklog
+ProjectFactoryImplementation ..> ProjectStatus
+ProjectFactoryImplementation ..> StatusHistory
+ProjectFactoryImplementation ..> SprintDuration
+ProjectFactoryImplementation ..> NumberPlannedSprints
+ProjectFactoryImplementation ..> Budget
+ProjectFactoryImplementation ..> TimePeriod
+ProjectFactoryImplementation ..> Project
+
+Project ..> ProjectCode
+Project ..> ProjectName
+Project ..> Description
+Project ..> TaxIdentificationNumber
+Project ..> BusinessSectorName
+Project ..> ProjectTypologyName
+Project ..> ProductBacklog
+Project ..> ProjectStatus
+Project ..> StatusHistory
+Project ..> SprintDuration
+Project ..> NumberPlannedSprints
+Project ..> Budget
+Project ..> TimePeriod
+
+@enduml

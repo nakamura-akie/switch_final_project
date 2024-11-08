@@ -1,0 +1,14 @@
+@startuml
+
+class ResourceDTO {
++email : String
++projectCode : String
++startDate : String
++endDate : String
++projectRole : String
+
++equals(o : Object) : boolean
++hashcode() : int
+}
+
+@enduml

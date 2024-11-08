@@ -1,0 +1,10 @@
+@startuml
+
+class ListHumanResourcesController {
+-resourceService : ResourceService
+
++ListHumanResourcesController(resourceService : ResourceService)
++listResourcesInProject(projectCodeValue : String, clock : Clock) : ResourceDTO [1..*]
+}
+
+@enduml

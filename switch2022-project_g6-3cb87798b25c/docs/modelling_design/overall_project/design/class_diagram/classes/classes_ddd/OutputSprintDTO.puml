@@ -1,0 +1,17 @@
+@startuml
+'Attribute syntax: <visibility> <name> : <type> <multiplicity> = <default>
+'Method syntax: <visibility> <name (parameter-list)> : <return-type> - For simplicity the type of the parameter-list is not specified
+
+class OutputSprintDTO {
+    + projectCode : String
+    + sprintCode : String
+    + startDate : String
+    + endDate : String
+    + sprintDuration : Integer
+    + sprintBacklog : String [0..*]
+    + sprintStatus : String
+    + equals(object : Object) : boolean
+    + hashCode() : int
+}
+
+@enduml

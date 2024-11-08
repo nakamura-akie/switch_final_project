@@ -1,0 +1,110 @@
+@startuml
+skinparam linetype polyline
+top to bottom direction
+
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ResourceController.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ResourceService.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/NewResourceDTO.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/Repository.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ResourceRepository.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ResourceRepositoryFake.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ResourceRepositoryPersistence.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/Resource.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/Project.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/Account.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectRepositoryFake.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectRepository.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectRepositoryPersistence.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ResourceMapper.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ResourceFactory.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ResourceFactoryImplementation.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/Email.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectCode.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/TimePeriod.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ResourceID.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectRole.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/CostPerHour.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/PercentageOfAllocation.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/AccountRepositoryFake.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/AccountRepository.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/AccountRepositoryPersistence.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/OutputResourceDTO.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/OutputResourceAssembler.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ResourceJPA.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ResourceIdJPA.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ResourceDomainDataAssembler.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ResourceRepositoryJPA.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/CrudRepository.puml
+
+
+
+
+
+ResourceController --> ResourceService : resourceService
+ResourceController ..> NewResourceDTO
+
+ResourceService --> ResourceRepository
+ResourceService --> AccountRepository
+ResourceService --> ProjectRepository
+ResourceService --> ResourceFactory
+
+ResourceService ..> Resource
+ResourceService ..> Account
+ResourceService ..> Project
+ResourceService ..> OutputResourceAssembler
+ResourceService ..> OutputResourceDTO
+
+ResourceRepository --|> Repository
+ResourceRepositoryFake ..|> ResourceRepository
+ResourceRepositoryPersistence ..|> ResourceRepository
+ResourceRepositoryFake "1"*-->"*" Resource
+
+ResourceRepositoryPersistence --> ResourceRepositoryJPA
+
+ResourceRepositoryJPA --|> CrudRepository
+ResourceRepositoryPersistence --> ResourceDomainDataAssembler
+
+ResourceDomainDataAssembler --> ResourceFactory
+ResourceDomainDataAssembler ..> ResourceJPA
+ResourceDomainDataAssembler ..> ResourceIdJPA
+ResourceJPA ..> ResourceRepositoryJPA
+ResourceIdJPA ..> ResourceRepositoryJPA
+
+
+ProjectRepository --|> Repository
+ProjectRepositoryFake ..|> ProjectRepository
+ProjectRepositoryPersistence ..|> ProjectRepository
+ProjectRepositoryFake "1"*-->"*" Project
+
+AccountRepository --|> Repository
+AccountRepositoryFake ..|> AccountRepository
+AccountRepositoryPersistence ..|> AccountRepository
+AccountRepositoryFake "1"*-->"*" Account
+
+
+ResourceFactoryImplementation ..|> ResourceFactory
+
+ResourceMapper ..> ResourceFactory
+ResourceMapper ..> NewResourceDTO
+ResourceMapper ..> Email
+Email <-- Account
+ResourceMapper ..> ProjectCode
+Project --> ProjectCode
+ResourceMapper ..> TimePeriod
+ResourceMapper ..> CostPerHour
+ResourceMapper ..> ResourceID
+ResourceMapper ..> ProjectRole
+ResourceMapper ..> PercentageOfAllocation
+ResourceMapper ..> Resource
+
+
+Resource --> ResourceID : resourceID
+Resource --> ProjectRole : roleInProject
+Resource --> PercentageOfAllocation : percentageOfAllocation
+Resource --> CostPerHour : costPerHour
+Resource --> TimePeriod : timePeriod
+
+
+OutputResourceDTO ..> ResourceController
+OutputResourceAssembler ..> OutputResourceDTO
+@enduml

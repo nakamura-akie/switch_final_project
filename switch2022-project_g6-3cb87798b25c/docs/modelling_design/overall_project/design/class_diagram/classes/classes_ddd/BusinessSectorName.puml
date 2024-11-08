@@ -1,0 +1,13 @@
+@startuml
+
+class BusinessSectorName<<DomainID>><<Value Object>> {
+    - businessSectorNameValue : String {readOnly}
+
+    + BusinessSectorName(businessSectorNameValue : String)
+    - validateValue(businessSectorNameValue : String) {static}
+    + getBusinessSectorNameValue() : String
+    + equals(o : Object) : boolean
+    + hashCode() : int
+}
+
+@enduml

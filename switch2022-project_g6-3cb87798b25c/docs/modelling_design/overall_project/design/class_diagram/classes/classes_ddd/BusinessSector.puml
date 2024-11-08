@@ -1,0 +1,14 @@
+@startuml
+
+class BusinessSector <<AggregateRoot>> {
+    - businessSectorName : BusinessSectorName
+
+    # BusinessSector(businessSectorName : BusinessSectorName)
+    + identity() : BusinessSectorName
+    + getBusinessSectorName() : String
+    + sameAs(object : Object) : boolean
+    + equals(o : Object) : boolean
+    + hashcode() : int
+}
+
+@enduml

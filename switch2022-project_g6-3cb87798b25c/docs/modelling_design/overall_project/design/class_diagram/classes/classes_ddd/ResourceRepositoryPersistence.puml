@@ -1,0 +1,23 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class ResourceRepositoryPersistence <<ResourceRepository>>{
+    - resourceJpaRepository : ResourceRepositoryJPA
+    - resourceAssembler : ResourceDomainDataAssembler
+
+    + ResourceRepositoryPersistence(resourceJpaRepository : ResourceRepositoryJPA,
+    resourceAssembler : ResourceDomainDataAssembler)
+    + save(entity : Resource) : Resource
+    + findAll() : Iterable<Resource>
+    + findById(id : ResourceID) : Optional<Resource>
+    + existsById(id : ResourceID) : boolean
+    + findByAccountEmailAndCurrentDate(accountEmail : Email, currentDate : LocalDate) : Iterable<Resource>
+    + findByProjectCodeAndIsAllocatedNow(projectCode : ProjectCode, searchDate : LocalDate) : Iterable<Resource>
+    + deleteAll()
+    + deleteById(id : ResourceID)
+    + findByEmail(email : Email) : Iterable<Resource>
+    + findByProjectCodeAndProjectRole(projectCode : ProjectCode, projectRole : ProjectRole) : Iterable<Resource>
+    + findByProjectCode(projectCode : ProjectCode) : Iterable<Resource>
+}
+
+@enduml

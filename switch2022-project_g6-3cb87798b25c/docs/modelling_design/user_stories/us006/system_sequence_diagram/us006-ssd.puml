@@ -1,0 +1,15 @@
+@startuml
+
+skinparam sequenceMessageAlign center
+autonumber
+
+title US006 - As Administrator, I want to activate a user account
+
+actor ":Administrator" as Admin #white
+participant ":System" as System #white
+
+Admin -> System: asks to activate account
+Admin <-- System: successful/unsuccessful
+
+
+@enduml

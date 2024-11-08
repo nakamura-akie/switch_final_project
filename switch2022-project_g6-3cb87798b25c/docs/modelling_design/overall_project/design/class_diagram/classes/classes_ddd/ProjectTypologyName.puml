@@ -1,0 +1,13 @@
+@startuml
+
+class ProjectTypologyName<<DomainID>> <<Value Object>> {
+    - projectTypologyNameValue : ProjectTypologyName {readOnly}
+
+    + ProjectTypologyName(projectTypologyNameValue : String)
+    - validateValue(projectTypologyNameValue : String) {static}
+    + getProjectTypologyNameValue() : String
+    + equals(object : Object) : boolean
+    + hashCode() : int
+}
+
+@enduml

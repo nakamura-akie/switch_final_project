@@ -1,0 +1,33 @@
+@startuml
+'Attribute syntax: <visibility> <name> : <type> <multiplicity> = <default>
+'Method syntax: <visibility> <name (parameter-list)> : <return-type> - For simplicity the type of the parameter-list is not specified
+
+class Resource {
+    -account : Account {readOnly}
+    -projectRole : ProjectRole {readOnly}
+    -percentageOfAllocation : int {readOnly}
+    -project : Project {readOnly}
+    -startDate : Date {readOnly}
+    -endDate : Date {readOnly}
+    -costPerHour : double {readOnly}
+
+    +Resource(account : Account, projectRole : ProjectRole, project : Project, \nstartDate : Date, endDate : Date, percentageOfAllocation : int, costPerHour : double)
+    +sumOfPercentageOfAllocation(percentageOfAllocation : int) : int
+    +hasSameRole(newResource : Resource) : boolean
+    +hasSameProject(newResource : Resource) : boolean
+    +uniqueRoleAlreadyExistsAtSameTime(newResource : Resource) : boolean
+    +resourceAlreadyExistsAtSameTime(newResource : Resource) : boolean
+    +startDateOrEndDateDuringPeriod(newResource : Resource) : boolean
+    -isDateInPeriod(date : Date, periodStartDate : Date, periodEndDate : Date) : boolean
+    +getProjectCode() : String
+    +getResourceEmail() : String
+    +getProjectRole() : String
+    +getProjectName() : String
+    +sameAccount(newResource : Resource) : boolean
+    +hasAccount(account : Account) : boolean
+    +hasAllocation() : boolean
+    +equals(object : Object) : boolean
+    +hashCode() : int
+}
+
+@enduml

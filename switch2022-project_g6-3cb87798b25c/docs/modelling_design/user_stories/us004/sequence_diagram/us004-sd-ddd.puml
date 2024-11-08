@@ -1,0 +1,46 @@
+@startuml
+
+skinparam sequenceMessageAlign center
+skinparam sequenceReferenceBackgroundColor white
+autonumber
+
+title US004 - As Administrator, I want to get a list of all user accounts and their status
+
+actor ":Administrator" as Administrator #white
+participant ":ListAccountUI" as UI #white
+participant "<<Controller>>\n :ListAccount\nController" as Controller #white
+participant "<<Service>>\n :AccountService" as Service #white
+participant "<<Repository>>\n:AccountRepository" as Repository #white
+participant "createUserAccount\n AndStatusListAssembler" as assembler #white
+participant "accountAndStatusDTO\n:AccountAndStatusDTO" as accountAndStatusDTO #white
+participant "accountAndStatusDTOList\n:List<accountAndStatusDTO>" as accountAndStatusDTOList #white
+
+
+Administrator -> UI++: request list of all users \n accounts and their status
+UI-> Controller++: createAccountAndStatusList()
+Controller -> Service++: createAccountAndStatusList()
+Service -> Repository++: findAll()
+return accountList
+Service -> assembler++: createAccountAndStatusList(accountList)
+
+create accountAndStatusDTOList
+    assembler -> accountAndStatusDTOList: create()
+
+    loop for each account in iterable
+
+    assembler -> assembler: accountAndStatusDTO = generateDTO(accountAndStatus)
+    activate assembler
+    create accountAndStatusDTO
+    assembler --> accountAndStatusDTO: create()
+    deactivate assembler
+
+    assembler -> accountAndStatusDTOList: add(accountAndStatusDTO)
+    activate accountAndStatusDTOList
+    deactivate accountAndStatusDTOList
+end
+
+return list of all user accounts and status
+return list of all user accounts and status
+return list of all user accounts and status
+return list of all user accounts and status
+@enduml

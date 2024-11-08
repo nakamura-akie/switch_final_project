@@ -1,0 +1,33 @@
+@startmindmap
+
+title US032 - As a Team Member, I want to add a user story in the product backlog to the sprint backlog, during the sprint planning ceremony in the web UI
+top to bottom direction
+
+* <&globe>Application
+** Navbar
+*** NavItem
+** MainRoute
+*** Projects
+**** ProjectPage
+***** ProjectPageTable\n(Project Info)
+***** Button\n(Back)
+***** Button\n(Product Backlog)
+***** Button\n(Resources)
+***** Button \n(Sprints)
+****** Sprint Page
+******* Button\n(Create Sprint)
+******* Button\n(All Sprints)
+******* CurrentlyOpenSprint
+******* Button\n(Close Sprint)
+******* Button\n(Add User Story)
+******** UserStoryModal\n(Select User Story)
+********* Button\n(Cancel)
+********* SearchBox
+********** Button\n(Clear)
+********** Button\n(Add)
+******* Button\n(Back)
+******* ScrumBoard
+******** UserStoryBox
+
+
+@endmindmap

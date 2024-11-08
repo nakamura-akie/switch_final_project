@@ -1,0 +1,14 @@
+@startuml
+'Attribute syntax: <visibility> <name> : <type> <multiplicity> = <default>
+'Method syntax: <visibility> <name (parameter-list)> : <return-type> - For simplicity the type of the parameter-list is not specified
+
+class ProductBacklogController<<Controller>> {
+    - projectService : ProjectService {readOnly}
+    - userStoryService : UserStoryService {readOnly}
+
+    + ProductBacklogController(projectService : ProjectService, userStoryService : UserStoryService)
+    + createUserStoryList(projectCodeValue : String) : ResponseEntity<Object>
+    + findUserStoryByID(projectCode : ProjectCode, userStoryCode : UserStoryCode) : ResponseEntity<Object>
+}
+
+@enduml

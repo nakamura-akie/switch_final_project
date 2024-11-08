@@ -1,0 +1,15 @@
+@startuml
+
+class ProjectTypologyService {
+
+-projectTypologyRepository : Repository
+-projectTypologyFactory : ProjectTypologyFactory
+
++ProjectTypologyService(projectTypologyRepository : Repository, \nprojectTypologyFactory : ProjectTypologyFactory)
+-createInitialProjectTypologies()
++createProjectTypology(projectTypologyValue : String) : boolean
+
+
+}
+
+@enduml

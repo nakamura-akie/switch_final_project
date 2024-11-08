@@ -1,0 +1,34 @@
+@startuml
+
+title US034 -   As Project Manager, I want to close the current/active sprint of a project in the web UI
+package "src" {
+    package "routes" {
+    }
+
+    package "pages" {
+    }
+
+    package "components" {
+
+        package "sprint" {
+        }
+
+    }
+
+    package "context" {
+    }
+    package "services" {
+        }
+}
+
+src ..> components
+src ..> routes
+routes ..> pages
+pages ..> components
+pages ..> sprint
+sprint ..> context
+pages ..> context
+context ..> services
+
+
+@enduml

@@ -1,0 +1,14 @@
+@startuml
+
+class ProjectTypology <<AggregateRoot>>{
+-projectTypologyName : ProjectTypologyName
+
++ProjectTypology(projectTypologyName : ProjectTypologyName)
++getProjectTypologyName() : String
++identity() : ProjectTypologyName
++sameAs(object : Object) : boolean
++equals(o : Object) : boolean
++hashCode() : int
+}
+
+@enduml

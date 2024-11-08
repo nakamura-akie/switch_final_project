@@ -1,0 +1,18 @@
+@startuml
+
+class TaxIdentificationNumberInternationalImplementation <<DomainID>> {
+
+    - internationalTaxIdentificationNumberValue : String
+
+    +TaxIdentificationNumberInternationalImplementation(taxIdentificationNumberValue : String)
+    -validateValue(taxIdentificationNumberValue : String)
+    +taxIdentificationNumberValidation(tinToValidate : String) : boolean
+    -taxIdentificationNumberHasCorrectLength(tinToValidate : String) : boolean {static}
+    -taxIdentificationNumberOnlyContainsDigits(tinToValidate : String) : boolean {static}
+    + getTaxIdentificationNumber() : String
+    +equals(o : Object) : boolean
+    +hashCode() : int
+
+}
+
+@enduml

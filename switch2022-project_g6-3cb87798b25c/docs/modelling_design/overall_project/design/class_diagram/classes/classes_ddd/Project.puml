@@ -1,0 +1,52 @@
+@startuml
+
+class Project<<AggregateRoot>>{
+    - projectCode : ProjectCode {readOnly}
+    - projectName : ProjectName {readOnly}
+    - description : Description {readOnly}
+    - customerID : TaxIdentificationNumber {readOnly}
+    - businessSectorName : BusinessSectorName {readOnly}
+    - projectTypologyName : ProjectTypologyName {readOnly}
+    - productBacklog : ProductBacklog {readOnly}
+    - projectStatus : ProjectStatus {readOnly}
+    - statusHistory : StatusHistory
+    - sprintDuration : SprintDuration
+    - numberPlannedSprints : NumberOfPlannedSprints
+    - budget : Budget
+    - period : TimePeriod
+
+    # Project(projectCode : ProjectCode, projectName : ProjectName, description : Description, \n customerID : TaxIdentificationNumber, businessSectorName : BusinessSectorName, \n projectTypologyName : ProjectTypologyName, productBacklog : ProductBacklog, \n  projectStatus : ProjectStatus,  statusHistory : StatusHistory) : Project
+    - notNull(parameter : Object, message : String) {static}
+    + addUserStoryToProductBacklog(userStoryID : UserStoryID) : boolean
+    + removeUserStoryFromProductBacklog(userStoryID : UserStoryID) : boolean
+    + changeStatus(status : ProjectStatus)
+    + importStatusHistory(statusHistoryMap : Map<ProjectStatus, LocalDate>)
+    + isDateBeforeProjectStartDate(date : LocalDate) : boolean
+    + isDateAfterProjectStartDate(date : LocalDate) : boolean
+    - isPeriodNull() : boolean
+    + getProjectCreationDate() : LocalDate
+    + getUserStoryPriorityList() : UserStoryID [0..*]
+    + getProjectCode() : ProjectCode
+    + getProjectName() : ProjectName
+    + getDescription() : Description
+    + getCustomerID() : TaxIdentificationNumber
+    + getProjectTypologyName() : ProjectTypologyName
+    + getBusinessSectorName() : BusinessSectorName
+    + getProductBacklog() : ProductBacklog
+    + getProjectStatus() : Status
+    + getStatusHistory() : StatusHistory
+    + getSprintDuration() : Optional<SprintDuration>
+    + getNumberPlannedSprints() : Optional<NumberPlannedSprints>
+    + getBudget() : Optional<Budget>
+    + getPeriod() : Optional<TimePeriod>
+    + setSprintDuration(duration : SprintDuration)
+    + setNumberPlannedSprints(numberPlannedSprints : NumberPlannedSprints)
+    + setBudget(budget : Budget)
+    + setPeriod(period : TimePeriod)
+    + identity() : ProjectCode
+    + sameAs(object : Object) : boolean
+    + equals (o : Object) : boolean
+    + hashCode() : int
+}
+
+@enduml

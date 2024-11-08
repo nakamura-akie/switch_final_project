@@ -1,0 +1,21 @@
+@startuml
+'Attribute syntax: <visibility> <name> : <type> <multiplicity> = <default>
+'Method syntax: <visibility> <name (parameter-list)> : <return-type> - For simplicity the type of the parameter-list is not specified
+
+class ResourceContainer {
+    -resourceList : Resource [1..*] {readOnly}
+
+    +allocateRoleInProject(account : Account, projectRole : ProjectRole, project : Project, \nstartDate : Date, endDate : Date, percentageOfAllocation : int, costPerHour : double) : boolean
+    -addResource(newResource : Resource, percentageOfAllocation : int) : boolean
+    -isSumOfPercentageOfAllocationBellowOneHundred(newResource : Resource, percentageOfAllocation : int) : boolean
+    +allocateUniqueRoleToProject(account : Account, projectRole : ProjectRole, project : Project, \nstartDate : Date, endDate : Date, percentageOfAllocation : int, costPerHour : double) : boolean
+    -accountRoleAndProjectDoesntExist(account : Account, projectRole : ProjectRole, project : Project) : boolean
+    -addUniqueRoleToResources(newResource : Resource, percentageOfAllocation : int) : boolean
+    -uniqueRoleAlreadyExistsInProjectAtThatTime(newResource : Resource) : boolean
+    -resourceAlreadyExistAtThatTime(newResource : Resource) : boolean
+    -isProfileUser(account : Account) : boolean
+    +getIterator() : Iterator
+    +filterByAccountWithAllocation(account : Account) : Iterator
+    }
+
+@enduml

@@ -1,0 +1,13 @@
+@startuml
+'Attribute syntax: <visibility> <name> : <type> <multiplicity> = <default>
+'Method syntax: <visibility> <name (parameter-list)> : <return-type> - For simplicity the type of the parameter-list is not specified
+
+class ListUserProjectsController {
+    - containers : Containers {readOnly}
+    - clock : Clock {readOnly}
+
+    + ListUserProjectsController(containers : Containers, clock : Clock)
+    + userProjectsList(accountEmail : String) : UserProjectDTO [1..*]
+}
+
+@enduml

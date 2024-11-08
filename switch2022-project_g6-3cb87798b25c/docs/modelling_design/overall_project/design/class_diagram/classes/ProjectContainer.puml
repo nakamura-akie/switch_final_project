@@ -1,0 +1,16 @@
+@startuml
+'Attribute syntax: <visibility> <name> : <type> <multiplicity> = <default>
+'Method syntax: <visibility> <name (parameter-list)> : <return-type> - For simplicity the type of the parameter-list is not specified
+
+class ProjectContainer {
+    -projectList : Project [1..*] {readOnly}
+
+    +createProject(businessSector : BusinessSector, projectTypology : ProjectTypology, \ncustomer : Customer, projectStatus : ProjectStatus, projectCode : String, \nprojectName : String, projectDescription : String) : boolean
+    -addProject(project : Project)
+    +getProject(projectCode : String) : Project
+    +getMaybeProject(projectCode : String) : Project {Optional}
+    +getIterator() : Iterator
+    +getUserStoryFromProductBacklog(projectCode : String, usNumber : String) : UserStory
+}
+
+@enduml

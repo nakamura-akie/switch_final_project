@@ -1,0 +1,17 @@
+@startuml
+title US028 - As Manager, I want to associate a user as Team Member of a project in the web UI.\nUS029 - As Manager, I want to define the PO of a project in the web UI.\nUS030 - As Manager, I want to define the SM of a project in the web UI.
+
+autonumber
+skinparam sequenceMessageAlign center
+skinparam actorBackgroundColor white
+skinparam participantBackgroundColor white
+skinparam sequenceReferenceBackgroundColor white
+skinparam sequenceReferenceHeaderBackgroundColor white
+skinparam sequenceGroupBackgroundColor white
+
+actor "Manager" as m
+participant "<<context(c4)>>\n:Scrumy" as system
+
+m -> system++ : ask to add resource to a project
+return success
+@enduml

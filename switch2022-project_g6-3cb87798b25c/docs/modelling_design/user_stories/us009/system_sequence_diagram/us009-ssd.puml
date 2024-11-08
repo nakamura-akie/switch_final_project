@@ -1,0 +1,16 @@
+@startuml
+
+skinparam sequenceMessageAlign center
+autonumber
+
+title US009 - As Administrator, I want to add a customer
+
+actor ":Administrator" as Admin #white
+participant ":System" as Sys #white
+
+Admin -> Sys: requests to add customer
+Sys --> Admin: asks for details
+Admin -> Sys: fills details (taxIdentificationNumberValue, \ncustomerNameValue, countryValue)
+Sys --> Admin: success/failure
+
+@enduml

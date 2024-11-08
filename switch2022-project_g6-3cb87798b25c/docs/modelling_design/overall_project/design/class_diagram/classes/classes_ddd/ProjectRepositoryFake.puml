@@ -1,0 +1,14 @@
+@startuml
+
+class ProjectRepositoryFake<<Repository>> {
+    - projectList : Project [0..*] {readOnly} {static}
+
+    + save(project : Project) : Project
+    + findAll() : Iterable<Project>
+    + findById(projectCode : ProjectCode) : Optional<Project>
+    + existsById(projectCode : ProjectCode) : boolean
+    + deleteAll()
+    + deleteById (id : ProjectCode)
+}
+
+@enduml

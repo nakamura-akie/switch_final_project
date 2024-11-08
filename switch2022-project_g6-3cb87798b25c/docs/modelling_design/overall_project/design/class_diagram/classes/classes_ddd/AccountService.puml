@@ -1,0 +1,18 @@
+@startuml
+
+class AccountService {
+
+    -accountFactory : AccountFactory
+    -profileRepository : ProfileRepository
+    -accountRepository : AccountRepository
+
+    +AccountService(accountRepository : AccountRepository, profileRepository : ProfileRepository,
+    accountFactory : AccountFactory)
+    +createAccount(accountNameValue : String, emailValue : String,\n photo : Image, phoneNumberValue : int) : boolean
+    +changeProfileOfUserAccount(accountEmail : String,\nprofileName : String) : boolean
+    -getAccount(id : Email) : Account
+    +changeAccountStatus(emailValue : String, accountStatusValue : boolean) : boolean
+    +createAccountAndStatusList() : AccountAndStatusDTO [0..*]
+}
+
+@enduml

@@ -1,0 +1,37 @@
+@startuml
+
+skinparam linetype polyline
+
+title US035 - As Project Manager, I want the Product Backlog to be updated when a sprint is closed.
+
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/Repository.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectRepositoryFake.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectRepositoryPersistence.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectRepository.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectRepositoryJPA.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectService.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectDomainDataAssembler.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStoryID.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectCode.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/Project.puml
+
+ProjectService --> Repository : projectRepository
+ProjectService ..> Project
+ProjectService ..> UserStoryID
+ProjectService ..> ProjectCode
+
+Repository <|-- ProjectRepository
+
+ProjectRepository <|.. ProjectRepositoryFake
+ProjectRepository <|.. ProjectRepositoryPersistence
+
+ProjectRepositoryFake "0" --> "*" Project : projectList
+
+ProjectRepositoryPersistence ..> Project
+ProjectRepositoryPersistence --> ProjectDomainDataAssembler : projectDomainDataAssembler
+ProjectRepositoryPersistence --> ProjectRepositoryJPA : projectRepositoryJPA
+
+ProjectDomainDataAssembler ..> Project
+
+
+@enduml

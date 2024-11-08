@@ -1,0 +1,10 @@
+@startuml
+
+class CreateBusinessSectorController {
+    - businessSectorService : BusinessSectorService {readOnly}
+
+    + CreateBusinessSectorController(businessSectorService : BusinessSectorService)
+    + createBusinessSector(businessSectorNameValue : String) : boolean
+}
+
+@enduml

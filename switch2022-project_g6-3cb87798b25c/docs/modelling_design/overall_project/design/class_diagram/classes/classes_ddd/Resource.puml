@@ -1,0 +1,23 @@
+@startuml
+
+class Resource <<Aggregate Root>> {
+-resourceID : ResourceID
+-roleInProject : ProjectRole
+-percentageOfAllocation : PercentageOfAllocation
+-costPerHour : CostPerHour
+
+#Resource(resourceID : ResourceID, roleInProject : ProjectRole, percentageOfAllocation : PercentageOfAllocation, costPerHour : CostPerHour)
++hasAccount(email : Email) : boolean
++getPercentageOfAllocation() : PercentageOfAllocation
++isPeriodOverlapping(newResourcePeriodOfAllocation : TimePeriod) : boolean
++isAllocated(searchDate : LocalDate) : boolean
++getRoleInProject() : ProjectRole
++getCostPerHour() : CostPerHour
++identity() : ResourceID
++sameAs(object : Object) : boolean
++equals(o : Object) : boolean
++hashCode() : int
++resourceVerificationOfDate(date : LocalDate) : boolean
+}
+
+@enduml

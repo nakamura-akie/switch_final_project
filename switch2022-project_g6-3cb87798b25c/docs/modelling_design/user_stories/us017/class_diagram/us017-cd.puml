@@ -1,0 +1,74 @@
+@startuml
+skinparam linetype polyline
+
+title US017 - As a Product Owner, I want to create a user story and add it to the Product Backlog
+
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStoryDomainDataAssembler.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStoryRepositoryJPA.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStoryController.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStoryRepositoryFake.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStoryRepository.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStoryRepositoryPersistence.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStoryService.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStory.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStoryFactory.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStoryFactoryImplementation.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/Description.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectCode.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStoryCode.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStoryID.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStoryStatus.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/Repository.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/NewUserStoryDTO.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStoryAssembler.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStoryDTO.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStoryJPA.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/UserStoryID.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/Effort.puml
+
+UserStoryController ..> NewUserStoryDTO
+UserStoryController --> UserStoryService : userStoryService
+UserStoryController ..> UserStoryDTO
+
+UserStoryService ..> NewUserStoryDTO
+UserStoryService ..> ProjectCode
+UserStoryService ..> UserStoryCode
+UserStoryService ..> Description
+UserStoryService ..> UserStoryID
+UserStoryService --> Repository : projectRepository
+UserStoryService --> UserStoryRepository : userStoryRepository
+UserStoryService --> UserStoryFactory : userStoryFactory
+UserStoryService ..> UserStory
+UserStoryService ..> UserStoryAssembler
+UserStoryService ..> UserStoryDTO
+
+Repository <|-- UserStoryRepository
+UserStoryRepository <|.. UserStoryRepositoryFake
+UserStoryRepository <|.. UserStoryRepositoryPersistence
+UserStoryRepositoryPersistence ..> UserStoryJPA
+UserStoryRepositoryPersistence --> UserStoryRepositoryJPA : jpaRepository
+UserStoryRepositoryPersistence --> UserStoryDomainDataAssembler : jpaAssembler
+UserStoryRepositoryPersistence ..> UserStory
+UserStoryRepositoryFake "1" *--> "*" UserStory : userStoryList
+
+UserStoryDomainDataAssembler --> UserStoryFactory : userStoryFactory
+UserStoryDomainDataAssembler ..> UserStoryJPA
+UserStoryDomainDataAssembler ..> UserStory
+
+UserStoryFactory <|.. UserStoryFactoryImplementation
+UserStoryFactoryImplementation ..> UserStory
+UserStoryFactoryImplementation ..> UserStoryID
+UserStoryFactoryImplementation ..> Description
+
+UserStoryAssembler ..> UserStoryDTO
+UserStoryAssembler ..> UserStory
+
+UserStory --> UserStoryID : userStoryID
+UserStory --> Description : description
+UserStory --> UserStoryStatus : userStoryStatus
+UserStory --> Effort : effort
+
+UserStoryID --> UserStoryCode : userStoryCode
+UserStoryID --> ProjectCode : projectCode
+
+@enduml

@@ -1,0 +1,28 @@
+@startuml
+'Attribute syntax: <visibility> <name> : <type> <multiplicity> = <default>
+'Method syntax: <visibility> <name (parameter-list)> : <return-type> - For simplicity the type of the parameter-list is not specified
+
+skinparam linetype polyline
+
+title US005 - As Administrator, I want to inactivate a user account
+
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/InactivateAccountController.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/AccountService.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/Account.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/AccountRepository.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/Repository.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/Email.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/AccountStatus.puml
+
+' Controller Layer
+InactivateAccountController ..> AccountService
+
+' Collections Layer
+
+AccountService --> Repository : accountRepository
+Repository <|.. AccountRepository
+AccountService ..> Account
+AccountService ..> Email
+AccountService ..> AccountStatus
+
+@enduml

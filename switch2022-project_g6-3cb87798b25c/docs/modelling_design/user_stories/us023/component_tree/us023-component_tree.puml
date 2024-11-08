@@ -1,0 +1,34 @@
+@startmindmap
+
+title US023 - As an Administrator, I want to create a Project in the web UI.
+
+top to bottom direction
+
+* <&globe>App
+** Navbar
+*** NavItem
+** MainRoute
+*** Projects
+**** SuccessMessageModal
+***** Backdrop
+***** ModalOverlay
+****** Card
+******* Button\n(Okay)
+**** Header
+**** ProjectForm
+***** Button\n(Back)
+***** Button\n(Add project)
+***** Button\n(Reset)
+***** ConfirmProjectModal
+****** Backdrop
+****** ModalOverlay
+******* Card
+******** Button\n(Save)
+******** Button\n(Cancel)
+***** ErrorProjectModal
+****** Backdrop
+****** ModalOverlay
+******* Card
+******** Button\n(Okay)
+
+@endmindmap

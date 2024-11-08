@@ -1,0 +1,33 @@
+@startmindmap
+'https://plantuml.com/mindmap-diagram
+
+title US025 - As a Product Owner, I want to create a user story and add it to the Product Backlog using the web UI
+top to bottom direction
+
+* <&globe>Application
+** Navbar
+*** NavItem
+** Route
+*** Home
+*** Projects
+**** Button\n(Create new Project)
+**** Table   \n(List of Projects)
+***** TableHeaderProjects
+***** TableBodyProjects
+****** Button\n(View Project)
+******* ProjectPage
+******** ProjectPageTable\n(Project Info)
+******** Button\n(Back)
+******** Button\n(View Product Backlog)
+********* ProductBacklogTable\n(List of User Stories)
+********* Button\n(Back)
+********* Button\n(Create User Story)
+********** User Story Form
+*********** Button\n(Back)
+*********** Button\n(Add to Product Backlog)
+
+*********** Button\n(Cancel)
+*********** Button\n(Confirm)
+*********** Button\n(Reset)
+
+@endmindmap

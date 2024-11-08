@@ -1,0 +1,13 @@
+@startuml
+
+skinparam sequenceMessageAlign center
+autonumber
+title: US034 - As Project Manager, I want to close the current/active sprint of a project in the web UI
+actor ":Project Manager" as ProjectManager #white
+participant ":System" as System #white
+
+ProjectManager -> System: requests to close a sprint
+
+ProjectManager <-- System: successful/unsuccessful
+
+@enduml

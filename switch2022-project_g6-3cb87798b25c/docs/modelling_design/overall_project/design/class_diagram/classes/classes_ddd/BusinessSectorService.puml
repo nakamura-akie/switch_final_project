@@ -1,0 +1,12 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+class BusinessSectorService {
+    - businessSectorRepository : Repository {readOnly}
+    - businessSectorFactory : BusinessSectorFactory {readOnly}
+
+    + BusinessSectorService(businessSectorRepository : Repository,\n businessSectorFactory : BusinessSectorFactory)
+    + createBusinessSector(businessSectorNameValue : String) : boolean
+}
+
+@enduml

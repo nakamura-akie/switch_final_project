@@ -1,0 +1,14 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class NumberPlannedSprints <<ValueObject>> {
+    - numberOfPlannedSprintsValue : Integer {readOnly}
+
+    + NumberPlannedSprints(numberOfPlannedSprintsValue : int)
+    - validateValue(numberPlannedSprintsValue : int) {static}
+    + getNumberOfPlannedSprints() : Integer
+    + equals(o : Object) : boolean
+    + hashCode() : int
+}
+
+@enduml

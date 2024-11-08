@@ -1,0 +1,8 @@
+@startuml
+
+  class ProjectByResourceAssembler {
+     - ProjectByResourceAssembler()
+     + createProjectByResourceList(projectList: List<Project>): List<ProjectByResourceDTO>
+     + generateProjectByResourceDTO(project: Project): ProjectByResourceDTO
+   }
+@enduml

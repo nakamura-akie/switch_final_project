@@ -1,0 +1,39 @@
+@startuml
+'Attribute syntax: <visibility> <name> : <type> <multiplicity> = <default>
+'Method syntax: <visibility> <name (parameter-list)> : <return-type> - For simplicity the type of the parameter-list is not specified
+
+class NewProjectDTO {
+    - projectCode : ProjectCode
+    - projectName : ProjectName
+    - description : Description
+    - customerID : TaxIdentificationNumberPortugalImplementation
+    - businessSectorName : BusinessSectorName
+    - projectTypologyName : ProjectTypologyName
+    - sprintDuration : SprintDuration
+    - numberPlannedSprints : NumberPlannedSprints
+    - budget : Budget
+    - period : TimePeriod
+
+    + getProjectCode(): ProjectCode
+    + setProjectCode(projectCode : ProjectCode): void
+    + getProjectName(): ProjectName
+    + setProjectName(projectName : ProjectName): void
+    + getDescription(): Description
+    + setDescription(description : Description): void
+    + getCustomerID(): TaxIdentificationNumberPortugalImplementation
+    + setCustomerID(customerID : TaxIdentificationNumberPortugalImplementation): void
+    + getBusinessSectorName(): BusinessSectorName
+    + setBusinessSectorName(businessSectorName : BusinessSectorName): void
+    + getProjectTypologyName(): ProjectTypologyName
+    + setProjectTypologyName(projectTypologyName : ProjectTypologyName)
+    + getSprintDuration(): SprintDuration
+    + setSprintDuration(sprintDuration : SprintDuration)
+    + getNumberPlannedSprints(): NumberPlannedSprints
+    + setNumberPlannedSprints(numberPlannedSprints : NumberPlannedSprints): void
+    + getBudget(): Budget
+    + setBudget(budget : Budget): void
+    + getPeriod(): TimePeriod
+    + setPeriod(period : TimePeriod): void
+}
+
+@enduml

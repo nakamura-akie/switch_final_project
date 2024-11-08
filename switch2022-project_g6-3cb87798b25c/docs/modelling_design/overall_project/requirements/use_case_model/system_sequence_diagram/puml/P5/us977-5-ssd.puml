@@ -1,0 +1,12 @@
+@startuml
+skinparam SequenceMessageAlign center
+autonumber
+actor “User” as User
+participant ":System" as System
+
+User -> System: asks for a KPI report
+System --> System: validates profile
+System --> System: generates report
+User <-- System: returns KPI report
+
+@enduml

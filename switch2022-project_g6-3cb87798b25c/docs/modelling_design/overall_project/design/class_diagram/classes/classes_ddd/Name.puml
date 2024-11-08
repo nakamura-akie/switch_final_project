@@ -1,0 +1,13 @@
+@startuml
+
+class Name <<ValueObject>> {
+    -name : String
+
+    +Name(name : String)
+    -isValid(name : String) : boolean
+    +equals(object : Object) : boolean
+    +hashCode() : int
+    +toString() : String
+}
+
+@enduml

@@ -1,0 +1,13 @@
+@startuml
+
+class AccountName<<ValueObject>> {
+
+    -name : String {readOnly}
+    +AccountName(name : String)
+    +toString() : String
+    +equals(o : Object) : boolean
+    +hashCode() : int
+}
+
+
+@enduml

@@ -1,0 +1,20 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class ResourceID <<Domain ID>> <<Value Object>>{
+-resourceEmail : Email
+-projectCode : ProjectCode
+-periodOfAllocation : TimePeriod
+
++ResourceID(resourceEmail : Email, projectCode : ProjectCode, periodOfAllocation : TimePeriod)
++getPeriodOfAllocation() : TimePeriod
++getResourceEmail() : Email
++getProjectCode() : ProjectCode
++hasEmail(email : Email) : boolean
++equals(o : Object) : boolean
++hashCode() : int
++toString() : String
+
+}
+
+@enduml

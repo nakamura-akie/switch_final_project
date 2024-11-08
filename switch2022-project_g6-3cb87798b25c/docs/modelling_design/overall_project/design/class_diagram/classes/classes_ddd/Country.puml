@@ -1,0 +1,15 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Country <<ValueObject>> {
+
+    - countryName : String {readOnly}
+
+    + Coutntry(countryName : String)
+    + getCountryName() : String
+    + equals(o : Object) : boolean
+    + hashCode() : int
+
+}
+
+@enduml

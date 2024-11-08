@@ -1,0 +1,41 @@
+@startuml
+
+title US036 - As a PO/SM/Team Member, I want to consult the Sprint Backlog of a chosen sprint in the web UI.
+
+package "src" {
+    package "routes" {
+    }
+
+    package "pages" {
+    }
+
+    package "components" {
+
+        package "sprintBacklog" {
+        }
+
+        package "sprint" {
+                }
+
+    }
+
+    package "context" {
+    }
+    package "services" {
+        }
+}
+
+src ..> components
+src ..> routes
+routes ..> pages
+pages ..> components
+pages ..> sprintBacklog
+pages ..> sprint
+sprint ..> sprintBacklog
+sprintBacklog ..> context
+sprint ..> context
+pages ..> context
+context ..> services
+
+
+@enduml

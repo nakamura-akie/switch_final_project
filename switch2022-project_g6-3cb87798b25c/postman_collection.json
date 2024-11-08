@@ -1,0 +1,3548 @@
+{
+	"info": {
+		"_postman_id": "18dec2ae-20ed-4e1b-be80-4cf8a018e05c",
+		"name": "Scrumy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27650106"
+	},
+	"item": [
+		{
+			"name": "Projects",
+			"item": [
+				{
+					"name": "Create Project Success - All data",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function() {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Assert body excluding status history\", function() {",
+									"    const body = pm.response.json();",
+									"",
+									"    const currentDate = new Date().toISOString().split(\"T\")[0];",
+									"",
+									"    const expected = {",
+									"        projectCode: \"P001\",",
+									"        projectName: \"Project name\",",
+									"        description: \"Project description\",",
+									"        customerID: \"211267490\",",
+									"        businessSectorName: \"Technology\",",
+									"        projectTypologyName: \"Time and Materials\",",
+									"        productBacklog: [],",
+									"        status: \"PLANNED\",",
+									"        statusHistory: {",
+									"            PLANNED: currentDate",
+									"        },",
+									"        sprintDuration: 1,",
+									"        numberPlannedSprints: 10,",
+									"        budget: 1000.0,",
+									"        startDate: \"2023-05-24\",",
+									"        endDate: \"2023-12-24\",",
+									"        _links: {",
+									"            self: {",
+									"                href: \"http://localhost:8080/projects/P001\"",
+									"            },",
+									"            projects: {",
+									"                href: \"http://localhost:8080/projects\"",
+									"            }",
+									"        }",
+									"    }",
+									"",
+									"    pm.expect(body).to.eql(expected);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"projectCode\": \"P001\",\n    \"projectName\": \"Project name\",\n    \"description\": \"Project description\",\n    \"customerID\": \"211267490\",\n    \"businessSectorName\": \"Technology\",\n    \"projectTypologyName\": \"Time and Materials\",\n    \"sprintDuration\": 1,\n    \"numberPlannedSprints\": 10,\n    \"budget\": 1000.0,\n    \"startDate\": \"2023-05-24\",\n    \"endDate\": \"2023-12-24\"\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/projects",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"projects"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Project Success - Only required data",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function() {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Assert body\", function() {\r",
+									"    const body = pm.response.json();\r",
+									"\r",
+									"    const currentDate = new Date().toISOString().split(\"T\")[0];\r",
+									"\r",
+									"    const expected = {\r",
+									"        projectCode: \"P77\",\r",
+									"        projectName: \"Project name\",\r",
+									"        description: \"Project description\",\r",
+									"        customerID: \"211267490\",\r",
+									"        businessSectorName: \"Technology\",\r",
+									"        projectTypologyName: \"Time and Materials\",\r",
+									"        productBacklog: [],\r",
+									"        status: \"PLANNED\",\r",
+									"        statusHistory: {\r",
+									"            \"PLANNED\": currentDate\r",
+									"        },\r",
+									"        sprintDuration: null,\r",
+									"        numberPlannedSprints: null,\r",
+									"        budget: null,\r",
+									"        startDate: null,\r",
+									"        endDate: null,\r",
+									"        _links: {\r",
+									"            self: {\r",
+									"                href: \"http://localhost:8080/projects/P77\"\r",
+									"            },\r",
+									"            projects: {\r",
+									"                href: \"http://localhost:8080/projects\"\r",
+									"            }\r",
+									"        }\r",
+									"    }\r",
+									"\r",
+									"    pm.expect(body).to.eql(expected);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"projectCode\": \"P77\",\n    \"projectName\": \"Project name\",\n    \"description\": \"Project description\",\n    \"customerID\": \"211267490\",\n    \"businessSectorName\": \"Technology\",\n    \"projectTypologyName\": \"Time and Materials\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/projects",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"projects"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Project Unsuccess - Same project code",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 409\", function () {",
+									"    pm.response.to.have.status(409);",
+									"});",
+									"",
+									"pm.test(\"Assert body\", function() {",
+									"    const body = pm.response.json();",
+									"",
+									"    const expected = {",
+									"        message: \"Project already exists\"",
+									"    }",
+									"",
+									"    pm.expect(body).to.eql(expected);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"projectCode\": \"P001\",\n    \"projectName\": \"Project name\",\n    \"description\": \"Project description\",\n    \"customerID\": \"211267490\",\n    \"businessSectorName\": \"Technology\",\n    \"projectTypologyName\": \"Time and Materials\",\n    \"sprintDuration\": 1,\n    \"numberPlannedSprints\": 10,\n    \"budget\": 1000.0,\n    \"period\": {\n        \"startDate\": \"2023-05-24\",\n        \"endDate\": \"2023-12-24\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/projects",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"projects"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Project Unsuccess - Null project code",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {",
+									"    pm.response.to.have.status(422);",
+									"});",
+									"",
+									"pm.test(\"Assert body\", function() {",
+									"    const body = pm.response.json();",
+									"",
+									"    const expected = {",
+									"        message: \"Project Code cannot be null\"",
+									"    }",
+									"",
+									"    pm.expect(body).to.eql(expected);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"projectCode\": null,\n    \"projectName\": \"Project name\",\n    \"description\": \"Project description\",\n    \"customerID\": \"211267490\",\n    \"businessSectorName\": \"Technology\",\n    \"projectTypologyName\": \"Time and Materials\",\n    \"sprintDuration\": 1,\n    \"numberPlannedSprints\": 10,\n    \"budget\": 1000.0,\n    \"period\": {\n        \"startDate\": \"2023-05-24\",\n        \"endDate\": \"2023-12-24\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/projects",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"projects"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Project Unsuccess - Customer does not exist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 409\", function () {",
+									"    pm.response.to.have.status(409);",
+									"});",
+									"",
+									"pm.test(\"Assert body\", function() {",
+									"    const body = pm.response.json();",
+									"",
+									"    const expected = {",
+									"        message: \"Customer doesn't exist\"",
+									"    }",
+									"",
+									"    pm.expect(body).to.eql(expected);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"projectCode\": \"P11\",\n    \"projectName\": \"Project name\",\n    \"description\": \"Project description\",\n    \"customerID\": \"123456789\",\n    \"businessSectorName\": \"Technology\",\n    \"projectTypologyName\": \"Time and Materials\",\n    \"sprintDuration\": 1,\n    \"numberPlannedSprints\": 10,\n    \"budget\": 1000.0,\n    \"period\": {\n        \"startDate\": \"2023-05-24\",\n        \"endDate\": \"2023-12-24\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/projects",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"projects"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Project Unsuccess - Business Sector does not exist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 409\", function () {",
+									"    pm.response.to.have.status(409);",
+									"});",
+									"",
+									"pm.test(\"Assert body\", function() {",
+									"    const body = pm.response.json();",
+									"",
+									"    const expected = {",
+									"        message: \"Business Sector doesn't exist\"",
+									"    }",
+									"",
+									"    pm.expect(body).to.eql(expected);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"projectCode\": \"P11\",\n    \"projectName\": \"Project name\",\n    \"description\": \"Project description\",\n    \"customerID\": \"211267490\",\n    \"businessSectorName\": \"I do not exist\",\n    \"projectTypologyName\": \"Time and Materials\",\n    \"sprintDuration\": 1,\n    \"numberPlannedSprints\": 10,\n    \"budget\": 1000.0,\n    \"period\": {\n        \"startDate\": \"2023-05-24\",\n        \"endDate\": \"2023-12-24\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/projects",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"projects"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Project Unsuccess - Project Typology does not exist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 409\", function () {",
+									"    pm.response.to.have.status(409);",
+									"});",
+									"",
+									"pm.test(\"Assert body\", function() {",
+									"    const body = pm.response.json();",
+									"",
+									"    const expected = {",
+									"        message: \"Project Typology doesn't exist\"",
+									"    }",
+									"",
+									"    pm.expect(body).to.eql(expected);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"projectCode\": \"P11\",\n    \"projectName\": \"Project name\",\n    \"description\": \"Project description\",\n    \"customerID\": \"211267490\",\n    \"businessSectorName\": \"Technology\",\n    \"projectTypologyName\": \"I do not exist\",\n    \"sprintDuration\": 1,\n    \"numberPlannedSprints\": 10,\n    \"budget\": 1000.0,\n    \"period\": {\n        \"startDate\": \"2023-05-24\",\n        \"endDate\": \"2023-12-24\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/projects",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"projects"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Project Success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Assert body\", function() {",
+									"    const body = pm.response.json();",
+									"",
+									"    const currentDate = new Date().toISOString().split(\"T\")[0];",
+									"",
+									"    const expected = {",
+									"        projectCode: \"A1\",",
+									"        projectName: \"Dummy 01\",",
+									"        description: \"Just a dummy project\",",
+									"        customerID: \"211267490\",",
+									"        businessSectorName: \"Technology\",",
+									"        projectTypologyName: \"Fixed-Cost\",",
+									"        productBacklog: [],",
+									"        status: \"CLOSED\",",
+									"        statusHistory: {",
+									"            \"INCEPTION\": \"2022-03-01\",",
+									"            \"CLOSED\": currentDate,",
+									"            \"CONSTRUCTION\": \"2022-04-26\",",
+									"            \"ELABORATION\": \"2022-03-22\",",
+									"            \"PLANNED\": \"2022-01-01\"",
+									"        },",
+									"        sprintDuration: 2,",
+									"        numberPlannedSprints: 8,",
+									"        budget: 150000.0,",
+									"        startDate: \"2022-03-01\",",
+									"        endDate: \"2022-08-31\",",
+									"        _links: {",
+									"            self: {",
+									"                href: \"http://localhost:8080/projects/A1\"",
+									"            },",
+									"            projects: {",
+									"                href: \"http://localhost:8080/projects\"",
+									"            }",
+									"        }",
+									"    }",
+									"",
+									"    pm.expect(body).to.eql(expected);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/projects/A1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"projects",
+								"A1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Project Unsucess",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"Assert body\", function() {",
+									"    const body = pm.response.json();",
+									"",
+									"    const currentDate = new Date().toISOString().split(\"T\")[0];",
+									"",
+									"    const expected = {",
+									"        message: \"Project doesn't exist\"",
+									"    }",
+									"",
+									"    pm.expect(body).to.eql(expected);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/projects/A9",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"projects",
+								"A9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Projects Success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Assert body\", function() {",
+									"    const body = pm.response.json();",
+									"",
+									"    const expected = {",
+									"    _embedded: {",
+									"        projectDTOList: [",
+									"            {",
+									"                projectCode: \"A1\",",
+									"                projectName: \"Dummy 01\",",
+									"                projectCustomer: \"211267490\",",
+									"                projectStatus: \"CLOSED\",",
+									"                _links: {",
+									"                    self: {",
+									"                        href: \"http://localhost:8080/projects/A1\"",
+									"                    },",
+									"                    projects: {",
+									"                        href: \"http://localhost:8080/projects\"",
+									"                    }",
+									"                }",
+									"            },",
+									"            {",
+									"                projectCode: \"A2\",",
+									"                projectName: \"Dummy 02\",",
+									"                projectCustomer: \"272983330\",",
+									"                projectStatus: \"ELABORATION\",",
+									"                _links: {",
+									"                    self: {",
+									"                        href: \"http://localhost:8080/projects/A2\"",
+									"                    },",
+									"                    projects: {",
+									"                        href: \"http://localhost:8080/projects\"",
+									"                    }",
+									"                }",
+									"            },",
+									"            {",
+									"                projectCode: \"666\",",
+									"                projectName: \"Inevitable Nightmare\",",
+									"                projectCustomer: \"235140236\",",
+									"                projectStatus: \"INCEPTION\",",
+									"                _links: {",
+									"                    self: {",
+									"                        href: \"http://localhost:8080/projects/666\"",
+									"                    },",
+									"                    projects: {",
+									"                        href: \"http://localhost:8080/projects\"",
+									"                    }",
+									"                }",
+									"            },",
+									"            {",
+									"                projectCode: \"P001\",",
+									"                projectName: \"Project name\",",
+									"                projectCustomer: \"211267490\",",
+									"                projectStatus: \"PLANNED\",",
+									"                _links: {",
+									"                    self: {",
+									"                        href: \"http://localhost:8080/projects/P001\"",
+									"                    },",
+									"                    projects: {",
+									"                        href: \"http://localhost:8080/projects\"",
+									"                    }",
+									"                }",
+									"            },",
+									"            {",
+									"                projectCode: \"P77\",",
+									"                projectName: \"Project name\",",
+									"                projectCustomer: \"211267490\",",
+									"                projectStatus: \"PLANNED\",",
+									"                _links: {",
+									"                    self: {",
+									"                        href: \"http://localhost:8080/projects/P77\"",
+									"                    },",
+									"                    projects: {",
+									"                        href: \"http://localhost:8080/projects\"",
+									"                    }",
+									"                }",
+									"            }",
+									"        ]",
+									"    },",
+									"    _links: {",
+									"        self: {",
+									"            href: \"http://localhost:8080/projects\"",
+									"        }",
+									"    }",
+									"}",
+									"",
+									"    pm.expect(body).to.eql(expected);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/projects",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"projects"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product Backlog Success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Assert body\", function() {",
+									"    const body = pm.response.json();",
+									"",
+									"    const expected = {",
+									"    _embedded: {",
+									"        userStoryDTOList: [",
+									"            {",
+									"                projectCode: {",
+									"                    projectCodeValue: \"A2\"",
+									"                },",
+									"                userStoryCode: {",
+									"                    userStoryCodeValue: \"US011\"",
+									"                },",
+									"                description: {",
+									"                    descriptionValue: \" A2 dummy 011\"",
+									"                },",
+									"                status: \"RUNNING\"",
+									"            },",
+									"            {",
+									"                projectCode: {",
+									"                    projectCodeValue: \"A2\"",
+									"                },",
+									"                userStoryCode: {",
+									"                    userStoryCodeValue: \"US012\"",
+									"                },",
+									"                description: {",
+									"                    descriptionValue: \" A2 dummy 012\"",
+									"                },",
+									"                status: \"OPEN\"",
+									"            },",
+									"            {",
+									"                projectCode: {",
+									"                    projectCodeValue: \"A2\"",
+									"                },",
+									"                userStoryCode: {",
+									"                    userStoryCodeValue: \"US013\"",
+									"                },",
+									"                description: {",
+									"                    descriptionValue: \" A2 dummy 013\"",
+									"                },",
+									"                status: \"RUNNING\"",
+									"            },",
+									"            {",
+									"                projectCode: {",
+									"                    projectCodeValue: \"A2\"",
+									"                },",
+									"                userStoryCode: {",
+									"                    userStoryCodeValue: \"US014\"",
+									"                },",
+									"                description: {",
+									"                    descriptionValue: \" A2 dummy 014\"",
+									"                },",
+									"                status: \"OPEN\"",
+									"            },",
+									"            {",
+									"                projectCode: {",
+									"                    projectCodeValue: \"A2\"",
+									"                },",
+									"                userStoryCode: {",
+									"                    userStoryCodeValue: \"US016\"",
+									"                },",
+									"                description: {",
+									"                    descriptionValue: \" A2 dummy 016\"",
+									"                },",
+									"                status: \"OPEN\"",
+									"            },",
+									"            {",
+									"                projectCode: {",
+									"                    projectCodeValue: \"A2\"",
+									"                },",
+									"                userStoryCode: {",
+									"                    userStoryCodeValue: \"US017\"",
+									"                },",
+									"                description: {",
+									"                    descriptionValue: \" A2 dummy 017\"",
+									"                },",
+									"                status: \"OPEN\"",
+									"            },",
+									"            {",
+									"                projectCode: {",
+									"                    projectCodeValue: \"A2\"",
+									"                },",
+									"                userStoryCode: {",
+									"                    userStoryCodeValue: \"US018\"",
+									"                },",
+									"                description: {",
+									"                    descriptionValue: \" A2 dummy 018\"",
+									"                },",
+									"                status: \"OPEN\"",
+									"            },",
+									"            {",
+									"                projectCode: {",
+									"                    projectCodeValue: \"A2\"",
+									"                },",
+									"                userStoryCode: {",
+									"                    userStoryCodeValue: \"US019\"",
+									"                },",
+									"                description: {",
+									"                    descriptionValue: \" A2 dummy 019\"",
+									"                },",
+									"                status: \"OPEN\"",
+									"            },",
+									"            {",
+									"                projectCode: {",
+									"                    projectCodeValue: \"A2\"",
+									"                },",
+									"                userStoryCode: {",
+									"                    userStoryCodeValue: \"US020\"",
+									"                },",
+									"                description: {",
+									"                    descriptionValue: \" A2 dummy 020\"",
+									"                },",
+									"                status: \"OPEN\"",
+									"            },",
+									"            {",
+									"                projectCode: {",
+									"                    projectCodeValue: \"A2\"",
+									"                },",
+									"                userStoryCode: {",
+									"                    userStoryCodeValue: \"US021\"",
+									"                },",
+									"                description: {",
+									"                    descriptionValue: \" A2 dummy 021\"",
+									"                },",
+									"                status: \"OPEN\"",
+									"            },",
+									"            {",
+									"                projectCode: {",
+									"                    projectCodeValue: \"A2\"",
+									"                },",
+									"                userStoryCode: {",
+									"                    userStoryCodeValue: \"US022\"",
+									"                },",
+									"                description: {",
+									"                    descriptionValue: \" A2 dummy 022\"",
+									"                },",
+									"                status: \"OPEN\"",
+									"            },",
+									"            {",
+									"                projectCode: {",
+									"                    projectCodeValue: \"A2\"",
+									"                },",
+									"                userStoryCode: {",
+									"                    userStoryCodeValue: \"US023\"",
+									"                },",
+									"                description: {",
+									"                    descriptionValue: \" A2 dummy 023\"",
+									"                },",
+									"                status: \"OPEN\"",
+									"            },",
+									"            {",
+									"                projectCode: {",
+									"                    projectCodeValue: \"A2\"",
+									"                },",
+									"                userStoryCode: {",
+									"                    userStoryCodeValue: \"US024\"",
+									"                },",
+									"                 description: {",
+									"                    descriptionValue: \" A2 dummy 024\"",
+									"                },",
+									"                status: \"OPEN\"",
+									"            },",
+									"            {",
+									"                projectCode: {",
+									"                    projectCodeValue: \"A2\"",
+									"                },",
+									"                userStoryCode: {",
+									"                    userStoryCodeValue: \"US025\"",
+									"                },",
+									"                description: {",
+									"                    descriptionValue: \" A2 dummy 025\"",
+									"                },",
+									"                status: \"OPEN\"",
+									"            },",
+									"            {",
+									"                projectCode: {",
+									"                    projectCodeValue: \"A2\"",
+									"                },",
+									"                userStoryCode: {",
+									"                    userStoryCodeValue: \"US026\"",
+									"                },",
+									"                description: {",
+									"                    descriptionValue: \" A2 dummy 026\"",
+									"                },",
+									"                status: \"OPEN\"",
+									"            },",
+									"            {",
+									"                projectCode: {",
+									"                    projectCodeValue: \"A2\"",
+									"                },",
+									"                userStoryCode: {",
+									"                    userStoryCodeValue: \"US027\"",
+									"                },",
+									"                description: {",
+									"                    descriptionValue: \" A2 dummy 027\"",
+									"                },",
+									"                status: \"OPEN\"",
+									"            },",
+									"            {",
+									"                projectCode: {",
+									"                    projectCodeValue: \"A2\"",
+									"                },",
+									"                userStoryCode: {",
+									"                    userStoryCodeValue: \"US028\"",
+									"                },",
+									"                description: {",
+									"                    descriptionValue: \" A2 dummy 028\"",
+									"                },",
+									"                status: \"OPEN\"",
+									"            },",
+									"            {",
+									"                projectCode: {",
+									"                    projectCodeValue: \"A2\"",
+									"                },",
+									"                userStoryCode: {",
+									"                    userStoryCodeValue: \"US029\"",
+									"                },",
+									"                description: {",
+									"                    descriptionValue: \" A2 dummy 029\"",
+									"                },",
+									"                status: \"OPEN\"",
+									"            },",
+									"            {",
+									"                projectCode: {",
+									"                    projectCodeValue: \"A2\"",
+									"                },",
+									"                userStoryCode: {",
+									"                    userStoryCodeValue: \"US030\"",
+									"                },",
+									"                description: {",
+									"                    descriptionValue: \" A2 dummy 030\"",
+									"                },",
+									"                status: \"OPEN\"",
+									"            },",
+									"            {",
+									"                projectCode: {",
+									"                    projectCodeValue: \"A2\"",
+									"                },",
+									"                userStoryCode: {",
+									"                    userStoryCodeValue: \"US031\"",
+									"                },",
+									"                description: {",
+									"                    descriptionValue: \" A2 dummy 031\"",
+									"                },",
+									"                status: \"OPEN\"",
+									"            },",
+									"            {",
+									"                projectCode: {",
+									"                    projectCodeValue: \"A2\"",
+									"                },",
+									"                userStoryCode: {",
+									"                    userStoryCodeValue: \"US032\"",
+									"                },",
+									"                description: {",
+									"                    descriptionValue: \" A2 dummy 032\"",
+									"                },",
+									"                status: \"OPEN\"",
+									"            },",
+									"            {",
+									"                projectCode: {",
+									"                    projectCodeValue: \"A2\"",
+									"                },",
+									"                userStoryCode: {",
+									"                    userStoryCodeValue: \"US033\"",
+									"                },",
+									"                description: {",
+									"                    descriptionValue: \" A2 dummy 033\"",
+									"                },",
+									"                status: \"OPEN\"",
+									"            },",
+									"            {",
+									"                projectCode: {",
+									"                    projectCodeValue: \"A2\"",
+									"                },",
+									"                userStoryCode: {",
+									"                    userStoryCodeValue: \"US034\"",
+									"                },",
+									"                description: {",
+									"                    descriptionValue: \" A2 dummy 034\"",
+									"                },",
+									"                status: \"OPEN\"",
+									"            },",
+									"            {",
+									"                projectCode: {",
+									"                    projectCodeValue: \"A2\"",
+									"                },",
+									"                userStoryCode: {",
+									"                    userStoryCodeValue: \"US035\"",
+									"                },",
+									"                description: {",
+									"                    descriptionValue: \" A2 dummy 035\"",
+									"                },",
+									"                status: \"OPEN\"",
+									"            },",
+									"            {",
+									"                projectCode: {",
+									"                    projectCodeValue: \"A2\"",
+									"                },",
+									"                userStoryCode: {",
+									"                    userStoryCodeValue: \"US036\"",
+									"                },",
+									"                description: {",
+									"                    descriptionValue: \" A2 dummy 036\"",
+									"                },",
+									"                status: \"OPEN\"",
+									"            },",
+									"            {",
+									"                projectCode: {",
+									"                    projectCodeValue: \"A2\"",
+									"                },",
+									"                userStoryCode: {",
+									"                    userStoryCodeValue: \"US037\"",
+									"                },",
+									"                description: {",
+									"                    descriptionValue: \" A2 dummy 037\"",
+									"                },",
+									"                status: \"OPEN\"",
+									"            },",
+									"            {",
+									"                projectCode: {",
+									"                    projectCodeValue: \"A2\"",
+									"                },",
+									"                userStoryCode: {",
+									"                    userStoryCodeValue: \"US038\"",
+									"                },",
+									"                description: {",
+									"                    descriptionValue: \" A2 dummy 038\"",
+									"                },",
+									"                status: \"OPEN\"",
+									"            },",
+									"            {",
+									"                projectCode: {",
+									"                    projectCodeValue: \"A2\"",
+									"                },",
+									"                userStoryCode: {",
+									"                    userStoryCodeValue: \"US039\"",
+									"                },",
+									"                description: {",
+									"                    descriptionValue: \" A2 dummy 039\"",
+									"                },",
+									"                status: \"OPEN\"",
+									"            },",
+									"            {",
+									"                projectCode: {",
+									"                    projectCodeValue: \"A2\"",
+									"                },",
+									"                userStoryCode: {",
+									"                    userStoryCodeValue: \"US040\"",
+									"                },",
+									"                description: {",
+									"                    descriptionValue: \" A2 dummy 040\"",
+									"                },",
+									"                status: \"OPEN\"",
+									"            }",
+									"        ]",
+									"    }",
+									"}",
+									"",
+									"    pm.expect(body).to.eql(expected);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/projects/A2/user-stories",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"projects",
+								"A2",
+								"user-stories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Empty Product Backlog Success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Assert body\", function() {",
+									"    const body = pm.response.json();",
+									"",
+									"    const expected = {}",
+									"",
+									"    pm.expect(body).to.eql(expected);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/projects/P001/user-stories",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"projects",
+								"P001",
+								"user-stories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product Backlog Unsuccess - Project does not exist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 409\", function () {\r",
+									"    pm.response.to.have.status(409);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Assert body\", function() {\r",
+									"    const body = pm.response.json();\r",
+									"\r",
+									"    const expected = {\r",
+									"        message: \"Project does not exist\"\r",
+									"    }\r",
+									"\r",
+									"    pm.expect(body).to.eql(expected);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/projects/404/user-stories",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"projects",
+								"404",
+								"user-stories"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Resources",
+			"item": [
+				{
+					"name": "Create Resource Success Team Member",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Assert body\", function() {",
+									"    const body = pm.response.json();",
+									"",
+									"    const expected = {",
+									"    email: \"js@mymail.com\",",
+									"    projectCode: \"666\",",
+									"    startDate: \"2023-03-10\",",
+									"    endDate: \"2023-03-12\",",
+									"    projectRole: \"TEAM_MEMBER\",",
+									"    percentageOfAllocation: 50,",
+									"    costPerHour: 10.0,",
+									"    _links: {",
+									"        self: {",
+									"            href: \"http://localhost:8080/resources/js%40mymail.com/666/2023-03-10/2023-03-12\"",
+									"        },",
+									"        resources: {",
+									"            href: \"http://localhost:8080/resources\"",
+									"        }",
+									"    }",
+									"}",
+									"",
+									"    pm.expect(body).to.eql(expected);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"js@mymail.com\",\r\n    \"projectCode\": \"666\",\r\n    \"startDate\": \"2023-03-10\",\r\n    \"endDate\": \"2023-03-12\",\r\n    \"projectRole\": \"TEAM_MEMBER\",\r\n    \"percentageOfAllocation\": 50,\r\n    \"costPerHour\": 10.0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/resources",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"resources"
+							]
+						},
+						"description": "Allocate existing account to valid project with TEAM_MEMBER role.\r\nTime Period does not overlap.\r\nShould return 201."
+					},
+					"response": []
+				},
+				{
+					"name": "Create Resource Success Product Owner",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Assert body\", function() {",
+									"    const body = pm.response.json();",
+									"",
+									"    const expected = {",
+									"    email: \"qb@mymail.com\",",
+									"    projectCode: \"666\",",
+									"    startDate: \"2050-03-10\",",
+									"    endDate: \"2051-03-12\",",
+									"    projectRole: \"PRODUCT_OWNER\",",
+									"    percentageOfAllocation: 50,",
+									"    costPerHour: 10.0,",
+									"    _links: {",
+									"        self: {",
+									"            href: \"http://localhost:8080/resources/qb%40mymail.com/666/2050-03-10/2051-03-12\"",
+									"        },",
+									"        resources: {",
+									"            href: \"http://localhost:8080/resources\"",
+									"        }",
+									"    }",
+									"}",
+									"",
+									"    pm.expect(body).to.eql(expected);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"qb@mymail.com\",\r\n    \"projectCode\": \"666\",\r\n    \"startDate\": \"2050-03-10\",\r\n    \"endDate\": \"2051-03-12\",\r\n    \"projectRole\": \"PRODUCT_OWNER\",\r\n    \"percentageOfAllocation\": 50,\r\n    \"costPerHour\": 10.0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/resources",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"resources"
+							]
+						},
+						"description": "Allocate existing account to valid project with TEAM_MEMBER role.\r\nTime Period does not overlap.\r\nShould return 201."
+					},
+					"response": []
+				},
+				{
+					"name": "Create Resource Success Scrum Master",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Assert body\", function() {",
+									"    const body = pm.response.json();",
+									"",
+									"    const expected = {",
+									"    email: \"tc@mymail.com\",",
+									"    projectCode: \"666\",",
+									"    startDate: \"2050-03-10\",",
+									"    endDate: \"2051-03-12\",",
+									"    projectRole: \"SCRUM_MASTER\",",
+									"    percentageOfAllocation: 10,",
+									"    costPerHour: 10.0,",
+									"    _links: {",
+									"        self: {",
+									"            href: \"http://localhost:8080/resources/tc%40mymail.com/666/2050-03-10/2051-03-12\"",
+									"        },",
+									"        resources: {",
+									"            href: \"http://localhost:8080/resources\"",
+									"        }",
+									"    }",
+									"}",
+									"",
+									"    pm.expect(body).to.eql(expected);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"tc@mymail.com\",\r\n    \"projectCode\": \"666\",\r\n    \"startDate\": \"2050-03-10\",\r\n    \"endDate\": \"2051-03-12\",\r\n    \"projectRole\": \"SCRUM_MASTER\",\r\n    \"percentageOfAllocation\": 10,\r\n    \"costPerHour\": 10.0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/resources",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"resources"
+							]
+						},
+						"description": "Allocate existing account to valid project with TEAM_MEMBER role.\r\nTime Period does not overlap.\r\nShould return 201."
+					},
+					"response": []
+				},
+				{
+					"name": "Create Resource Success Project Manager",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Assert body\", function() {",
+									"    const body = pm.response.json();",
+									"",
+									"    const expected = {",
+									"    email: \"tc@mymail.com\",",
+									"    projectCode: \"666\",",
+									"    startDate: \"2052-03-10\",",
+									"    endDate: \"2053-03-12\",",
+									"    projectRole: \"PROJECT_MANAGER\",",
+									"    percentageOfAllocation: 10,",
+									"    costPerHour: 10.0,",
+									"    _links: {",
+									"        self: {",
+									"            href: \"http://localhost:8080/resources/tc%40mymail.com/666/2052-03-10/2053-03-12\"",
+									"        },",
+									"        resources: {",
+									"            href: \"http://localhost:8080/resources\"",
+									"        }",
+									"    }",
+									"}",
+									"",
+									"    pm.expect(body).to.eql(expected);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"tc@mymail.com\",\r\n    \"projectCode\": \"666\",\r\n    \"startDate\": \"2052-03-10\",\r\n    \"endDate\": \"2053-03-12\",\r\n    \"projectRole\": \"PROJECT_MANAGER\",\r\n    \"percentageOfAllocation\": 10,\r\n    \"costPerHour\": 10.0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/resources",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"resources"
+							]
+						},
+						"description": "Allocate existing account to valid project with TEAM_MEMBER role.\r\nTime Period does not overlap.\r\nShould return 201."
+					},
+					"response": []
+				},
+				{
+					"name": "Create Resource Unsuccess - Add resource to the same project, in the same time period",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 409\", function () {",
+									"    pm.response.to.have.status(409);",
+									"});",
+									"",
+									"pm.test(\"Assert body\", function() {",
+									"    const body = pm.response.json();",
+									"",
+									"    const expected = {",
+									"        message: \"This resource is already exists in the given time period.\"",
+									"    }",
+									"",
+									"    pm.expect(body).to.eql(expected);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"js@mymail.com\",\r\n    \"projectCode\": \"A1\",\r\n    \"startDate\": \"2022-03-10\",\r\n    \"endDate\": \"2022-03-12\",\r\n    \"projectRole\": \"TEAM_MEMBER\",\r\n    \"percentageOfAllocation\": 50,\r\n    \"costPerHour\": 10.0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/resources",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"resources"
+							]
+						},
+						"description": "Adds a resource as a TEAM_MEMBER to a project, when he is already allocated as a ProductOwner to that same project.\r\nExpected error message notifying that team member is allocated in that period."
+					},
+					"response": []
+				},
+				{
+					"name": "Create Resource Unsuccess - Add resource to other project when he exceeds 100% time allocation",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 409\", function () {",
+									"    pm.response.to.have.status(409);",
+									"});",
+									"",
+									"pm.test(\"Assert body\", function() {",
+									"    const body = pm.response.json();",
+									"",
+									"    const expected = {",
+									"        message: \"Allocation exceed 100%\"",
+									"    }",
+									"",
+									"    pm.expect(body).to.eql(expected);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"xf@mymail.com\",\r\n    \"projectCode\": \"A2\",\r\n    \"startDate\": \"2022-04-10\",\r\n    \"endDate\": \"2022-05-12\",\r\n    \"projectRole\": \"TEAM_MEMBER\",\r\n    \"percentageOfAllocation\": 50,\r\n    \"costPerHour\": 10.0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/resources",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"resources"
+							]
+						},
+						"description": "Account is allocated to another project, and somewhen, between that time period, he exceeds 100% time allocation.\r\nExpected error message notifying that allocation exceeds 100%."
+					},
+					"response": []
+				},
+				{
+					"name": "Create Resource Unsuccess - Add resource to project, but already allocated to project as Scrum Master.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 409\", function () {",
+									"    pm.response.to.have.status(409);",
+									"});",
+									"",
+									"pm.test(\"Assert body\", function() {",
+									"    const body = pm.response.json();",
+									"",
+									"    const expected = {",
+									"        message: \"This resource is already exists in the given time period.\"",
+									"    }",
+									"",
+									"    pm.expect(body).to.eql(expected);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"ms@mymail.com\",\r\n    \"projectCode\": \"A1\",\r\n    \"startDate\": \"2022-04-01\",\r\n    \"endDate\": \"2022-06-30\",\r\n    \"projectRole\": \"SCRUM_MASTER\",\r\n    \"percentageOfAllocation\": 0,\r\n    \"costPerHour\": 10.0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/resources",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"resources"
+							]
+						},
+						"description": "Account is allocated in the same time period to another project, as scrum master.\n\nTime period sums up to 100% between the two project allocations.\n\nExpected to return 201."
+					},
+					"response": []
+				},
+				{
+					"name": "Create Resource Unsuccess - Not profile user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 409\", function () {\r",
+									"    pm.response.to.have.status(409);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Assert body\", function() {\r",
+									"    const body = pm.response.json();\r",
+									"\r",
+									"    const expected = {\r",
+									"        message: \"This account does not have a User Profile.\"\r",
+									"    }\r",
+									"\r",
+									"    pm.expect(body).to.eql(expected);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"ze@mymail.com\",\n    \"projectCode\": \"666\",\n    \"startDate\": \"2023-03-10\",\n    \"endDate\": \"2023-03-12\",\n    \"projectRole\": \"TEAM_MEMBER\",\n    \"percentageOfAllocation\": 50,\n    \"costPerHour\": 10.0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/resources",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"resources"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Resource Unsuccess - Product Owner already exists",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 409\", function () {",
+									"    pm.response.to.have.status(409);",
+									"});",
+									"",
+									"pm.test(\"Assert body\", function() {",
+									"    const body = pm.response.json();",
+									"",
+									"    const expected = {",
+									"        message: \"PRODUCT_OWNER already exists in time period.\"",
+									"}",
+									"",
+									"    pm.expect(body).to.eql(expected);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"tg@mymail.com\",\r\n    \"projectCode\": \"666\",\r\n    \"startDate\": \"2050-03-10\",\r\n    \"endDate\": \"2051-03-12\",\r\n    \"projectRole\": \"PRODUCT_OWNER\",\r\n    \"percentageOfAllocation\": 10,\r\n    \"costPerHour\": 10.0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/resources",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"resources"
+							]
+						},
+						"description": "Allocate existing account to valid project with TEAM_MEMBER role.\r\nTime Period does not overlap.\r\nShould return 201."
+					},
+					"response": []
+				},
+				{
+					"name": "Create Resource Unsuccess - Scrum Master already exists",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 409\", function () {",
+									"    pm.response.to.have.status(409);",
+									"});",
+									"",
+									"pm.test(\"Assert body\", function() {",
+									"    const body = pm.response.json();",
+									"",
+									"    const expected = {",
+									"        message: \"SCRUM_MASTER already exists in time period.\"",
+									"    }",
+									"",
+									"    pm.expect(body).to.eql(expected);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"tg@mymail.com\",\r\n    \"projectCode\": \"666\",\r\n    \"startDate\": \"2050-03-10\",\r\n    \"endDate\": \"2051-03-12\",\r\n    \"projectRole\": \"SCRUM_MASTER\",\r\n    \"percentageOfAllocation\": 10,\r\n    \"costPerHour\": 10.0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/resources",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"resources"
+							]
+						},
+						"description": "Allocate existing account to valid project with TEAM_MEMBER role.\r\nTime Period does not overlap.\r\nShould return 201."
+					},
+					"response": []
+				},
+				{
+					"name": "Create Resource Unsuccess - Project Manager already exists",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 409\", function () {",
+									"    pm.response.to.have.status(409);",
+									"});",
+									"",
+									"pm.test(\"Assert body\", function() {",
+									"    const body = pm.response.json();",
+									"",
+									"    const expected = {",
+									"        message: \"PROJECT_MANAGER already exists in time period.\"",
+									"}",
+									"",
+									"    pm.expect(body).to.eql(expected);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"tg@mymail.com\",\r\n    \"projectCode\": \"666\",\r\n    \"startDate\": \"2052-03-10\",\r\n    \"endDate\": \"2053-03-12\",\r\n    \"projectRole\": \"PROJECT_MANAGER\",\r\n    \"percentageOfAllocation\": 10,\r\n    \"costPerHour\": 10.0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/resources",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"resources"
+							]
+						},
+						"description": "Allocate existing account to valid project with TEAM_MEMBER role.\r\nTime Period does not overlap.\r\nShould return 201."
+					},
+					"response": []
+				},
+				{
+					"name": "Create Resource Unsuccess - Project does not exist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"Assert body\", function() {",
+									"    const body = pm.response.json();",
+									"",
+									"    const expected = {",
+									"        message: \"Project does not exist.\"",
+									"}",
+									"",
+									"    pm.expect(body).to.eql(expected);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"tg@mymail.com\",\r\n    \"projectCode\": \"404\",\r\n    \"startDate\": \"2052-03-10\",\r\n    \"endDate\": \"2053-03-12\",\r\n    \"projectRole\": \"PROJECT_MANAGER\",\r\n    \"percentageOfAllocation\": 10,\r\n    \"costPerHour\": 10.0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/resources",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"resources"
+							]
+						},
+						"description": "Allocate existing account to valid project with TEAM_MEMBER role.\r\nTime Period does not overlap.\r\nShould return 201."
+					},
+					"response": []
+				},
+				{
+					"name": "Create Resource Unsuccess - Account does not exist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"Assert body\", function() {",
+									"    const body = pm.response.json();",
+									"",
+									"    const expected = {",
+									"        message: \"Account does not exist.\"",
+									"}",
+									"",
+									"    pm.expect(body).to.eql(expected);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"I do not exist\",\r\n    \"projectCode\": \"A1\",\r\n    \"startDate\": \"2052-03-10\",\r\n    \"endDate\": \"2053-03-12\",\r\n    \"projectRole\": \"PROJECT_MANAGER\",\r\n    \"percentageOfAllocation\": 10,\r\n    \"costPerHour\": 10.0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/resources",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"resources"
+							]
+						},
+						"description": "Allocate existing account to valid project with TEAM_MEMBER role.\r\nTime Period does not overlap.\r\nShould return 201."
+					},
+					"response": []
+				},
+				{
+					"name": "Get current resources in project list - Success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Assert body\", function() {\r",
+									"    const body = pm.response.json();\r",
+									"\r",
+									"    const expected = {\r",
+									"    _embedded: {\r",
+									"        resourceDTOList: [\r",
+									"            {\r",
+									"                email: \"qb@mymail.com\",\r",
+									"                projectCode: \"A2\",\r",
+									"                startDate: \"2023-05-15\",\r",
+									"                endDate: \"2024-04-29\",\r",
+									"                projectRole: \"PROJECT_MANAGER\",\r",
+									"                _links: {\r",
+									"                    self: {\r",
+									"                        href: \"http://localhost:8080/resources/qb%40mymail.com/A2/2023-05-15/2024-04-29\"\r",
+									"                    }\r",
+									"                }\r",
+									"            },\r",
+									"            {\r",
+									"                email: \"tg@mymail.com\",\r",
+									"                projectCode: \"A2\",\r",
+									"                startDate: \"2023-05-15\",\r",
+									"                endDate: \"2024-04-29\",\r",
+									"                projectRole: \"PRODUCT_OWNER\",\r",
+									"                _links: {\r",
+									"                    self: {\r",
+									"                        href: \"http://localhost:8080/resources/tg%40mymail.com/A2/2023-05-15/2024-04-29\"\r",
+									"                    }\r",
+									"                }\r",
+									"            },\r",
+									"            {\r",
+									"                email: \"zm@mymail.com\",\r",
+									"                projectCode: \"A2\",\r",
+									"                startDate: \"2023-05-31\",\r",
+									"                endDate: \"2024-04-29\",\r",
+									"                projectRole: \"TEAM_MEMBER\",\r",
+									"                _links: {\r",
+									"                    self: {\r",
+									"                        href: \"http://localhost:8080/resources/zm%40mymail.com/A2/2023-05-31/2024-04-29\"\r",
+									"                    }\r",
+									"                }\r",
+									"            },\r",
+									"            {\r",
+									"                email: \"as@mymail.com\",\r",
+									"                projectCode: \"A2\",\r",
+									"                startDate: \"2023-05-31\",\r",
+									"                endDate: \"2024-04-29\",\r",
+									"                projectRole: \"TEAM_MEMBER\",\r",
+									"                _links: {\r",
+									"                    self: {\r",
+									"                        href: \"http://localhost:8080/resources/as%40mymail.com/A2/2023-05-31/2024-04-29\"\r",
+									"                    }\r",
+									"                }\r",
+									"            }\r",
+									"        ]\r",
+									"    },\r",
+									"    _links: {\r",
+									"        self: {\r",
+									"            href: \"http://localhost:8080/resources/A2/2023-06-21\"\r",
+									"        }\r",
+									"    }\r",
+									"}\r",
+									"\r",
+									"    pm.expect(body).to.eql(expected);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/resources/A2/2023-06-21",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"resources",
+								"A2",
+								"2023-06-21"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get current resources in project Empty List - Success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Assert body\", function() {\r",
+									"    const body = pm.response.json();\r",
+									"\r",
+									"    const expected = {\r",
+									"        _links: {\r",
+									"            self: {\r",
+									"                href: \"http://localhost:8080/resources/A2/2050-10-21\"\r",
+									"            }\r",
+									"        }\r",
+									"    }\r",
+									"\r",
+									"    pm.expect(body).to.eql(expected);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/resources/A2/2050-10-21",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"resources",
+								"A2",
+								"2050-10-21"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "UserStory",
+			"item": [
+				{
+					"name": "Create User Story Success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Assert body\", function() {",
+									"    const body = pm.response.json();",
+									"",
+									"    const expected = {",
+									"    projectCode: {",
+									"        projectCodeValue: \"666\"",
+									"    },",
+									"    userStoryCode: {",
+									"        userStoryCodeValue: \"my test code\"",
+									"    },",
+									"    description: {",
+									"        descriptionValue: \"presentation user story\"",
+									"    },",
+									"    status: \"OPEN\"",
+									"}",
+									"",
+									"    pm.expect(body).to.eql(expected);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n            \"projectCode\": \"666\",\n            \"userStoryCode\": \"my test code\",\n            \"description\": \"presentation user story\"\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/user-stories",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"user-stories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User Story Unsuccess - Same user story code",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 409\", function () {",
+									"    pm.response.to.have.status(409);",
+									"});",
+									"",
+									"pm.test(\"Assert body\", function() {",
+									"    const body = pm.response.json();",
+									"",
+									"    const expected = {",
+									"    message: \"The User Story already exists\"",
+									"    }",
+									"",
+									"    pm.expect(body).to.eql(expected);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"projectCode\": \"666\",\n    \"userStoryCode\": \"my test code\",\n    \"description\": \"presentation user story\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/user-stories",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"user-stories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User Story Unsuccess - Project Does not exist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 409\", function () {",
+									"    pm.response.to.have.status(409);",
+									"});",
+									"",
+									"pm.test(\"Assert body\", function() {",
+									"    const body = pm.response.json();",
+									"",
+									"    const expected = {",
+									"    message: \"Project does not exist.\"",
+									"    }",
+									"",
+									"    pm.expect(body).to.eql(expected);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"projectCode\": \"P404\",\n    \"userStoryCode\": \"US001\",\n    \"description\": \"As Administrator, I want to create an account.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/user-stories",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"user-stories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User Story Unsuccess - Empty Description",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {",
+									"    pm.response.to.have.status(422);",
+									"});",
+									"",
+									"pm.test(\"Assert body\", function() {",
+									"    const body = pm.response.json();",
+									"",
+									"    const expected = {",
+									"    message: \"Description cannot be empty\"",
+									"    }",
+									"",
+									"    pm.expect(body).to.eql(expected);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n            \"projectCode\": \"A1\",\n            \"userStoryCode\": \"A1001\",\n            \"description\": \"\"\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/user-stories",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"user-stories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User Story Unsuccess - Empty UserStoryCode",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {",
+									"    pm.response.to.have.status(422);",
+									"});",
+									"",
+									"pm.test(\"Assert body\", function() {",
+									"    const body = pm.response.json();",
+									"",
+									"    const expected = {",
+									"    message: \"The inserted User Story code is invalid\"",
+									"    }",
+									"",
+									"    pm.expect(body).to.eql(expected);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n            \"projectCode\": \"A1\",\n            \"userStoryCode\": \" \",\n            \"description\": \"description\"\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/user-stories",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"user-stories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User Story Status Uncesss - User Story does not exist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"User Story does not exist.\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userStoryStatus\":\"OPEN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/projects/A1/user-stories/US99",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"projects",
+								"A1",
+								"user-stories",
+								"US99"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User Story Status Unsuccess - Project does not exist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Project does not exist.\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userStoryStatus\": \"OPEN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/projects/A99/user-stories/US01",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"projects",
+								"A99",
+								"user-stories",
+								"US01"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User Story Status Success - Update  to running",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Assert body\", function() {\r",
+									"    const body = pm.response.json();\r",
+									"\r",
+									"    const expected = {\r",
+									"        projectCode: \"A1\",\r",
+									"        userStoryCode: \"US02\",\r",
+									"        description: \"Dummy 02\",\r",
+									"        status: \"RUNNING\",\r",
+									"        userStoryEffort: 1,\r",
+									"        _links: {\r",
+									"            self: {\r",
+									"                href: \"http://localhost:8080/projects/A1/user-stories/US02\"\r",
+									"            }\r",
+									"        }\r",
+									"    }\r",
+									"\r",
+									"    pm.expect(body).to.eql(expected);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userStoryStatus\":\"RUNNING\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/projects/A1/user-stories/US02",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"projects",
+								"A1",
+								"user-stories",
+								"US02"
+							]
+						},
+						"description": "Change UserStoryStatus"
+					},
+					"response": []
+				},
+				{
+					"name": "Update User Story Status Success - Update  to finished",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Assert body\", function() {\r",
+									"    const body = pm.response.json();\r",
+									"\r",
+									"    const expected = {\r",
+									"        projectCode: \"A1\",\r",
+									"        userStoryCode: \"US02\",\r",
+									"        description: \"Dummy 02\",\r",
+									"        status: \"FINISHED\",\r",
+									"        userStoryEffort: 1,\r",
+									"        _links: {\r",
+									"            self: {\r",
+									"                href: \"http://localhost:8080/projects/A1/user-stories/US02\"\r",
+									"            }\r",
+									"        }\r",
+									"    }\r",
+									"\r",
+									"    pm.expect(body).to.eql(expected);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userStoryStatus\":\"FINISHED\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/projects/A1/user-stories/US02",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"projects",
+								"A1",
+								"user-stories",
+								"US02"
+							]
+						},
+						"description": "Change UserStoryStatus"
+					},
+					"response": []
+				},
+				{
+					"name": "Update User Story Status Success - Update  to cancelled",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Assert body\", function() {\r",
+									"    const body = pm.response.json();\r",
+									"\r",
+									"    const expected = {\r",
+									"        projectCode: \"A1\",\r",
+									"        userStoryCode: \"US02\",\r",
+									"        description: \"Dummy 02\",\r",
+									"        status: \"CANCELLED\",\r",
+									"        userStoryEffort: 1,\r",
+									"        _links: {\r",
+									"            self: {\r",
+									"                href: \"http://localhost:8080/projects/A1/user-stories/US02\"\r",
+									"            }\r",
+									"        }\r",
+									"    }\r",
+									"\r",
+									"    pm.expect(body).to.eql(expected);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userStoryStatus\":\"CANCELLED\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/projects/A1/user-stories/US02",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"projects",
+								"A1",
+								"user-stories",
+								"US02"
+							]
+						},
+						"description": "Change UserStoryStatus"
+					},
+					"response": []
+				},
+				{
+					"name": "Update User Story Status Success - Update  to open",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Assert body\", function() {\r",
+									"    const body = pm.response.json();\r",
+									"\r",
+									"    const expected = {\r",
+									"        projectCode: \"A1\",\r",
+									"        userStoryCode: \"US02\",\r",
+									"        description: \"Dummy 02\",\r",
+									"        status: \"OPEN\",\r",
+									"        userStoryEffort: 1,\r",
+									"        _links: {\r",
+									"            self: {\r",
+									"                href: \"http://localhost:8080/projects/A1/user-stories/US02\"\r",
+									"            }\r",
+									"        }\r",
+									"    }\r",
+									"\r",
+									"    pm.expect(body).to.eql(expected);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userStoryStatus\":\"OPEN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/projects/A1/user-stories/US02",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"projects",
+								"A1",
+								"user-stories",
+								"US02"
+							]
+						},
+						"description": "Change UserStoryStatus"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sprints",
+			"item": [
+				{
+					"name": "Create Sprint Success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Assert body\", function() {",
+									"    const body = pm.response.json();",
+									"",
+									"    const expected = {",
+									"    sprintID: {",
+									"        projectCode: {",
+									"            projectCodeValue: \"666\"",
+									"        },",
+									"        sprintCode: {",
+									"            sprintCodeValue: \"S1\"",
+									"        }",
+									"    },",
+									"    sprintDuration: {",
+									"        sprintDurationValue: 4",
+									"    },",
+									"    startDate: \"2023-04-02\",",
+									"    endDate: \"2023-04-30\",",
+									"    sprintStatus: \"PLANNED\"",
+									"}",
+									"",
+									"    pm.expect(body).to.eql(expected);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"projectCode\": \"666\",\n    \"startDate\": \"2023-04-02\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/sprints",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"sprints"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Sprint Unsuccess - No start date",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 409\", function () {",
+									"    pm.response.to.have.status(409);",
+									"});",
+									"",
+									"pm.test(\"Assert body\", function() {",
+									"    const body = pm.response.json();",
+									"",
+									"    const expected = {",
+									"        message: \"can not create a sprint with start date not defined\"",
+									"    }",
+									"",
+									"    pm.expect(body).to.eql(expected);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"projectCode\": \"666\",\n        \"startDate\": \"\"\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/sprints",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"sprints"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Sprint Unsuccess - Project does not have sprint duration",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 409\", function () {",
+									"    pm.response.to.have.status(409);",
+									"});",
+									"",
+									"pm.test(\"Assert body\", function() {",
+									"    const body = pm.response.json();",
+									"",
+									"    const expected = {",
+									"        message: \"Sprint duration is not defined\"",
+									"    }",
+									"",
+									"    pm.expect(body).to.eql(expected);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"projectCode\": \"P77\",\n        \"startDate\": \"2023-02-02\"\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/sprints",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"sprints"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Open Sprint Success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Assert body\", function() {\r",
+									"    const body = pm.response.json();\r",
+									"\r",
+									"    const expected = {\r",
+									"    sprintID: {\r",
+									"        projectCode: {\r",
+									"            projectCodeValue: \"666\"\r",
+									"        },\r",
+									"        sprintCode: {\r",
+									"            sprintCodeValue: \"S1\"\r",
+									"        }\r",
+									"    },\r",
+									"    sprintDuration: {\r",
+									"        sprintDurationValue: 4\r",
+									"    },\r",
+									"    startDate: \"2023-04-02\",\r",
+									"    endDate: \"2023-04-30\",\r",
+									"    sprintStatus: \"OPENED\"\r",
+									"}\r",
+									"\r",
+									"    pm.expect(body).to.eql(expected);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sprintID\": {\r\n        \"projectCode\": \"666\",\r\n        \"sprintCode\": \"S1\"\r\n    },\r\n    \"sprintStatus\": \"OPENED\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/sprints",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"sprints"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Open Sprint Unsuccess - Sprint is already open",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 409\", function () {\r",
+									"    pm.response.to.have.status(409);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Assert body\", function() {\r",
+									"    const body = pm.response.json();\r",
+									"\r",
+									"    const expected = {\r",
+									"    message: \"The sprint already has the desired status.\"\r",
+									"    }\r",
+									"\r",
+									"    pm.expect(body).to.eql(expected);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sprintID\": {\r\n        \"projectCode\": \"666\",\r\n        \"sprintCode\": \"S1\"\r\n    },\r\n    \"sprintStatus\": \"OPENED\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/sprints",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"sprints"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Open Sprint Unsuccess - Sprint does not exist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 409\", function () {\r",
+									"    pm.response.to.have.status(409);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Assert body\", function() {\r",
+									"    const body = pm.response.json();\r",
+									"\r",
+									"    const expected = {\r",
+									"    message: \"Sprint does not exist\"\r",
+									"    }\r",
+									"\r",
+									"    pm.expect(body).to.eql(expected);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sprintID\": {\r\n        \"projectCode\": \"666\",\r\n        \"sprintCode\": \"S404\"\r\n    },\r\n    \"sprintStatus\": \"OPENED\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/sprints",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"sprints"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add user story to new Sprint Success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Assert body\", function() {\r",
+									"    const body = pm.response.json();\r",
+									"\r",
+									"    const expected = {\r",
+									"    projectCode: \"666\",\r",
+									"    sprintCode: \"S1\",\r",
+									"    startDate: \"2023-04-02\",\r",
+									"    endDate: \"2023-04-30\",\r",
+									"    sprintDuration: 4,\r",
+									"    sprintBacklog: [\r",
+									"        \"my test code\"\r",
+									"    ],\r",
+									"    sprintStatus: \"OPENED\"\r",
+									"}\r",
+									"\r",
+									"    pm.expect(body).to.eql(expected);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userStoryCode\": \"my test code\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/projects/666/sprints/S1/backlog",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"projects",
+								"666",
+								"sprints",
+								"S1",
+								"backlog"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add user story to new Sprint Unsucess - Sprint is not open",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 409\", function () {\r",
+									"    pm.response.to.have.status(409);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Assert body\", function() {\r",
+									"    const body = pm.response.json();\r",
+									"\r",
+									"    const expected = {\r",
+									"        message: \"The selected Sprint is currently closed\"\r",
+									"}\r",
+									"\r",
+									"    pm.expect(body).to.eql(expected);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userStoryCode\": \"US040\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/projects/A2/sprints/S1/backlog",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"projects",
+								"A2",
+								"sprints",
+								"S1",
+								"backlog"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add user story to new Sprint Unsuccess - Project does not exist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 409\", function () {\r",
+									"    pm.response.to.have.status(409);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Assert body\", function() {\r",
+									"    const body = pm.response.json();\r",
+									"\r",
+									"    const expected = {\r",
+									"        message: \"The selected Project does not exist\"\r",
+									"    }\r",
+									"\r",
+									"    pm.expect(body).to.eql(expected);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userStoryCode\": \"my test code\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/projects/404/sprints/S1/backlog",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"projects",
+								"404",
+								"sprints",
+								"S1",
+								"backlog"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add user story to new Sprint Unsuccess - Sprint does not exist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 409\", function () {\r",
+									"    pm.response.to.have.status(409);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Assert body\", function() {\r",
+									"    const body = pm.response.json();\r",
+									"\r",
+									"    const expected = {\r",
+									"        message: \"The selected Sprint is currently closed\"\r",
+									"    }\r",
+									"\r",
+									"    pm.expect(body).to.eql(expected);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userStoryCode\": \"my test code\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/projects/666/sprints/S404/backlog",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"projects",
+								"666",
+								"sprints",
+								"S404",
+								"backlog"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add user story to new Sprint Unsuccess - UserStory does not exist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 409\", function () {\r",
+									"    pm.response.to.have.status(409);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Assert body\", function() {\r",
+									"    const body = pm.response.json();\r",
+									"\r",
+									"    const expected = {\r",
+									"        message: \"The selected User Story does not exist in the Product Backlog\"\r",
+									"    }\r",
+									"\r",
+									"    pm.expect(body).to.eql(expected);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userStoryCode\": \"404\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/projects/666/sprints/S1/backlog",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"projects",
+								"666",
+								"sprints",
+								"S1",
+								"backlog"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add user story to new Sprint Unsuccess - User Story already in sprint backlog",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 409\", function () {\r",
+									"    pm.response.to.have.status(409);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Assert body\", function() {\r",
+									"    const body = pm.response.json();\r",
+									"\r",
+									"    const expected = {\r",
+									"        message: \"The selected User Story already exists in the Sprint Backlog\"\r",
+									"}\r",
+									"\r",
+									"    pm.expect(body).to.eql(expected);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userStoryCode\": \"my test code\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/projects/666/sprints/S1/backlog",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"projects",
+								"666",
+								"sprints",
+								"S1",
+								"backlog"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Sprint Backlog Success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Assert body\", function() {\r",
+									"    const body = pm.response.json();\r",
+									"\r",
+									"    const expected = {\r",
+									"    _embedded: {\r",
+									"        userStoryDTOList: [\r",
+									"            {\r",
+									"                projectCode: {\r",
+									"                    projectCodeValue: \"666\"\r",
+									"                },\r",
+									"                userStoryCode: {\r",
+									"                    userStoryCodeValue: \"my test code\"\r",
+									"                },\r",
+									"                description: {\r",
+									"                    descriptionValue: \"presentation user story\"\r",
+									"                },\r",
+									"                status: \"OPEN\"\r",
+									"            }\r",
+									"        ]\r",
+									"    }\r",
+									"}\r",
+									"\r",
+									"    pm.expect(body).to.eql(expected);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/projects/666/sprints/S1/backlog",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"projects",
+								"666",
+								"sprints",
+								"S1",
+								"backlog"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Sprint Backlog Unsuccess - Project does not exist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 409\", function () {\r",
+									"    pm.response.to.have.status(409);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Assert body\", function() {\r",
+									"    const body = pm.response.json();\r",
+									"\r",
+									"    const expected = {\r",
+									"        message: \"Project does not exist.\"\r",
+									"    }\r",
+									"\r",
+									"    pm.expect(body).to.eql(expected);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseURL}}/projects/404/sprints/S1/backlog",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"projects",
+								"404",
+								"sprints",
+								"S1",
+								"backlog"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Sprint Backlog Unsuccess - Sprint does not exist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 409\", function () {\r",
+									"    pm.response.to.have.status(409);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Assert body\", function() {\r",
+									"    const body = pm.response.json();\r",
+									"\r",
+									"    const expected = {\r",
+									"        message: \"Sprint does not exist.\"\r",
+									"    }\r",
+									"\r",
+									"    pm.expect(body).to.eql(expected);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/projects/A1/sprints/S404/backlog",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"projects",
+								"A1",
+								"sprints",
+								"S404",
+								"backlog"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Close Sprint Success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Assert body\", function() {\r",
+									"    const body = pm.response.json();\r",
+									"\r",
+									"    const expected = {\r",
+									"    sprintID: {\r",
+									"        projectCode: {\r",
+									"            projectCodeValue: \"666\"\r",
+									"        },\r",
+									"        sprintCode: {\r",
+									"            sprintCodeValue: \"S1\"\r",
+									"        }\r",
+									"    },\r",
+									"    sprintDuration: {\r",
+									"        sprintDurationValue: 4\r",
+									"    },\r",
+									"    startDate: \"2023-04-02\",\r",
+									"    endDate: \"2023-04-30\",\r",
+									"    sprintStatus: \"CLOSED\"\r",
+									"}\r",
+									"\r",
+									"    pm.expect(body).to.eql(expected);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sprintID\": {\r\n        \"projectCode\": \"666\",\r\n        \"sprintCode\": \"S1\"\r\n    },\r\n    \"sprintStatus\": \"CLOSED\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/sprints",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"sprints"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Close Sprint Unsuccess",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 409\", function () {\r",
+									"    pm.response.to.have.status(409);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Assert body\", function() {\r",
+									"    const body = pm.response.json();\r",
+									"\r",
+									"    const expected = {\r",
+									"        message: \"The sprint already has the desired status.\"\r",
+									"    }\r",
+									"\r",
+									"    pm.expect(body).to.eql(expected);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sprintID\": {\r\n        \"projectCode\": \"666\",\r\n        \"sprintCode\": \"S1\"\r\n    },\r\n    \"sprintStatus\": \"CLOSED\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/sprints",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"sprints"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Close Sprint Unsuccess - Sprint does not exist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 409\", function () {\r",
+									"    pm.response.to.have.status(409);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Assert body\", function() {\r",
+									"    const body = pm.response.json();\r",
+									"\r",
+									"    const expected = {\r",
+									"        message: \"Sprint does not exist\"\r",
+									"    }\r",
+									"\r",
+									"    pm.expect(body).to.eql(expected);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sprintID\": {\r\n        \"projectCode\": \"666\",\r\n        \"sprintCode\": \"S404\"\r\n    },\r\n    \"sprintStatus\": \"CLOSED\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/sprints",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"sprints"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "http://localhost:8080"
+		}
+	]
+}

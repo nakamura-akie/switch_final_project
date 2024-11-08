@@ -1,0 +1,50 @@
+@startuml
+
+class OutputProjectDTO {
+    - projectCode : String
+    - projectName : String
+    - description : String
+    - customerID : String
+    - businessSectorName : String
+    - projectTypologyName : String
+    - productBacklog : String [0..*]
+    - status : String
+    - sprintDuration : Integer
+    - numberPlannedSprints : Integer
+    - budget : Double
+    - startDate : LocalDate
+    - endDate : LocalDate
+
+    + getProjectCode() : String
+    + setProjectCode(projectCode : ProjectCode)
+    + getProjectName() : String
+    + setProjectName(projectName : ProjectName)
+    + getDescription() : String
+    + setDescription(description : Description)
+    + getCustomerID() : String
+    + setCustomerID(customerID : TaxIdentificationNumberPortugalImplementation)
+    + getBusinessSectorName() : String
+    + setBusinessSectorName(businessSectorName : BusinessSectorName)
+    + getProjectTypologyName() : String
+    + setProjectTypologyName(projectTypologyName : ProjectTypologyName)
+    + getProductBacklog(): String
+    + setProductBacklog(productBacklog : String [0..*])
+    + getStatus(): String
+    + setStatus(status : String)
+    + getStatusHistory(): String
+    + setStatusHistory(status : Map<String, String>)
+    + getSprintDuration() : Integer
+    + setSprintDuration(sprintDuration : Integer) : Integer
+    + getNumberPlannedSprints() : Integer
+    + setNumberPlannedSprints(numberPlannedSprints : Integer)
+    + getBudget() : Double
+    + setBudget(budget : Double)
+    + getStartDate() : String
+    + setStartDate(period : String)
+    + getEndDate() : String
+    + setEndDate(period : String)
+    + equals(object : Object) : boolean
+    + hashCode() : int
+}
+
+@enduml

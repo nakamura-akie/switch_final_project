@@ -1,0 +1,30 @@
+@startuml
+'https://plantuml.com/component-diagram
+skinparam linetype polyline
+
+title US024 - As an Admin, I want to list all projects
+
+package "src" {
+package "components" {
+    package "projectsList" {
+    }
+}
+
+package "pages" {
+}
+
+package "context" {
+}
+
+package "routes" {
+}
+}
+
+
+routes <..> components
+projectsList <.. pages
+projectsList ..> context
+pages ..> context
+pages ..> components
+
+@enduml

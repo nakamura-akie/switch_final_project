@@ -1,0 +1,9 @@
+@startuml
+
+interface TaxIdentificationNumber<<DomainID>> <<ValueObject>> {
+
+    + taxIdentificationNumberValidation\n(taxIdentificationNumberValue : String) : boolean
+    + getTaxIdentificationNumber() : String
+}
+
+@enduml

@@ -1,0 +1,10 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class UserStoryAssembler {
+
+    + createUserStoryDTO(userStory : UserStory) : UserStoryDTO {static}
+    + createUserStoryDTOList(userStoryIterator Iterator<UserStory>) : UserStoryDTO [0..*] {static}
+    }
+
+@enduml

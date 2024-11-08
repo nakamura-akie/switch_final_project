@@ -1,0 +1,9 @@
+@startuml
+
+interface CustomerFactory{
+
+    +createCustomer(customerID : TaxIdentificationNumber, \ncustomerName : Name, country : Country) : Customer
+}
+
+
+@enduml

@@ -1,0 +1,22 @@
+
+.p {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.projectDetails {
+    width: 30rem;
+    /*border: 2px solid #ccc;*/
+    /*border-radius: 10px;*/
+    margin-bottom: 15px;
+}
+
+.projectPageTable td {
+    height: 40px;
+    width: 50rem;
+}
+
+.projectPageTable td:first-child {
+    width: 40rem;
+    font-weight: bold;
+}

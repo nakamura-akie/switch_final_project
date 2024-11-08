@@ -1,0 +1,30 @@
+@startuml
+'Attribute syntax: <visibility> <name> : <type> <multiplicity> = <default>
+'Method syntax: <visibility> <name (parameter-list)> : <return-type> - For simplicity the type of the parameter-list is not specified
+
+class Sprint <<AggregateRoot>> {
+    - sprintID : SprintID {readOnly}
+    - startDate : LocalDate {readOnly}
+    - endDate : LocalDate {readOnly}
+    - sprintDuration : SprintDuration {readOnly}
+    - sprintBacklog : SprintBacklog {readOnly}
+    - sprintStatus : SprintStatus
+
+    # Sprint(sprintID: SprintID, startDate : LocalDate, \nsprintDuration : sprintDuration, sprintBacklog : \nSprintBacklog)
+    # Sprint(sprintID: SprintID, startDate : LocalDate, \nsprintDuration : sprintDuration, sprintBacklog : \nSprintBacklog, sprintStatus : SprintStatus)
+    + getStartDate(): LocalDate
+    + getEndDate() : LocalDate
+    + getSprintDuration(): SprintDuration
+    + getProjectCodee(): ProjectCode
+    + getSprintCode(): SprintCode
+    + defineSprintStatus(sprintStatusValue : SprintStatus)
+    + getSprintStatus() : SprintStatus
+    + hasStatus(status : SprintStatus) : boolean
+    + addToSprintBacklog(userStoryID: UserStoryID): boolean
+    + identity() : SprintID
+    + sameAs(object : Object) : boolean
+    + equals(o : Object) : boolean
+    + hashCode() : int
+    + getIDsOfUserStoriesInSprintBacklog() : List<UserStoryID>
+}
+@enduml

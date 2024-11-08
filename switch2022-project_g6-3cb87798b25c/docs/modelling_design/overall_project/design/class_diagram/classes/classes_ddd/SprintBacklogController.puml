@@ -1,0 +1,13 @@
+@startuml
+'Attribute syntax: <visibility> <name> : <type> <multiplicity> = <default>
+'Method syntax: <visibility> <name (parameter-list)> : <return-type> - For simplicity the type of the parameter-list is not specified
+
+class SprintBacklogController<<Controller>> {
+    - sprintService : SprintService {readOnly}
+
+    +SprintBacklogController(sprintService : SprintService)
+    +addUserStoryToSprintBacklog(projectCode : ProjectCode,\n sprintCode : SprintCode, newSprintBacklogUserStoryDTO :\n NewSprintBacklogUserStoryDTO) : ResponseEntity<Object>
+    +showScrumBoard (projectCode : String, \nsprintCode: String) : ResponseEntity<Object>
+}
+
+@enduml

@@ -1,0 +1,18 @@
+@startuml
+
+autonumber
+skinparam sequenceMessageAlign center
+
+actor ":User" as User
+
+participant ":System" as System
+
+
+
+User -> System: Asks to end session
+
+System --> System: Deletes user session
+
+System --> User: Returns ok
+
+@enduml

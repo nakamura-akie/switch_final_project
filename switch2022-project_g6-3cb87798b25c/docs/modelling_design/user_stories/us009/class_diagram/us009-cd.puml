@@ -1,0 +1,68 @@
+@startuml
+skinparam linetype polyline
+
+title US009 - As Administrator, I want to add a customer
+
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/CustomerController.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/CustomerService.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/Repository.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/CustomerRepositoryFake.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/CustomerRepositoryPersistence.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/CustomerRepository.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/CustomerFactory.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/CustomerFactoryImplementation.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/Customer.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/TaxIdentificationNumber.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/TaxIdentificationNumberPortugalImplementation.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/TaxIdentificationNumberSpainImplementation.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/TaxIdentificationNumberInternationalImplementation.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/CustomerName.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/Country.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/NewCustomerDTO.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/OutputCustomerDTO.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/CustomerValueObjectDTO.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/CustomerValueObjectAssembler.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/OutputCustomerAssembler.puml
+
+CustomerController --> CustomerService : customerService
+CustomerController ..> NewCustomerDTO
+CustomerController ..> CustomerValueObjectDTO
+CustomerController ..> CustomerValueObjectAssembler
+CustomerController ..> OutputCustomerDTO
+
+CustomerValueObjectAssembler --> CustomerValueObjectDTO
+CustomerValueObjectAssembler ..> NewCustomerDTO
+CustomerValueObjectAssembler --> TaxIdentificationNumber
+CustomerValueObjectAssembler --> CustomerName
+CustomerValueObjectAssembler --> Country
+
+CustomerService --> Repository : customerRepository
+CustomerService --> CustomerFactory : customerFactory
+CustomerService ..> CustomerValueObjectDTO
+CustomerService ..> OutputCustomerDTO
+CustomerService ..> TaxIdentificationNumber
+CustomerService ..> CustomerName
+CustomerService ..> Country
+CustomerService ..> OutputCustomerAssembler
+
+OutputCustomerAssembler --> OutputCustomerDTO
+OutputCustomerAssembler ..> Customer
+
+
+TaxIdentificationNumberPortugalImplementation ..|> TaxIdentificationNumber
+TaxIdentificationNumberSpainImplementation ..|> TaxIdentificationNumber
+TaxIdentificationNumberInternationalImplementation ..|> TaxIdentificationNumber
+
+CustomerFactoryImplementation ..|> CustomerFactory
+CustomerFactoryImplementation --> Customer
+
+CustomerRepository --|> Repository
+CustomerRepositoryFake ..|> CustomerRepository
+CustomerRepositoryPersistence ..|> CustomerRepository
+CustomerRepositoryFake "1" *--> "*" Customer : customerList
+
+Customer --> TaxIdentificationNumber : customerID
+Customer --> CustomerName : customerName
+Customer --> Country : country
+
+@enduml

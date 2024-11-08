@@ -1,0 +1,13 @@
+@startuml
+
+skinparam sequenceMessageAlign center
+autonumber
+
+actor User
+participant ":System" as System
+
+User -> System: searches for projects
+System --> User: shows projects
+
+
+@enduml

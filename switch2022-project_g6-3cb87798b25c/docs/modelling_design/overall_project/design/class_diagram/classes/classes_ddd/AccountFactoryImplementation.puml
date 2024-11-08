@@ -1,0 +1,9 @@
+@startuml
+
+class AccountFactoryImplementation{
+
+    +createAccount(accountName: AccountName, email : Email, photo : Image,\nphoneNumber : PhoneNumber, profileName : ProfileName) : Account
+
+}
+
+@enduml

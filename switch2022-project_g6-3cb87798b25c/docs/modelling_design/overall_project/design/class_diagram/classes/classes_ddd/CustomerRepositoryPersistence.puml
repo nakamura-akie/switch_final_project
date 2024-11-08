@@ -1,0 +1,17 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class CustomerRepositoryPersistence<<Repository>> {
+    - customerRepositoryJPA : CustomerRepositoryJPA
+    - customerAssembler : CustomerDomainDataAssembler
+
+    + CustomerRepositoryPersistence(customerRepositoryJPA : CustomerRepositoryJPA, customerAssembler : CustomerDomainDataAssembler)
+    + save(domainCustomer : Customer) : Customer
+    + findAll() : Iterable
+    + findById(taxIdentificationNumber : TaxIdentificationNumber) : Optional<Customer>
+    + existsById(taxIdentificationNumber : TaxIdentificationNumber) : boolean
+    + deleteAll()
+    + deleteById (id : TaxIdentificationNumber)
+}
+
+@enduml

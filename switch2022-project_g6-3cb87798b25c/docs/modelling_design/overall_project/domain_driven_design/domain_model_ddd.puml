@@ -1,0 +1,165 @@
+@startuml
+'skinparam packageStyle rectangle
+skinparam linetype polyline
+'left to right direction
+
+' Aggregates -------------------------------------------------------------
+package AccountAggregate {
+    object "<<Agg. Root>>\nAccount" as Account
+    package ValueObject as AccountValueObject <<Rectangle>> {
+        object "<<ValueObject>>\nEmail" as Email
+        object "<<ValueObject>>\nName" as Name
+        object "<<ValueObject>>\nPhoneNumber" as PhoneNumber
+    }
+}
+
+package ProfileAggregate {
+    object "<<Agg. Root>>\nProfile" as Profile
+    package ValueObject as ProfileValueObject <<Rectangle>> {
+        object "<<ValueObject>>\nName" as ProfileName
+    }
+}
+
+package ResourceAggregate {
+    object "<<Agg. Root>>\nResource" as Resource
+    package ValueObject as ResourceValueObject <<Rectangle>> {
+        object "<<ValueObject>>\nRole" as Role
+        object "<<ValueObject>>\nAllocation" as Allocation
+        object "<<ValueObject>>\nCostPerHour" as CostPerHour
+        object "<<ValueObject>>\nPeriod" as ResourcePeriod
+    }
+}
+
+package ProjectAggregate {
+    object "<<Agg. Root>>\nProject" as Project
+    object "<<Entity>>\nProductBacklog" as ProductBacklog
+
+    package ValueObject as ProjectValueObject {
+        object "<<ValueObject>>\nBudget" as Budget
+        object "<<ValueObject>>\nProjectName" as ProjectName
+        object "<<ValueObject>>\nDescription" as ProjectDescription
+        object "<<ValueObject>>\nPeriod" as ProjectPeriod
+        object "<<ValueObject>>\nSprintDuration" as SprintDuration
+    }
+}
+
+package ProjectStatusAggregate {
+    object "<<Agg. Root>>\nProjectStatus" as ProjectStatus
+
+    package ValueObject as ProjectStatusValueObject <<Rectangle>> {
+        object "<<ValueObject>>\nName" as ProjectStatusName
+    }
+}
+
+package ProjectTypologyAggregate {
+    object "<<Agg. Root>>\nProjectTypology" as ProjectTypology
+
+    package ValueObject as ProjectTypologyValueObject <<Rectangle>> {
+        object "<<ValueObject>>\nName" as ProjectTypologyName
+    }
+}
+
+package BusinessSectorAggregate {
+    object "<<Agg. Root>>\nBusinessSector" as BusinessSector
+    package ValueObject as BusinessSectorValueObject <<Rectangle>> {
+        object "<<ValueObject>>\nName" as BusinessSectorName
+    }
+}
+
+package CustomerAggregate {
+    object "<<Agg. Root>>\nCustomer" as Customer
+    package ValueObject as CustomerValueObject <<Rectangle>> {
+        object "<<ValueObject>>\nTaxIdentificationNumber" as TaxIdentificationNumber
+        object "<<ValueObject>>\nName" as CustomerName
+    }
+}
+
+package SprintAggregate {
+    object "<<Agg. Root>>\nSprint" as Sprint
+    object "<<Entity>>\nSprintBacklog" as SprintBacklog
+    package ValueObject as SprintValueObject <<Rectangle>> {
+        object "<<ValueObject>>\nSprintCode" as SprintCode
+        object "<<ValueObject>>\nPeriod" as SprintPeriod
+    }
+}
+
+
+
+package UserStoryAggregate {
+    object "<<Agg. Root>>\nUserStory" as UserStory
+    package ValueObject as UserStoryValueObject <<Rectangle>> {
+        object "<<ValueObject>>\nUserStoryCode" as UserStoryCode
+        object "<<ValueObject>>\nAcceptanceCriteria" as AcceptanceCriteria
+        object "<<ValueObject>>\nUserStoryStatus" as UserStoryStatus
+        object "<<ValueObject>>\nDescription" as UserStoryDescription
+        object "<<ValueObject>>\nEffort" as Effort
+    }
+}
+
+
+' Notes -------------------------------------------------------------------------------------------------------------------------
+note top of UserStoryAggregate
+The repository of this aggregate can be
+consulted to check the Product Backlog.
+end note
+
+note left of ProductBacklog
+This has a list of UserStoryCode that
+defines the priority of the User Stories.
+When saved in the database it would be stored
+as a String of User Story codes separated by
+a comma (e.g.: {US001,US002,US003}) to guarantee
+that the priority is correctly stored.
+end note
+
+note as N1
+Some simplifications in this diagram:
+- The associations between aggregates are represented
+  as an association between Aggregate Root Entities.
+  In reality one Aggregate only knows the Value Object
+  that identifies other Aggregate.
+end note
+
+' Associations in aggregate -------------------------------------------------------------
+Project --> ProjectValueObject
+
+Project --> ProjectTypology
+Project --> ProjectStatus
+Project --> Customer
+Project --> BusinessSector
+
+UserStory --> UserStoryValueObject
+
+Sprint --> SprintValueObject
+
+Resource --> ResourceValueObject
+
+Account --> AccountValueObject
+
+Customer --> CustomerValueObject
+
+ProjectTypology --> ProjectTypologyValueObject
+
+Profile --> ProfileValueObject
+
+ProjectStatus --> ProjectStatusValueObject
+
+BusinessSector --> BusinessSectorValueObject
+
+' Associations between aggregates -------------------------------------
+Resource -------> Project : ProjectCode
+Resource -------> Account : Email
+
+Sprint -------> Project : ProjectCode
+Sprint "1"-------> "*" UserStory : UserStoryCode
+
+Account -------> Profile
+
+UserStory -------> Project : ProjectCode
+
+ProductBacklog <------- Project : ProductBacklog
+ProductBacklog "1" -------> "*" UserStory : UserStoryCode
+
+@enduml
+
+

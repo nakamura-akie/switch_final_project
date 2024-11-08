@@ -1,0 +1,20 @@
+@startmindmap
+'https://plantuml.com/mindmap-diagram
+
+
+title US024 - As an Admin, I want to list all projects
+top to bottom direction
+
+* <&globe>Application
+** Navbar
+*** NavItem
+** MainRoute
+*** Projects
+**** Button \n(Create a new Project)
+**** Table   \n(Project List)
+***** TableHeaderProjects
+***** TableBodyProjects
+****** Button \n(View Project)
+
+
+@endmindmap

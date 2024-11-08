@@ -1,0 +1,84 @@
+@startuml
+title US033 - As Team Member, I want to update the status (i.e.: the Scrum Board category) of \na user story in the scope of the current/active sprint backlog in the web UI.
+autonumber
+skinparam sequenceMessageAlign center
+skinparam actorBackgroundColor white
+skinparam participantBackgroundColor white
+skinparam sequenceReferenceBackgroundColor white
+skinparam sequenceReferenceHeaderBackgroundColor white
+skinparam sequenceGroupBackgroundColor white
+
+participant ":Bootstrap" as bootstrap
+participant "<<Component(c4)>>\ncontroller:UserStoryController" as controller
+participant "inputuserStoryStatus\n:UserStoryStatus" as inputStatus
+participant ":ProjectCode" as projectCode
+participant ":UserStoryCode" as userStoryCode
+participant "<<Component(c4)>>\nservice:UserStoryService" as service
+participant ":UserStoryID" as userStoryID
+participant "<<Component(c4)>>\nrepository:UserStoryRepository" as repository
+participant "userStory\n:DomainModel" as domainEntity
+participant ":OutputUserStoryAssembler" as outputAssembler
+participant ":OutputUserStoryDTO" as outputDTO
+participant "domainDataAssembler\n:UserStoryDomainDataAssembler" as domainDataAssembler
+participant "userStory\n:DataSchema" as dataSchema
+participant "jpaRepository\n:DatabaseDriver" as driver
+participant "<<container(c4)>>\nDatabase" as db
+
+activate bootstrap
+create domainDataAssembler
+bootstrap --> domainDataAssembler
+create driver
+bootstrap --> driver
+create repository
+bootstrap --> repository : create(userStoryDomainDataAssembler,jpaRepository)
+create service
+bootstrap --> service : create(userStoryRepository)
+create controller
+bootstrap --> controller : create(userStoryService)
+deactivate bootstrap
+
+--> controller++ : PATCH /projects/{projectCode}/user-stories/{userStoryCode}\n(userStoryStatusJson)
+
+create inputStatus
+controller --> inputStatus
+create projectCode
+controller --> projectCode
+create userStoryCode
+controller --> userStoryCode
+
+controller --> service++ : changeUserStoryStatus(userStoryStatus, userStoryCode, projectCode)
+
+create userStoryID
+service --> userStoryID : create\n(projectCode, userStoryCode)
+
+service --> repository++ : findById(userStoryID)
+repository --> driver++ : findById(userStoryID)
+driver --> db : findByID (userStoryIDJpa)
+return userStoryJpa
+return userStory
+
+service --> domainEntity++ : changeStatus(userStoryStatus)
+deactivate domainEntity
+
+service --> repository++ : patch(serStory)
+
+repository --> domainDataAssembler++ : toData(userStory)
+create dataSchema
+domainDataAssembler --> dataSchema
+return userStoryJpa
+repository --> driver++ : save(userStoryJpa)
+driver --> db : save(userStoryJpa)
+return userStoryJpa
+
+repository --> domainDataAssembler++ : toDomain(userStoryJpa)
+return userStory
+return userStory
+
+service --> outputAssembler++ : createOutputUserStoryDTO(userStory)
+create outputDTO
+outputAssembler --> outputDTO : create()
+return outputUserStoryDTO
+return outputUserStoryDTO
+
+<-- controller : 200.OK
+@enduml

@@ -1,0 +1,24 @@
+@startuml
+skinparam linetype polyline
+top to bottom direction
+
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ChangeProfileController.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/AccountService.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/Repository.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProfileRepository.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/AccountRepository.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/Account.puml
+
+ChangeProfileController --> AccountService : accountService
+
+AccountService --> Repository : accountRepository
+AccountService --> Repository : profileRepository
+AccountService --> Account
+
+Repository <|-- AccountRepository
+Repository <|-- ProfileRepository
+
+AccountRepository "1" *--> "*" Account : accountList
+
+
+@enduml

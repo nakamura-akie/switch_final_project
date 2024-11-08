@@ -1,0 +1,36 @@
+@startuml
+
+skinparam UsecaseBackgroundColor white
+skinparam ActorBackgroundColor white
+
+left to right direction
+
+actor "Product Owner" as PO
+actor "Scrum Master" as SM
+actor "Project Manager" as PM
+actor "Team Member" as TM
+
+
+rectangle System {
+  usecase "US031: start the next sprint of a project in the web UI" as UC31
+  usecase "US032: add a user story to the open/current sprint backlog using the web UI" as UC32
+  usecase "US033: update the status (i.e.: the Scrum Board category) of \na user story in the scope of the current/active sprint backlog in the web UI." as UC33
+  usecase "US034: close the current/active sprint of a project in the web UI" as UC34
+  usecase "US035: Product Backlog should be updated when a sprint is closed" as UC35
+  usecase "US036: consult the Sprint Backlog of a chosen sprint in the web UI" as UC36
+}
+
+PM --> UC31
+PM --> UC32
+PO --> UC33
+SM --> UC33
+TM --> UC33
+PM --> UC33
+PM --> UC34
+PM --> UC35
+PO --> UC36
+SM --> UC36
+TM --> UC36
+
+
+@enduml

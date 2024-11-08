@@ -1,0 +1,26 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+skinparam linetype polyline
+
+title US021 -  As Team Member, I want to estimate the effort of a user story in a sprint, during the sprint planning ceremony
+
+!include ../../../overall_project/design/class_diagram/classes/UserStory.puml
+!include ../../../overall_project/design/class_diagram/classes/EstimateEffortController.puml
+!include ../../../overall_project/design/class_diagram/classes/Project.puml
+!include ../../../overall_project/design/class_diagram/classes/Containers.puml
+!include ../../../overall_project/design/class_diagram/classes/ProjectContainer.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/Effort.puml
+!include ../../../overall_project/design/class_diagram/classes/ProductBacklog.puml
+
+EstimateEffortController --> Containers : containers
+EstimateEffortController ..> ProjectContainer
+EstimateEffortController ..> Project
+ProjectContainer "1" *--> "*" Project : projectList
+Containers --> ProjectContainer : projectContainer
+Project --> ProductBacklog : productBacklog
+ProductBacklog "1" *--> "*" UserStory
+UserStory --> Effort : effort
+EstimateEffortController ..> ProductBacklog
+
+@enduml

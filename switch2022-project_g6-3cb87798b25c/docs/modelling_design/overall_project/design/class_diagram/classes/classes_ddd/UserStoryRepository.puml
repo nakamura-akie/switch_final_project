@@ -1,0 +1,14 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+interface UserStoryRepository<<Repository>> {
+
+    + findByProjectCodeAndUserStoryStatusNotAndUserStoryStatusNot(projectCode : ProjectCode,\n firstStatus : UserStoryStatus, secondStatus : UserStoryStatus) : Iterable<UserStory>
+    + findAllByID(listOfIDs : UserStoryID [0..*]) : UserStory [0..*]
+    + existsByUserStoryIdAndUserStoryStatusNotAndUserStoryStatusNot\n(userStoryID : UserStoryID, fisrtStatus : UserStoryStatus, secondStatus \n: UserStoryStatus) : boolean
+    + patch(userStory : UserStory) : UserStory
+
+
+}
+
+@enduml

@@ -1,0 +1,75 @@
+@startuml
+
+skinparam sequenceMessageAlign center
+skinparam actorBackgroundColor white
+skinparam participantBackgroundColor white
+skinparam sequenceReferenceBackgroundColor white
+skinparam sequenceReferenceHeaderBackgroundColor white
+skinparam sequenceGroupBackgroundColor white
+
+autonumber
+
+title US018 - As PO/SM/Team Member, I want to consult the product backlog, i.e. to get the list of user stories sorted by priority
+
+actor ":User With Role" as UserWithRole
+
+note left of UserWithRole
+Product Owner,
+Scrum Master or
+Team Member
+end note
+
+participant ":ConsultProduct\nBacklogUI" as UI
+participant ":ProductBacklog\nController" as Controller
+participant "<<ValueObject>>\nprojectCode\n:ProjectCode" as ProjectCode
+participant "<<ApplicationService>>\n:ProjectService" as Service
+participant "<<ValueObject>>\ncancelled\n:Status" as StatusCancelled
+participant "<<ValueObject>>\nfinished\n:Status" as StatusFinished
+participant "<<Interface>>\n<<Repository>>\n:ProjectRepository" as ProductBacklogRepository
+participant "<<Interface>>\n<<Repository>>\n:UserStoryRepository" as Repository
+participant "<<Entity>>\nproject\n:Project" as Project
+participant ":UserStoryAssembler" as Assembler
+participant "userStoryDTOList \n:List<UserStoryDTO>" as list
+
+UserWithRole -> UI++ : requests list of User Stories
+
+    UI -> Controller++: createUserStoryList(projectCodeValue)
+
+        create ProjectCode
+        Controller -> ProjectCode: create(projectCodeValue)
+
+        Controller -> Service++: createUserStoryList(projectCode)
+
+            create StatusCancelled
+            Service -> StatusCancelled: create(cancelled)
+
+            create StatusFinished
+            Service -> StatusFinished: create(finished)
+
+            Service -> ProductBacklogRepository++: findByID(projectCode)
+            return project
+
+            Service -> Repository++: findByProjectCodeAndUserStoryStatusNotAndUserStoryStatusNot(projectCode, cancelled, finished)
+            return userStoryList
+
+            Service -> Project++: getUserStoryPriorityList()
+            return userStoryPriorityList
+
+            Service -> Service: sortUserStoriesByPriority\n(userStoryList, userStoryPriorityList)
+
+            Service -> Assembler++: createUserStoryDTOList(userStoryIterator)
+            create list
+            Assembler -> list: create()
+                loop#white userStoryIterator.hasNext()
+                Assembler -> Assembler: currentUserStory = \nuserStoryIterator.next()
+                Assembler -> Assembler: userStoryDTO = \nuserStoryDTO(currentUserStory)
+                Assembler -> list++: add(userStoryDTO)
+                return true
+            end
+
+            return userStoryDTOList
+        return userStoryDTOList
+    return userStoryDTOList
+return shows list of user stories
+
+@enduml

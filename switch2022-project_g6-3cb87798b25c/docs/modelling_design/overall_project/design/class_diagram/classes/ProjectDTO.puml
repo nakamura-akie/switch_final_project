@@ -1,0 +1,16 @@
+@startuml
+'Attribute syntax: <visibility> <name> : <type> <multiplicity> = <default>
+'Method syntax: <visibility> <name (parameter-list)> : <return-type> - For simplicity the type of the parameter-list is not specified
+
+class ProjectDTO {
+    +projectCode : String
+    +name : String
+    +description : String
+    +customer : String
+    +projectStatus : String
+
+    +equals(object : Object) : boolean
+    +hashCode() : int
+}
+
+@enduml

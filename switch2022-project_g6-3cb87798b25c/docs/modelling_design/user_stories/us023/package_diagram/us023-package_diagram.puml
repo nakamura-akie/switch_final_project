@@ -1,0 +1,32 @@
+@startuml
+
+title US023 - As an Administrator, I want to create a Project in the web UI.
+
+package "src" {
+    package "routes" {
+    }
+
+    package "pages" {
+    }
+
+    package "components" {
+
+        package "project" {
+        }
+
+    }
+
+    package "context" {
+    }
+
+}
+
+src ..> components
+src ..> routes
+routes ..> pages
+pages ..> components
+pages ..> project
+project ..> context
+pages ..> context
+
+@enduml

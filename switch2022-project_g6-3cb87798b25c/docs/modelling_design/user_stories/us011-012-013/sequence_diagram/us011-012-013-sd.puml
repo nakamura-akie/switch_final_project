@@ -1,0 +1,56 @@
+@startuml
+@startuml
+
+skinparam sequenceMessageAlign center
+skinparam participantBackgroundColor white
+skinparam actorBackgroundColor white
+autonumber
+
+title US011/012/013 - As Manager, I want to define a resource of a project
+
+actor "Manager" as Actor
+participant ":CreateResouceUI" as UI
+participant ":ResourceController" as ResourceController
+participant ":ResourceService" as ResourceService
+participant ":ProjectRepository" as ProjectRepository
+participant ":AccountRepository" as AccountRepository
+participant ":ResourceRepository" as ResourceRepository
+participant "ResourceMapper" as ResourceMapper
+participant ":OutputResourceAssembler" as OutputResourceAssembler
+participant "outputResourceDTO:\nOutputResourceDTO" as OutputResourceDTO
+participant ":ResourceFactory" as ResourceFactory
+participant "newResource:\nResource" as Resource
+
+Actor -> UI++: asks to create a resource
+UI -> ResourceController++: addResourceToProject(info)
+ResourceController -> ResourceService++ :addResourceToProject\n(newResourceDTO)
+ResourceService -> ProjectRepository++: existsById\n(newResourceDTO.projectCode)
+return true/false
+ResourceService -> AccountRepository++: existsById\n(newResourceDTO.email)
+return true/false
+
+ResourceService -> ResourceMapper++: createDomainObject\n(newResourceDTO, resourceFactory)
+
+
+
+
+ResourceMapper -> ResourceFactory++: createResource(resourceID, roleInProject,\npercentageOfAllocation, costPerHour)
+create Resource
+ResourceFactory -> Resource
+return newResource
+return newResource
+
+ResourceService -> ResourceService: validateResource(newResource)
+
+ResourceService -> ResourceRepository++: save(newResource)
+return resource
+
+ResourceService -> OutputResourceAssembler++: generateOutputResourceDTO(resource)
+create OutputResourceDTO
+OutputResourceAssembler -> OutputResourceDTO
+return outputResourceDTO
+
+return outputResourceDTO
+return responseEntity.created
+return success/unsuccessful
+@enduml

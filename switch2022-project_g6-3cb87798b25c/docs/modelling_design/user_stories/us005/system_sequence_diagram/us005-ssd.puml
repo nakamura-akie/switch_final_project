@@ -1,0 +1,14 @@
+@startuml
+
+skinparam sequenceMessageAlign center
+autonumber
+
+title US005 - As Administrator, I want to inactivate a user account
+
+actor ":Administrator" as Admin #white
+participant ":System" as System #white
+
+Admin -> System: asks to inactivate account
+Admin <-- System: successful/unsuccessful
+
+@enduml

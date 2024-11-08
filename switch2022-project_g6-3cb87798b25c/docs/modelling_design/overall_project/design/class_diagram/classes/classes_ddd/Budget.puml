@@ -1,0 +1,13 @@
+@startuml
+
+class Budget <<ValueObject>> {
+    - budget : Double {readOnly}
+
+    + Budget(budgetValue : Double)
+    + Budget(budgetValue : String)
+    - validateValue(budgetValue : Double) {static}
+    + getBudgetValue() : Double
+    + equals(o : Object) : boolean
+    + hashCode() : int
+}
+@enduml

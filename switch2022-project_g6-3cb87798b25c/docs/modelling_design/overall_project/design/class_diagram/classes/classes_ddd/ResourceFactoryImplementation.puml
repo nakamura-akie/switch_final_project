@@ -1,0 +1,9 @@
+@startuml
+
+class ResourceFactoryImplementation<<Factory>>{
+
+    + createResource(resourceID : ResourceID, roleInProject : ProjectRole,
+     percentageOfAllocation : PercentageOfAllocation, \n costPerHour : CostPerHour) : Resource
+}
+
+@enduml

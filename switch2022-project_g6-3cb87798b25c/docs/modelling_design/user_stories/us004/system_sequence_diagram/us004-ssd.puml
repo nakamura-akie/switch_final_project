@@ -1,0 +1,14 @@
+@startuml
+
+skinparam sequenceMessageAlign center
+autonumber
+
+title US004 - As Administrator, I want to get a list of all user accounts and their status
+
+actor ":Administrator" as A #white
+participant ":System" as S #white
+
+A -> S : requests list of accounts and their status
+S --> A :list of accounts and their status
+
+@enduml

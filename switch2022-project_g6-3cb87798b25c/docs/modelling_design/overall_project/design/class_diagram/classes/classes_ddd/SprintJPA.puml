@@ -1,0 +1,26 @@
+@startuml
+'Attribute syntax: <visibility> <name> : <type> <multiplicity> = <default>
+'Method syntax: <visibility> <name (parameter-list)> : <return-type> - For simplicity the type of the parameter-list is not specified
+
+class SprintJPA {
+    - sprintIdJPA: SprintIdJPA
+    - sprintBacklogJPA : SprintBacklogJPA
+    - startDate: String
+    - sprintDuration: Integer
+    - endDate : String
+    - sprintStatus : String
+
+    + SprintJPA(sprintIdJPA: SprintIdJPA, startDate: String, \nsprintDuration: Integer, endDate : String, \nsprintBacklogJPA : SprintBacklogJPA)
+    + SprintJPA(sprintIdJPA: SprintIdJPA, startDate: String, \nsprintDuration: Integer, endDate : String, \nsprintBacklogJPA : SprintBacklogJPA, sprintStatus : String)
+    # SprintJPA()
+    + getSprintIdJPA() : SprintIdJPA
+    + getSprintBacklogJPA() : SprintBacklogJPA
+    + getStartDate() : String
+    + getSprintStatus() : String
+    + getEndDate() : String
+    + getSprintDuration() : Integer
+    + equals(o : Object) : boolean
+    + hashCode() : int
+}
+
+@enduml

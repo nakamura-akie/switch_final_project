@@ -1,0 +1,20 @@
+@startuml
+'Attribute syntax: <visibility> <name> : <type> <multiplicity> = <default>
+'Method syntax: <visibility> <name (parameter-list)> : <return-type> - For simplicity the type of the parameter-list is not specified
+
+class SprintIdJPA {
+    - sprintCode : String
+    - projectCode : String
+
+    + SprintIdJPA(projectCode : String, sprintCode : String)
+    # SprintIdJPA()
+    + getProjectCodeValue() : String
+    + getSprintCode() : String
+    + setProjectCode(projectCode : String)
+    + setSprintCode(sprintCode : String)
+    + equals(o : Object) : boolean
+    + hashCode() : int
+
+}
+
+@enduml

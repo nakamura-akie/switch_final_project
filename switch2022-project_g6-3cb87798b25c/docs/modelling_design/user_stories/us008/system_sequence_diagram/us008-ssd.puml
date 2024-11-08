@@ -1,0 +1,16 @@
+@startuml
+
+skinparam sequenceMessageAlign center
+autonumber
+title US008 - As Administrator, I want to add a business sector
+actor ":Administrator" as Administrator #white
+participant ":System" as System #white
+
+Administrator -> System: requests to add business sector
+Administrator <-- System: requests business sector name
+
+Administrator -> System: enters business sector name
+
+Administrator <-- System: successful/unsuccessful
+
+@enduml

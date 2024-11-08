@@ -1,0 +1,13 @@
+@startuml
+
+class CreateAccountController {
+
+    -profileService : ProfileService
+    -accountService : AccountService
+
+    +CreateAccountController (profileService : ProfileService, accountService : AccountService)
+    +createAccount(accountNameValue : String, emailValue : String,\n photo : Image, phoneNumberValue : int) : boolean
+
+}
+
+@enduml

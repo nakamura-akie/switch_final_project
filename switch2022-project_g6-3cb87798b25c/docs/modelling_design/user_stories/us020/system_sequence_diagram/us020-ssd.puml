@@ -1,0 +1,14 @@
+@startuml
+
+skinparam sequenceMessageAlign center
+autonumber
+
+title US020 - As a Team Member, I want to add a user story in the product backlog\n to the sprint backlog, during the sprint planning ceremony
+
+actor ":Team Member" as TeamMember #white
+participant ":System" as System #white
+
+TeamMember -> System : requests to add user story in the product backlog\n to the sprint backlog
+System --> TeamMember: returns successful/unsuccessful
+
+@enduml

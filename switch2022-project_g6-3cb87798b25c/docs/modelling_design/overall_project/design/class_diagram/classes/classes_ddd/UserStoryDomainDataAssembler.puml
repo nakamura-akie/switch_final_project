@@ -1,0 +1,16 @@
+@startuml
+'Attribute syntax: <visibility> <name> : <type> <multiplicity> = <default>
+'Method syntax: <visibility> <name (parameter-list)> : <return-type> - For simplicity the type of the parameter-list is not specified
+
+class UserStoryDomainDataAssembler {
+    - userStoryFactory : UserStoryFactory {readOnly}
+
+    + UserStoryDomainDataAssembler(userStoryFactory : UserStoryFactory)
+    + toData(userStory : UserStory) : UserStoryJPA
+    + toDomain(userStoryJPA : UserStoryJPA) : UserStory
+    + listOfIdsToData(listOfIDs : Iterable<UserStoryID>) : UserStoryIdJPA [0..*]
+    - userStoryIdToData(domainUserStoryId : UserStoryID) : UserStoryIdJPA {static}
+    + userStoryJPAListToDomain(listOfUserStoryJPA : Iterable<UserStoryJPA>) : Iterable<UserStory>
+}
+
+@enduml

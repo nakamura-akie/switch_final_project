@@ -1,0 +1,31 @@
+@startuml
+
+skinparam linetype polyline
+
+title US015 - As Manager, I want to get a list of all projects
+
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectController.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectService.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/Repository.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectRepository.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectRepositoryFake.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectRepositoryPersistence.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/CreateProjectListAssembler.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/ProjectDTO.puml
+!include ../../../overall_project/design/class_diagram/classes/classes_ddd/Project.puml
+
+ProjectController --> ProjectService : projectService
+ProjectService --> Repository : projectRepository
+
+ProjectRepository <|.. ProjectRepositoryFake
+ProjectRepository <|.. ProjectRepositoryPersistence
+Repository <|-- ProjectRepository
+ProjectService ..> CreateProjectListAssembler
+
+CreateProjectListAssembler ..> ProjectDTO
+CreateProjectListAssembler ..> Project
+
+ProjectRepositoryFake "0" *--> "*" Project : projectList
+ProjectRepositoryPersistence "0" *--> "*" Project : projectList
+
+@enduml

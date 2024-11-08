@@ -1,0 +1,17 @@
+@startuml
+
+class TaxIdentificationNumberSpainImplementation <<DomainID>> {
+
+    - spanishTaxIdentificationNumberValue : String
+
+    +TaxIdentificationNumberSpainImplementation(taxIdentificationNumberValue : String)
+    -validateValue(taxIdentificationNumberValue : String)
+    +taxIdentificationNumberValidation(tinToValidate : String) : boolean
+    -taxIdentificationNumberIsNotCorrectLength(tinToValidate : String,\n correctTinLength : int) : boolean {static}
+    + getTaxIdentificationNumber() : String
+    +equals(o : Object) : boolean
+    +hashCode() : int
+
+}
+
+@enduml

@@ -1,0 +1,15 @@
+@startuml
+'Attribute syntax: <visibility> <name> : <type> <multiplicity> = <default>
+'Method syntax: <visibility> <name (parameter-list)> : <return-type> - For simplicity the type of the parameter-list is not specified
+
+class ProjectController<<Controller>> {
+    - projectService : ProjectService {readOnly}
+    - RESOURCE_NAME : String = "projects" {readOnly} {static}
+
+    + ProjectController(projectService : ProjectService)
+    + createProject(newProjectDTO : NewProjectDTO) : ResponseEntity<EntityModel<OutputProjectDTO>>
+    + findProjectByID(projectCode : ProjectCode) :  ResponseEntity<EntityModel<OutputProjectDTO>>
+    + createProjectList() : CollectionModel<EntityModel<ProjectDTO>>
+}
+
+@enduml

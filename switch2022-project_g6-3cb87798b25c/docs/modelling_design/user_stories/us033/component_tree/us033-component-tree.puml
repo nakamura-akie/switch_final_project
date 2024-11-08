@@ -1,0 +1,29 @@
+@startmindmap
+'https://plantuml.com/mindmap-diagram
+
+title US033 - As Project Member, I want to update the status (i.e.: the Scrum Board category) of \na user story in the scope of the current/active sprint backlog in the web UI.
+top to bottom direction
+
+* <&globe>Application
+** Navbar
+*** NavItem
+** MainRoute
+*** Projects
+**** ProjectPage
+***** ProjectPageTable\n(Project Info)
+***** Button\n(Back)
+***** Button\n(Product Backlog)
+***** Button\n(Resources)
+***** Button \n(Sprints)
+****** Sprint Page
+******* Button\n(Create Sprint)
+******* Button\n(All Sprints)
+******* CurrentlyOpenSprint
+******* Button\n(Close Sprint)
+******* Button\n(Add User Story)
+******* Button\n(Back)
+******* ScrumBoard
+******** UserStory Box
+
+
+@endmindmap

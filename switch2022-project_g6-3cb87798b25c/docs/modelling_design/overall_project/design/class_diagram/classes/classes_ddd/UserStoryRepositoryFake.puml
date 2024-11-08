@@ -1,0 +1,20 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class UserStoryRepositoryFake<<Repository>> {
+    - userStoryList : UserStory [0..*] {static}
+
+    + save(userStory : UserStory) : UserStory
+    + findAll() : Iterable<UserStory>
+    + findById(id : UserStoryID) : Optional<UserStory>
+    + existsById(id : UserStoryID) : boolean
+    + findByProjectCodeAndUserStoryStatusNotAndUserStoryStatusNot(projectCode : ProjectCode,\n firstStatus : UserStoryStatus, secondStatus : UserStoryStatus) : Iterable<UserStory>
+    + deleteAll()
+    + deleteById (id : UserStoryID)
+    + findAllById(idList : Iterable<UserStoryID>) : Iterable<UserStory>
+    + patch(patchedUserStory : UserStory) : UserStory
+    + existsByUserStoryIdAndUserStoryStatusNotAndUserStoryStatusNot\n(userStoryID : UserStoryID, firstStatus : UserStoryStatus, secondStatus \n: UserStoryStatus) : boolean
+
+}
+
+@enduml

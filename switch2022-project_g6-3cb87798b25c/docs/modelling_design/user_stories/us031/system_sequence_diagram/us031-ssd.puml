@@ -1,0 +1,13 @@
+@startuml
+
+skinparam sequenceMessageAlign center
+autonumber
+title US031 -  As Project Manager, I want to start the next sprint of a project in the web UI
+actor ":Project Manager" as ProjectManager #white
+participant ":System" as System #white
+
+ProjectManager -> System: requests to open a sprint
+
+ProjectManager <-- System: returns successful/unsuccessful
+
+@enduml
